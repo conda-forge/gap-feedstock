@@ -1,4 +1,4 @@
-{% set version = "4.8.6" %}
+{% set version = "4.8.3" %}
 {% set name = "gap" %}
 
 package:
@@ -7,8 +7,8 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
-  url: http://www.gap-system.org/pub/gap/gap48/tar.gz/gap4r8p6_2016_11_12-14_25.tar.gz
-  sha256: a9df4c49b2feb5dd7b8c4f093f6558bdd7a6c1b3f5f64971c4d9e74828eb0cd4
+  url: http://www.gap-system.org/pub/gap/gap48/tar.gz/gap4r8p3_2016_03_19-22_17.tar.gz
+  sha256: 667fbbe4b6f2626b799b977a4ca12e9373e0878a6771a94d217bab412405abe6
   patches:
     # Patches from https://github.com/sagemath/sage
     # Set GAP_MEM
