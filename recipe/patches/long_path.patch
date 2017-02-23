@@ -1,0 +1,109 @@
+diff -ru src2/system.c src/system.c
+--- src2/system.c       2017-02-23 19:58:56.286797419 +0530
++++ src/system.c        2017-02-23 20:00:35.907200742 +0530
+@@ -167,7 +167,7 @@
+ **
+ *V  SyCompileInput  . . . . . . . . . . . . . . . . . .  from this input file
+ */
+-Char SyCompileInput [256];
++Char SyCompileInput [512];
+ 
+ 
+ /****************************************************************************
+@@ -181,20 +181,20 @@
+ **
+ *V  SyCompileName . . . . . . . . . . . . . . . . . . . . . .  with this name
+ */
+-Char SyCompileName [256];
++Char SyCompileName [512];
+ 
+ 
+ /****************************************************************************
+ **
+ *V  SyCompileOutput . . . . . . . . . . . . . . . . . . into this output file
+ */
+-Char SyCompileOutput [256];
++Char SyCompileOutput [512];
+ 
+ /****************************************************************************
+ **
+ *V  SyCompileOutput . . . . . . . . . . . . . . . . . . into this output file
+ */
+-Char SyCompileOptions [256] = {'\0'};
++Char SyCompileOptions [512] = {'\0'};
+ 
+ 
+ /****************************************************************************
+@@ -252,7 +252,7 @@
+ *V  SyUserHome . . . . . . . . . . . . .  path of users home (it is exists)
+ */
+ Int SyHasUserHome;
+-Char SyUserHome [256];
++Char SyUserHome [512];
+ 
+ /****************************************************************************
+ **
+@@ -420,7 +420,7 @@
+ **
+ *V  SySystemInitFile  . . . . . . . . . . .  name of the system "init.g" file
+ */
+-Char SySystemInitFile [256];
++Char SySystemInitFile [512];
+ 
+ 
+ /****************************************************************************
+diff -ru src2/system.h src/system.h
+--- src2/system.h       2017-02-23 20:25:05.408195877 +0530
++++ src/system.h        2017-02-23 20:25:29.938389158 +0530
+@@ -267,7 +267,7 @@
+ **
+ *V  SyCompileInput  . . . . . . . . . . . . . . . . . .  from this input file
+ */
+-extern Char SyCompileInput [256];
++extern Char SyCompileInput [512];
+ 
+ 
+ /****************************************************************************
+@@ -281,20 +281,20 @@
+ **
+ *V  SyCompileName . . . . . . . . . . . . . . . . . . . . . .  with this name
+ */
+-extern Char SyCompileName [256];
++extern Char SyCompileName [512];
+ 
+ 
+ /****************************************************************************
+ **
+ *V  SyCompileOutput . . . . . . . . . . . . . . . . . . into this output file
+ */
+-extern Char SyCompileOutput [256];
++extern Char SyCompileOutput [512];
+ 
+ /****************************************************************************
+ **
+ *V  SyCompileOptions . . . . . . . . . . . . . . . . . with these options
+ */
+-extern Char SyCompileOptions [256];
++extern Char SyCompileOptions [512];
+ 
+ 
+ /****************************************************************************
+@@ -376,7 +376,7 @@
+ *V  SyUserHome . . . . . . . . . . . . .  path of users home (it is exists)
+ */
+ extern Int SyHasUserHome;
+-extern Char SyUserHome [256];
++extern Char SyUserHome [512];
+ 
+ 
+ /****************************************************************************
+@@ -544,7 +544,7 @@
+ **
+ *V  SySystemInitFile  . . . . . . . . . . .  name of the system "init.g" file
+ */
+-extern Char SySystemInitFile [256];
++extern Char SySystemInitFile [512];
+ 
+ 
+ /****************************************************************************
+
