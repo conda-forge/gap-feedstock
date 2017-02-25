@@ -72,7 +72,7 @@ cp -R tst/* "$INSTALL_DIR"/tst/
 cp -R bin/* "$INSTALL_DIR"/bin/
 cp bin/gap.sh "$PREFIX/bin/gap"
 rm -rf "$INSTALL_DIR"/bin/**/*.o
-ln -s "$GAP_DIR" "$PREFIX/gap/latest"
+ln -s "$INSTALL_DIR" "$PREFIX/gap/latest"
 
 # Delete tests that rely on the non-GPL small group library
 rm "$INSTALL_DIR"/tst/testinstall/ctblsolv.tst
