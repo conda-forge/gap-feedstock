@@ -1,7 +1,89 @@
-diff -ru src2/system.c src/system.c
---- src2/system.c       2017-02-23 19:58:56.286797419 +0530
-+++ src/system.c        2017-02-23 20:00:35.907200742 +0530
-@@ -167,7 +167,7 @@
+diff --git a/src/sysfiles.c b/src/sysfiles.c
+index 9f0739a..8663e7b 100644
+--- a/src/sysfiles.c
++++ b/src/sysfiles.c
+@@ -139,10 +139,10 @@ Int SyFindOrLinkGapRootFile (
+     Int                 found_gap = 0;
+     Int                 found_dyn = 0;
+     Int                 found_sta = 0;
+-    Char                tmpbuffer[256];
++    Char                tmpbuffer[512];
+     Char *              tmp;
+-    Char                module[256];
+-    Char                name[256];
++    Char                module[512];
++    Char                name[512];
+     StructInitInfo *    info_dyn = 0;
+     StructInitInfo *    info_sta = 0;
+     Int                 k;
+@@ -807,7 +807,7 @@ Char * SyWinCmd (
+ **  stores buffers for the relatively few files that need them.
+ */
+ 
+-SYS_SY_BUF syBuf [256];
++SYS_SY_BUF syBuf [512];
+ 
+ SYS_SY_BUFFER syBuffers [ 32];
+ 
+@@ -1760,7 +1760,7 @@ void syEchos (
+ **  'SyFputs' is called to put the  <line>  to the file identified  by <fid>.
+ */
+ UInt   syNrchar;                        /* nr of chars already on the line */
+-Char   syPrompt [256];                  /* characters already on the line   */
++Char   syPrompt [512];                  /* characters already on the line   */
+ 
+ 
+ 
+@@ -3885,9 +3885,9 @@ Char * SyFindGapRootFile ( const Char * filename, Char * result )
+     for ( k=0;  k<sizeof(SyGapRootPaths)/sizeof(SyGapRootPaths[0]);  k++ ) {
+         if ( SyGapRootPaths[k][0] ) {
+             result[0] = '\0';
+-            if (strlcpy( result, SyGapRootPaths[k], 256 ) >= 256)
++            if (strlcpy( result, SyGapRootPaths[k], 512 ) >= 512)
+                 continue;
+-            if (strlcat( result, filename, 256 ) >= 256)
++            if (strlcat( result, filename, 512 ) >= 512)
+             	continue;
+             if ( SyIsReadableFile(result) == 0 ) {
+                 return result;
+diff --git a/src/sysfiles.h b/src/sysfiles.h
+index 497acca..438f5a7 100644
+--- a/src/sysfiles.h
++++ b/src/sysfiles.h
+@@ -47,7 +47,7 @@
+ */
+ 
+ typedef union {
+-  Char pathname[256];
++  Char pathname[512];
+   StructInitInfo * module_info;
+ } TypGRF_Data;
+ 
+@@ -155,9 +155,9 @@ typedef struct {
+   UInt buflen;
+ } SYS_SY_BUFFER;
+ 
+-extern SYS_SY_BUF syBuf [256];
++extern SYS_SY_BUF syBuf [512];
+ 
+ extern SYS_SY_BUFFER syBuffers[32];
+ 
+ extern UInt SySetBuffering( UInt fid );
+ 
+@@ -555,7 +555,7 @@ extern Obj SyIsDir (
+ **
+ *F  SyFindGapRootFile( <filename>, <buffer> ) . . .  find file in system area
+ **
+-**  <buffer> must point to a buffer of at least 256 characters. The returned
++**  <buffer> must point to a buffer of at least 512 characters. The returned
+ **  pointer will either be NULL, or into <buffer>
+ */
+ extern Char * SyFindGapRootFile (
+diff --git a/src/system.c b/src/system.c
+index b647dc7..7b5f2e3 100644
+--- a/src/system.c
++++ b/src/system.c
+@@ -167,7 +167,7 @@ Int SyCheckCRCCompiledModule;
  **
  *V  SyCompileInput  . . . . . . . . . . . . . . . . . .  from this input file
  */
@@ -10,7 +92,7 @@ diff -ru src2/system.c src/system.c
  
  
  /****************************************************************************
-@@ -181,20 +181,20 @@
+@@ -181,20 +181,20 @@ Char * SyCompileMagic1;
  **
  *V  SyCompileName . . . . . . . . . . . . . . . . . . . . . .  with this name
  */
@@ -34,7 +116,7 @@ diff -ru src2/system.c src/system.c
  
  
  /****************************************************************************
-@@ -252,7 +252,7 @@
+@@ -252,7 +252,7 @@ Int IgnoreGapRC;
  *V  SyUserHome . . . . . . . . . . . . .  path of users home (it is exists)
  */
  Int SyHasUserHome;
@@ -43,7 +125,7 @@ diff -ru src2/system.c src/system.c
  
  /****************************************************************************
  **
-@@ -420,7 +420,7 @@
+@@ -420,7 +420,7 @@ Int SyStorMin;
  **
  *V  SySystemInitFile  . . . . . . . . . . .  name of the system "init.g" file
  */
@@ -52,10 +134,11 @@ diff -ru src2/system.c src/system.c
  
  
  /****************************************************************************
-diff -ru src2/system.h src/system.h
---- src2/system.h       2017-02-23 20:25:05.408195877 +0530
-+++ src/system.h        2017-02-23 20:25:29.938389158 +0530
-@@ -267,7 +267,7 @@
+diff --git a/src/system.h b/src/system.h
+index eb58802..6266af9 100644
+--- a/src/system.h
++++ b/src/system.h
+@@ -267,7 +267,7 @@ extern Int SyCheckCRCCompiledModule;
  **
  *V  SyCompileInput  . . . . . . . . . . . . . . . . . .  from this input file
  */
@@ -64,7 +147,7 @@ diff -ru src2/system.h src/system.h
  
  
  /****************************************************************************
-@@ -281,20 +281,20 @@
+@@ -281,20 +281,20 @@ extern Char * SyCompileMagic1;
  **
  *V  SyCompileName . . . . . . . . . . . . . . . . . . . . . .  with this name
  */
@@ -88,7 +171,7 @@ diff -ru src2/system.h src/system.h
  
  
  /****************************************************************************
-@@ -376,7 +376,7 @@
+@@ -376,7 +376,7 @@ extern Char SyGapRCFilename [512];
  *V  SyUserHome . . . . . . . . . . . . .  path of users home (it is exists)
  */
  extern Int SyHasUserHome;
@@ -97,7 +180,7 @@ diff -ru src2/system.h src/system.h
  
  
  /****************************************************************************
-@@ -544,7 +544,7 @@
+@@ -544,7 +544,7 @@ extern Int SyStorMin;
  **
  *V  SySystemInitFile  . . . . . . . . . . .  name of the system "init.g" file
  */
@@ -106,4 +189,3 @@ diff -ru src2/system.h src/system.h
  
  
  /****************************************************************************
-
