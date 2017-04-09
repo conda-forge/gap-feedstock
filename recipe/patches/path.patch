@@ -1,0 +1,325 @@
+From a586d3a4be121301d109a9988185d572a5ad6a0b Mon Sep 17 00:00:00 2001
+From: Max Horn <max@quendi.de>
+Date: Wed, 15 Mar 2017 12:39:26 +0100
+Subject: [PATCH] kernel: introduce GAP_PATH_MAX
+
+Some places in our code were limited to paths of length 256, some had
+512 as limit. Now they all use the new constant GAP_PATH_MAX as limit,
+which is set to 512 for now, but could be increased later on.
+
+Note that most operating systems don't actually impose a limit on path
+lengths (and if they do, it tends to be much larger), so this isn't the
+final word. But it's at least a start.
+
+We also extend SyFindGapRootFile to support output buffers of arbitrary
+size, and adapt SyFindOrLinkGapRootFile accordingly. Also cleanup
+SyFindOrLinkGapRootFile and remove various redundant buffers and copying
+operations.
+---
+ src/sysfiles.c | 42 +++++++++++++-----------------------------
+ src/sysfiles.h | 12 +++++-------
+ src/system.c   | 18 +++++++++---------
+ src/system.h   | 30 ++++++++++++++++++------------
+ 4 files changed, 45 insertions(+), 57 deletions(-)
+
+diff --git a/src/sysfiles.c b/src/sysfiles.c
+index 43616d5..013d34c 100644
+--- a/src/sysfiles.c
++++ b/src/sysfiles.c
+@@ -135,10 +135,7 @@ Int SyFindOrLinkGapRootFile (
+     UInt4               crc_sta = 0;
+     Int                 found_gap = 0;
+     Int                 found_sta = 0;
+-    Char                tmpbuffer[256];
+-    Char *              tmp;
+-    Char                module[256];
+-    Char                name[256];
++    Char                module[GAP_PATH_MAX];
+ 
+     StructInitInfo *    info_sta = 0;
+     Int                 k;
+@@ -146,18 +143,8 @@ Int SyFindOrLinkGapRootFile (
+ 
+     /* find the GAP file                                                   */
+     result->pathname[0] = '\0';
+-    tmp = SyFindGapRootFile(filename, tmpbuffer);
+-    if ( tmp ) {
+-        strxcpy( result->pathname, tmp, sizeof(result->pathname) );
+-        strxcpy( name, tmp, sizeof(name) );
+-    }
+-    if ( result->pathname[0] ) {
+-        if ( SyIsReadableFile(result->pathname) == 0 ) {
+-            found_gap = 1;
+-        }
+-        else {
+-            result->pathname[0] = '\0';
+-        }
++    if ( SyFindGapRootFile(filename, result->pathname, sizeof(result->pathname)) ) {
++        found_gap = 1;
+     }
+     if ( ! SyUseModule ) {
+         return ( found_gap ? 3 : 0 );
+@@ -179,20 +166,17 @@ Int SyFindOrLinkGapRootFile (
+         }
+     }
+ 
+-
+-
+     /* check if we have to compute the crc                                 */
+     if ( found_gap && ( found_sta ) ) {
+         if ( crc_gap == 0 ) {
+-            crc_gap = SyGAPCRC(name);
++            crc_gap = SyGAPCRC(result->pathname);
+         } else if ( SyCheckCRCCompiledModule ) {
+-            if ( crc_gap != SyGAPCRC(name) ) {
++            if ( crc_gap != SyGAPCRC(result->pathname) ) {
+                 return 4;
+             }
+         }
+     }
+ 
+-
+     /* now decide what to do                                               */
+     if ( found_gap && found_sta && crc_gap != crc_sta ) {
+         Pr("#W Static module %s has CRC mismatch, ignoring\n", (Int) filename, 0);
+@@ -3493,22 +3477,22 @@ Obj SyIsDir ( const Char * name )
+ **
+ *F  SyFindGapRootFile( <filename>,<buffer> ) . .  find file in system area
+ */
+-Char * SyFindGapRootFile ( const Char * filename, Char * result )
++Char * SyFindGapRootFile ( const Char * filename, Char * buffer, size_t bufferSize )
+ {
+-    Int             k;
++    Int k;
+ 
+-    for ( k=0;  k<sizeof(SyGapRootPaths)/sizeof(SyGapRootPaths[0]);  k++ ) {
++    for ( k = 0; k < sizeof(SyGapRootPaths)/sizeof(SyGapRootPaths[0]); k++ ) {
+         if ( SyGapRootPaths[k][0] ) {
+-            result[0] = '\0';
+-            if (strlcpy( result, SyGapRootPaths[k], 256 ) >= 256)
++            if (strlcpy( buffer, SyGapRootPaths[k], bufferSize ) >= bufferSize)
+                 continue;
+-            if (strlcat( result, filename, 256 ) >= 256)
++            if (strlcat( buffer, filename, bufferSize ) >= bufferSize)
+             	continue;
+-            if ( SyIsReadableFile(result) == 0 ) {
+-                return result;
++            if ( SyIsReadableFile(buffer) == 0 ) {
++                return buffer;
+             }
+         }
+     }
++    buffer[0] = '\0';
+     return 0;
+ }
+ 
+diff --git a/src/sysfiles.h b/src/sysfiles.h
+index fe887d9..c8cfc69 100644
+--- a/src/sysfiles.h
++++ b/src/sysfiles.h
+@@ -47,7 +47,7 @@
+ */
+ 
+ typedef union {
+-  Char pathname[256];
++  Char pathname[GAP_PATH_MAX];
+   StructInitInfo * module_info;
+ } TypGRF_Data;
+ 
+@@ -526,14 +526,12 @@ extern Obj SyIsDir (
+ 
+ /****************************************************************************
+ **
+-*F  SyFindGapRootFile( <filename>, <buffer> ) . . .  find file in system area
++*F  SyFindGapRootFile( <filename>, <buffer>, <bufferSize> ) . . .  find file in system area
+ **
+-**  <buffer> must point to a buffer of at least 256 characters. The returned
+-**  pointer will either be NULL, or into <buffer>
++**  <buffer> must point to a buffer of at least <bufferSize> characters.
++**  The returned pointer will either be NULL, or <buffer>
+ */
+-extern Char * SyFindGapRootFile (
+-            const Char *    filename,
+-            Char *          buffer);
++extern Char *SyFindGapRootFile(const Char *filename, Char *buffer, size_t bufferSize);
+ 
+ 
+ /****************************************************************************
+diff --git a/src/system.c b/src/system.c
+index 29a9164..262aff2 100644
+--- a/src/system.c
++++ b/src/system.c
+@@ -170,7 +170,7 @@ Int SyCheckCRCCompiledModule;
+ **
+ *V  SyCompileInput  . . . . . . . . . . . . . . . . . .  from this input file
+ */
+-Char SyCompileInput [256];
++Char SyCompileInput[GAP_PATH_MAX];
+ 
+ 
+ /****************************************************************************
+@@ -184,20 +184,20 @@ Char * SyCompileMagic1;
+ **
+ *V  SyCompileName . . . . . . . . . . . . . . . . . . . . . .  with this name
+ */
+-Char SyCompileName [256];
++Char SyCompileName[256];
+ 
+ 
+ /****************************************************************************
+ **
+ *V  SyCompileOutput . . . . . . . . . . . . . . . . . . into this output file
+ */
+-Char SyCompileOutput [256];
++Char SyCompileOutput[GAP_PATH_MAX];
+ 
+ /****************************************************************************
+ **
+ *V  SyCompileOutput . . . . . . . . . . . . . . . . . . into this output file
+ */
+-Char SyCompileOptions [256] = {'\0'};
++Char SyCompileOptions[256] = {'\0'};
+ 
+ 
+ /****************************************************************************
+@@ -237,9 +237,9 @@ Int SyDebugLoading;
+ **
+ #define MAX_GAP_DIRS 128
+ */
+-Char SyGapRootPaths [MAX_GAP_DIRS] [512];
++Char SyGapRootPaths[MAX_GAP_DIRS][GAP_PATH_MAX];
+ #if HAVE_DOTGAPRC
+-Char DotGapPath[512];
++Char DotGapPath[GAP_PATH_MAX];
+ #endif
+ 
+ /****************************************************************************
+@@ -255,7 +255,7 @@ Int IgnoreGapRC;
+ *V  SyUserHome . . . . . . . . . . . . .  path of users home (it is exists)
+ */
+ Int SyHasUserHome;
+-Char SyUserHome [256];
++Char SyUserHome[GAP_PATH_MAX];
+ 
+ /****************************************************************************
+ **
+@@ -423,7 +423,7 @@ Int SyStorMin;
+ **
+ *V  SySystemInitFile  . . . . . . . . . . .  name of the system "init.g" file
+ */
+-Char SySystemInitFile [256];
++Char SySystemInitFile[GAP_PATH_MAX];
+ 
+ 
+ /****************************************************************************
+@@ -2125,7 +2125,7 @@ void InitSystem (
+            with a tilde ~ */
+         for (i = 0; i < MAX_GAP_DIRS && SyGapRootPaths[i][0]; i++) {
+           if (SyGapRootPaths[i][0] == '~' && 
+-              strlen(SyUserHome)+strlen(SyGapRootPaths[i]) < 512) {
++              strlen(SyUserHome)+strlen(SyGapRootPaths[i]) < sizeof(SyGapRootPaths[i])) {
+             memmove(SyGapRootPaths[i]+strlen(SyUserHome),
+                     /* don't copy the ~ but the trailing '\0' */
+                     SyGapRootPaths[i]+1, strlen(SyGapRootPaths[i]));
+diff --git a/src/system.h b/src/system.h
+index d049d60..10dab22 100644
+--- a/src/system.h
++++ b/src/system.h
+@@ -94,6 +94,11 @@
+ #endif
+ 
+ 
++enum {
++    GAP_PATH_MAX = 512
++};
++
++
+ #define FPUTS_TO_STDERR(str) fputs (str, stderr)
+ 
+ /****************************************************************************
+@@ -227,7 +232,7 @@ extern Int SyCheckCRCCompiledModule;
+ **
+ *V  SyCompileInput  . . . . . . . . . . . . . . . . . .  from this input file
+ */
+-extern Char SyCompileInput [256];
++extern Char SyCompileInput[GAP_PATH_MAX];
+ 
+ 
+ /****************************************************************************
+@@ -241,20 +246,20 @@ extern Char * SyCompileMagic1;
+ **
+ *V  SyCompileName . . . . . . . . . . . . . . . . . . . . . .  with this name
+ */
+-extern Char SyCompileName [256];
++extern Char SyCompileName[256];
+ 
+ 
+ /****************************************************************************
+ **
+ *V  SyCompileOutput . . . . . . . . . . . . . . . . . . into this output file
+ */
+-extern Char SyCompileOutput [256];
++extern Char SyCompileOutput[GAP_PATH_MAX];
+ 
+ /****************************************************************************
+ **
+ *V  SyCompileOptions . . . . . . . . . . . . . . . . . with these options
+ */
+-extern Char SyCompileOptions [256];
++extern Char SyCompileOptions[256];
+ 
+ 
+ /****************************************************************************
+@@ -290,11 +295,12 @@ extern Int SyDebugLoading;
+ **  
+ **  Put in this package because the command line processing takes place here.
+ */
+-#define MAX_GAP_DIRS 128
+-
+-extern Char SyGapRootPaths [MAX_GAP_DIRS] [512];
++enum {
++    MAX_GAP_DIRS = 128
++};
++extern Char SyGapRootPaths[MAX_GAP_DIRS][GAP_PATH_MAX];
+ #if HAVE_DOTGAPRC
+-extern Char DotGapPath[512];
++extern Char DotGapPath[GAP_PATH_MAX];
+ #endif
+ 
+ /****************************************************************************
+@@ -312,7 +318,7 @@ extern Char DotGapPath[512];
+ **
+ **  For UNIX this list contains 'LIBNAME/init.g' and '$HOME/.gaprc'.
+ */
+-extern Char SyInitfiles [32] [512];
++extern Char SyInitfiles[32][GAP_PATH_MAX];
+ 
+ /****************************************************************************
+ **
+@@ -328,7 +334,7 @@ extern Char SyPkgnames [SY_MAX_PKGNR][16];
+ **
+ *V  SyGapRCFilename . . . . . . . . . . . . . . . filename of the gaprc file
+ */
+-extern Char SyGapRCFilename [512];
++extern Char SyGapRCFilename[GAP_PATH_MAX];
+ 
+ /****************************************************************************
+ **
+@@ -336,7 +342,7 @@ extern Char SyGapRCFilename [512];
+ *V  SyUserHome . . . . . . . . . . . . .  path of users home (it is exists)
+ */
+ extern Int SyHasUserHome;
+-extern Char SyUserHome [256];
++extern Char SyUserHome[GAP_PATH_MAX];
+ 
+ 
+ /****************************************************************************
+@@ -504,7 +510,7 @@ extern Int SyStorMin;
+ **
+ *V  SySystemInitFile  . . . . . . . . . . .  name of the system "init.g" file
+ */
+-extern Char SySystemInitFile [256];
++extern Char SySystemInitFile[GAP_PATH_MAX];
+ 
+ 
+ /****************************************************************************

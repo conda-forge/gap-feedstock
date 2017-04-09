@@ -15,9 +15,11 @@ source:
     - patches/gap_shi.patch
     # fix infinite loop in writeandcheck() when writing an error message fails.
     - patches/writeandcheck.patch
+    # https://github.com/gap-system/gap/pull/1188
+    - patches/path.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
 
 requirements:
