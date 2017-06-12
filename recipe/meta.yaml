@@ -19,9 +19,11 @@ source:
     - patches/448.patch
     # https://github.com/gap-system/gap/pull/1188
     - patches/path.patch
+    # we don't install some of the default packages
+    - patches/nodefaultpackages.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
 
 requirements:
