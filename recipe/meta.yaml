@@ -11,8 +11,6 @@ source:
   sha256: 8d4ff0a9fad5dd66bbfc6a6e30911c2addff971db7372988b26fe91c5f620dcc
   patches:
     # Patches from https://github.com/sagemath/sage
-    # Set GAP_MEM
-    - patches/gap_shi.patch
     # fix infinite loop in writeandcheck() when writing an error message fails.
     - patches/writeandcheck.patch
     # we don't install some of the default packages
