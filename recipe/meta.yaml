@@ -1,4 +1,4 @@
-{% set version = "4.10dev" %}
+{% set version = "4.9.0" %}
 {% set name = "gap" %}
 
 package:
