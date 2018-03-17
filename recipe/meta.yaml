@@ -1,4 +1,4 @@
-{% set version = "4.8.6" %}
+{% set version = "4.9.0" %}
 {% set name = "gap" %}
 
 package:
@@ -6,19 +6,13 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: http://www.gap-system.org/pub/gap/gap48/tar.gz/gap4r8p6_2016_11_12-14_25.tar.gz
-  sha256: a9df4c49b2feb5dd7b8c4f093f6558bdd7a6c1b3f5f64971c4d9e74828eb0cd4
+  fn: {{ version }}.tar.gz
+  url: https://github.com/gap-system/gap/archive/v{{ version }}.tar.gz
+  sha256: 8d4ff0a9fad5dd66bbfc6a6e30911c2addff971db7372988b26fe91c5f620dcc
   patches:
     # Patches from https://github.com/sagemath/sage
-    # Set GAP_MEM
-    - patches/gap_shi.patch
     # fix infinite loop in writeandcheck() when writing an error message fails.
     - patches/writeandcheck.patch
-    # https://github.com/gap-system/gap/pull/448
-    - patches/448.patch
-    # https://github.com/gap-system/gap/pull/1188
-    - patches/path.patch
     # we don't install some of the default packages
     - patches/nodefaultpackages.patch
 
@@ -53,3 +47,4 @@ about:
 extra:
   recipe-maintainers:
     - isuruf
+    - saraedum
