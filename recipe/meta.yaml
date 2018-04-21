@@ -1,4 +1,4 @@
-{% set version = "4.8.6" %}
+{% set version = "4.8.10" %}
 {% set name = "gap" %}
 
 package:
@@ -7,8 +7,8 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
-  url: http://www.gap-system.org/pub/gap/gap48/tar.gz/gap4r8p6_2016_11_12-14_25.tar.gz
-  sha256: a9df4c49b2feb5dd7b8c4f093f6558bdd7a6c1b3f5f64971c4d9e74828eb0cd4
+  url: https://www.gap-system.org/pub/gap/gap48/tar.gz/gap4r8p10_2018_01_15-13_02.tar.gz
+  sha256: fc0dac32d196a825be5b4cab6a970aad58f1d16ca2870bd0381c94c85e7a9e5b
   patches:
     # Patches from https://github.com/sagemath/sage
     # Set GAP_MEM
@@ -23,7 +23,7 @@ source:
     - patches/nodefaultpackages.patch
 
 build:
-  number: 3
+  number: 1
   skip: true  # [win]
 
 requirements:
@@ -32,11 +32,11 @@ requirements:
     - libtool
     - gmp >=5.0.1,<7
     - readline 6.2*
-    - ncurses 6.1*
+    - ncurses 6.1.*
   run:
     - gmp >=5.0.1,<7
     - readline 6.2*
-    - ncurses 6.1*
+    - ncurses 6.1.*
 
 test:
   commands:
