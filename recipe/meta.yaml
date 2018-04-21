@@ -23,7 +23,7 @@ source:
     - patches/nodefaultpackages.patch
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
 
 requirements:
@@ -32,11 +32,11 @@ requirements:
     - libtool
     - gmp >=5.0.1,<7
     - readline 6.2*
-    - ncurses 5.9*
+    - ncurses 6.1*
   run:
     - gmp >=5.0.1,<7
     - readline 6.2*
-    - ncurses 5.9*
+    - ncurses 6.1*
 
 test:
   commands:
@@ -53,3 +53,4 @@ about:
 extra:
   recipe-maintainers:
     - isuruf
+    - saraedum
