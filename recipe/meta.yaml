@@ -23,20 +23,21 @@ source:
     - patches/nodefaultpackages.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
 
 requirements:
   build:
-    - toolchain
+    - {{ compiler('cxx') }}
     - libtool
-    - gmp >=5.0.1,<7
-    - readline 6.2*
-    - ncurses 5.9*
+  host:
+    - gmp
+    - readline
+    - ncurses
   run:
-    - gmp >=5.0.1,<7
-    - readline 6.2*
-    - ncurses 5.9*
+    - gmp
+    - readline
+    - ncurses
 
 test:
   commands:
