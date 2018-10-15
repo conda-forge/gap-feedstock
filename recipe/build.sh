@@ -48,7 +48,6 @@ chmod +x configure
     CC="$CC" CXX="$CXX" CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
 
 
-make config
 make
 
 mkdir -p "$INSTALL_DIR"
@@ -57,7 +56,6 @@ mkdir -p "$INSTALL_DIR"/doc
 mkdir -p "$INSTALL_DIR"/grp
 mkdir -p "$INSTALL_DIR"/lib
 mkdir -p "$INSTALL_DIR"/pkg
-mkdir -p "$INSTALL_DIR"/src
 mkdir -p "$INSTALL_DIR"/tst
 
 cp -R * "$INSTALL_DIR"

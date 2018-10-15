@@ -1,4 +1,4 @@
-{% set version = "4.8.10" %}
+{% set version = "4.9.3" %}
 {% set name = "gap" %}
 
 package:
@@ -7,23 +7,11 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
-  url: https://www.gap-system.org/pub/gap/gap48/tar.gz/gap4r8p10_2018_01_15-13_02.tar.gz
-  sha256: fc0dac32d196a825be5b4cab6a970aad58f1d16ca2870bd0381c94c85e7a9e5b
-  patches:
-    # Patches from https://github.com/sagemath/sage
-    # Set GAP_MEM
-    - patches/gap_shi.patch
-    # fix infinite loop in writeandcheck() when writing an error message fails.
-    - patches/writeandcheck.patch
-    # https://github.com/gap-system/gap/pull/448
-    - patches/448.patch
-    # https://github.com/gap-system/gap/pull/1188
-    - patches/path.patch
-    # we don't install some of the default packages
-    - patches/nodefaultpackages.patch
+  url: https://www.gap-system.org/pub/gap/gap4/tar.gz/gap-4.9.3.tar.gz
+  sha256: e502941e52352285e87faaf11e7f0e810eab8e38849d869fc6b9714d6cf7fe7c
 
 build:
-  number: 1002
+  number: 0 
   skip: true  # [win]
 
 requirements:
