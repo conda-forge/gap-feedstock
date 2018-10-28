@@ -72,6 +72,10 @@ cp bin/gap.sh "$PREFIX/bin/gap"
 rm -rf "$INSTALL_DIR"/bin/**/*.o
 ln -s "$GAP_DIR" "$PREFIX/gap/latest"
 
+GAP_SRC_PATH=`echo "$INSTALL_DIR/bin/*/src"`
+rm "$GAP_SRC_PATH"
+ln -s "$INSTALL_DIR"/src/ "$GAP_SRC_PATH"
+
 # Delete tests that rely on the non-GPL small group library
 rm "$INSTALL_DIR"/tst/testinstall/ctblsolv.tst
 rm "$INSTALL_DIR"/tst/testinstall/grppc.tst
