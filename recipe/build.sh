@@ -51,28 +51,14 @@ chmod +x configure
 make
 
 mkdir -p "$INSTALL_DIR"
-mkdir -p "$INSTALL_DIR"/bin
-mkdir -p "$INSTALL_DIR"/doc
-mkdir -p "$INSTALL_DIR"/grp
-mkdir -p "$INSTALL_DIR"/lib
-mkdir -p "$INSTALL_DIR"/pkg
-mkdir -p "$INSTALL_DIR"/tst
 
 cp -R * "$INSTALL_DIR"
-cp sysinfo.gap "$INSTALL_DIR"
-cp sysinfo.gap-default64 "$INSTALL_DIR"
-cp -R doc/* "$INSTALL_DIR"/doc/
-cp -R grp/* "$INSTALL_DIR"/grp/
-cp -R lib/* "$INSTALL_DIR"/lib/
-cp -R pkg/* "$INSTALL_DIR"/pkg/
-cp src/*.h "$INSTALL_DIR"/src/
-cp -R tst/* "$INSTALL_DIR"/tst/
-cp -R bin/* "$INSTALL_DIR"/bin/
+rm "$INSTALL_DIR/conda_build.sh"
+rm -rf "$INSTALL_DIR/obj"
 cp bin/gap.sh "$PREFIX/bin/gap"
-rm -rf "$INSTALL_DIR"/bin/**/*.o
 ln -s "$GAP_DIR" "$PREFIX/gap/latest"
 
-GAP_SRC_PATH=`echo "$INSTALL_DIR/bin/*/src"`
+GAP_SRC_PATH=`ls -d "$INSTALL_DIR"/bin/*/src`
 rm "$GAP_SRC_PATH"
 ln -s "$INSTALL_DIR"/src/ "$GAP_SRC_PATH"
 
