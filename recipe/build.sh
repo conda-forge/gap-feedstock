@@ -55,7 +55,7 @@ mkdir -p "$INSTALL_DIR"
 cp -R * "$INSTALL_DIR"
 rm "$INSTALL_DIR/conda_build.sh"
 rm -rf "$INSTALL_DIR/obj"
-cp bin/gap.sh "$PREFIX/bin/gap"
+ln -s "$INSTALL_DIR/gap" "$PREFIX/bin/gap"
 ln -s "$GAP_DIR" "$PREFIX/gap/latest"
 
 GAP_SRC_PATH=`ls -d "$INSTALL_DIR"/bin/*/src`
