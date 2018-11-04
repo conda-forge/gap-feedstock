@@ -1,5 +1,5 @@
 {% set version = "4.9.3" %}
-{% set name = "gap-split" %}
+{% set name = "gap-core" %}
 
 package:
   name: {{ name }}
@@ -35,10 +35,14 @@ outputs:
         - gmp
         - readline
         - ncurses
-        - {{ pin_subpackage('gap-smallgrp', max_pin='x.x.x') }}
-        - {{ pin_subpackage('gap-primgrp', max_pin='x.x.x') }}
-        - {{ pin_subpackage('gap-transgrp', max_pin='x.x.x') }}
 
+  - name: gap-minimal
+    requirements:
+      - {{ pin_subpackage('gap-core', max_pin='x.x.x') }}
+      - {{ pin_subpackage('gap-smallgrp', max_pin='x.x.x') }}
+      - {{ pin_subpackage('gap-primgrp', max_pin='x.x.x') }}
+      - {{ pin_subpackage('gap-transgrp', max_pin='x.x.x') }}
+      - {{ pin_subpackage('gap-gapdoc', max_pin='x.x.x') }}
 
   - name: gap-repsn
     script: install-pkg.sh
