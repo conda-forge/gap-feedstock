@@ -66,7 +66,7 @@ outputs:
         - gmp
         - readline
         - ncurses    # for Browse
-        - curl       # for curlInterface
+        - libcurl    # for curlInterface
         - boost-cpp  # for NormalizInterface
         - mpfr       # for float
         - mpfi       # for float
@@ -80,8 +80,7 @@ outputs:
         - gmp
         - readline
         - ncurses    # for Browse
-        - curl       # for curlInterface
-        - boost-cpp  # for NormalizInterface
+        - libcurl    # for curlInterface
         - mpfr       # for float
         - mpfi       # for float
         - mpc        # for float
