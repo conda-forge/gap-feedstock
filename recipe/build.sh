@@ -46,3 +46,5 @@ bash ../bin/BuildPackages.sh
 mkdir -p log
 ls -al log
 touch log/fail.log
+cat log/fail.log
+rm -rf log
