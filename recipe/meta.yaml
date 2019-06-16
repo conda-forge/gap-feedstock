@@ -48,12 +48,18 @@ outputs:
       run:
         - gmp
         - readline
+    test:
+      commands:
+        - echo "Can't test easily"
 
   - name: gap-minimal
     script: install-minimal.sh
     requirements:
       run:
         - {{ pin_subpackage('gap-core', exact=True) }}
+    test:
+      commands:
+        - gap -h
 
   - name: gap
     script: install-full.sh
@@ -89,6 +95,9 @@ outputs:
         - zeromq     # for ZeroMQInterface
         - linbox     # for linboxing
         - {{ pin_subpackage('gap-minimal', exact=True) }}
+    test:
+      commands:
+        - echo "TODO - test a package here"
 
 about:
   home: https://www.gap-system.org/
