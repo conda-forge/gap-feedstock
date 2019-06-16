@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 export CPPFLAGS="-I$PREFIX/include $CPPFLAGS"
 export LDFLAGS="-L$PREFIX/lib $LDFLAGS"
 export LD_LIBRARY_PATH="$PREFIX/lib:$LD_LIBRARY_PATH"
@@ -42,4 +44,5 @@ make
 cd pkg
 bash ../bin/BuildPackages.sh
 mkdir -p log
+ls -al log
 touch log/fail.log
