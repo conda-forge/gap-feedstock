@@ -41,4 +41,5 @@ make
 
 cd pkg
 bash ../bin/BuildPackages.sh
-
+mkdir -p log
+touch log/fail.log
