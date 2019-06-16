@@ -21,5 +21,4 @@ do
     fi
 
     mv $PKG_DIR $INSTALL_DIR/pkg/$PKG_DIR
-    ln -s "$INSTALL_DIR/pkg/$PKG_DIR" "$PKG_DIR"
 done
