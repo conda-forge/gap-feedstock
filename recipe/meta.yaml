@@ -19,7 +19,7 @@ requirements:
     - {{ compiler('cxx') }}
     - libtool
   host:
-    # Since we are using bin/buildpackages.sh to build alll packages at once,
+    # Since we are using bin/buildpackages.sh to build all packages at once,
     # these requirements are needed.
     - gmp
     - readline
@@ -48,15 +48,6 @@ outputs:
       run:
         - gmp
         - readline
-    test:
-      commands:
-        - echo "Can't test easily"
-
-  - name: gap-minimal
-    script: install-minimal.sh
-    requirements:
-      run:
-        - {{ pin_subpackage('gap-core', exact=True) }}
     test:
       commands:
         - gap -h
