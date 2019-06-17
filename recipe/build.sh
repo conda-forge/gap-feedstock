@@ -56,7 +56,9 @@ SEMIGROUPS_PKG_DIR=`find . -maxdepth 1 -iname "semigroups-*" -type d`
 pushd $SEMIGROUPS_PKG_DIR
 ./configure --with-graproot=$SRC_DIR --with-external-libsemigroups
 make
+make clean
 rm -rf src/libsemigroups
+rm -rf bin/lib
 popd
 
 # Print error logs
@@ -69,3 +71,16 @@ for file in log/*; do
   cat $file
 done
 rm -rf log
+
+for folder in *; do
+  pushd $folder
+  echo "GAP_PKG_NAME: $GAP_PKG_NAME"
+  GAP_PKG_NAME=$(echo $folder | cut -d- -f1)
+  load_output=$(gap -q -T <<< "LoadPackage(\"$GAP_PKG_NAME\");")
+  [ "${load_output:1}" == "true" ] || echo "Loading already fails"
+  echo "${load_output:1}"
+  make clean || echo true
+  load_output2=$(gap -q -T <<< "LoadPackage(\"$GAP_PKG_NAME\");")
+  [ "${load_output2:1}" == "true" ] || echo "Loading fails after make clean"
+  popd
+done
