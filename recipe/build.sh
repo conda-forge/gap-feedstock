@@ -49,6 +49,7 @@ do
     rm -rf $PKG_DIR
 done
 
+sed -i.bak "s@./build-normaliz.sh@echo@g" ../bin/BuildPackages.sh
 bash ../bin/BuildPackages.sh
 
 # Build semigroups with external libsemigroups

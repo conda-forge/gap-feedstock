@@ -40,6 +40,7 @@ requirements:
     - linbox     # linboxing
     - libsemigroups   # for Semigroups
     - planarity  # for digraphs
+    - normaliz   # for NormalizInterface
 
 outputs:
   - name: gap-core
@@ -81,6 +82,7 @@ outputs:
         - linbox     # for linboxing
         - libsemigroups   # for Semigroups
         - planarity  # for digraphs
+        - normaliz   # for NormalizInterface
         - {{ pin_subpackage('gap-core', exact=True) }}
       run:
         - gmp
@@ -96,6 +98,7 @@ outputs:
         - linbox     # for linboxing
         - {{ pin_compatible('libsemigroups') }}   # for Semigroups
         - {{ pin_compatible('planarity') }}       # for digraphs
+        - {{ pin_compatible('normaliz') }}        # for NormalizInterface
         - {{ pin_subpackage('gap-core', exact=True) }}
     test:
       commands:
