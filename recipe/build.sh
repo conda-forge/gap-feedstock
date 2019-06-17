@@ -77,10 +77,6 @@ for folder in *; do
   echo "GAP_PKG_NAME: $GAP_PKG_NAME"
   GAP_PKG_NAME=$(echo $folder | cut -d- -f1)
   load_output=$(../../bin/gap.sh -q -T <<< "LoadPackage(\"$GAP_PKG_NAME\");")
-  [ "${load_output:1}" == "true" ] || echo "Loading already fails"
-  echo "${load_output:1}"
-  make clean || echo true
-  load_output2=$(../../bin/gap.sh -q -T <<< "LoadPackage(\"$GAP_PKG_NAME\");")
-  [ "${load_output2:1}" == "true" && "${load_output:1}" != "true" ] || echo "Loading fails after make clean"
+  [[ "${load_output}" == "true" || "${load_output:1}" == "true" ]] || echo "Loading fails"
   popd
 done
