@@ -72,7 +72,7 @@ outputs:
         - pari       # for alnuth
         - zeromq     # for ZeroMQInterface
         - linbox     # for linboxing
-        - {{ pin_subpackage('gap-minimal', exact=True) }}
+        - {{ pin_subpackage('gap-core', exact=True) }}
       run:
         - gmp
         - readline
@@ -85,7 +85,7 @@ outputs:
         - pari       # for alnuth
         - zeromq     # for ZeroMQInterface
         - linbox     # for linboxing
-        - {{ pin_subpackage('gap-minimal', exact=True) }}
+        - {{ pin_subpackage('gap-core', exact=True) }}
     test:
       commands:
         - echo "TODO - test a package here"
