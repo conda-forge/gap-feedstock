@@ -33,6 +33,7 @@ requirements:
     - pari       # for alnuth
     - zeromq     # for ZeroMQInterface
     - linbox     # linboxing
+    - libsemigroups   # for Semigroups
 
 outputs:
   - name: gap-core
@@ -72,6 +73,7 @@ outputs:
         - pari       # for alnuth
         - zeromq     # for ZeroMQInterface
         - linbox     # for linboxing
+        - libsemigroups   # for Semigroups
         - {{ pin_subpackage('gap-core', exact=True) }}
       run:
         - gmp
@@ -85,6 +87,7 @@ outputs:
         - pari       # for alnuth
         - zeromq     # for ZeroMQInterface
         - linbox     # for linboxing
+        - {{ pin_compatible('libsemigroups') }}   # for Semigroups
         - {{ pin_subpackage('gap-core', exact=True) }}
     test:
       commands:
