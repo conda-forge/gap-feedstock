@@ -60,11 +60,18 @@ make
 make clean
 rm -rf src/libsemigroups
 rm -rf bin/lib
+if [[ "$target_platform" == "osx-64" ]]; then
+    ${INSTALL_NAME_TOOL} -change $SEMIGROUPS_PKG_DIR/src/libsemigroups/../../bin/lib/libsemigroups.0.dylib @rpath/libplanarity.0.dylib $SEMIGROUPS_PKG_DIR/bin/64/semigroups.so
+fi
 popd
 
 # Remove planarity and use the one from conda
 DIGRAPHS_PKG_DIR=`find . -maxdepth 1 -iname "digraphs-*" -type d`
 rm -rf $DIGRAPHS_PKG_DIR/extern/edge-addition-planarity-suite-Version_3.0.0.5
+rm -rf $DIGRAPHS_PKG_DIR/bin/lib
+if [[ "$target_platform" == "osx-64" ]]; then
+    ${INSTALL_NAME_TOOL} -change $DIGRAPHS_PKG_DIR/extern/edge-addition-planarity-suite-Version_3.0.0.5/../../bin/lib/libplanarity.0.dylib @rpath/libplanarity.0.dylib $DIGRAPHS_PKG_DIR/bin/64/digraphs.so
+fi
 
 # Print error logs
 mkdir -p log
