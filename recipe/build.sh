@@ -56,6 +56,7 @@ SEMIGROUPS_PKG_DIR=`find . -maxdepth 1 -iname "semigroups-*" -type d`
 pushd $SEMIGROUPS_PKG_DIR
 ./configure --with-graproot=$SRC_DIR --with-external-libsemigroups
 make
+rm -rf src/libsemigroups
 popd
 
 # Print error logs
