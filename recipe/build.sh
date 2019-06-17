@@ -43,7 +43,7 @@ make
 cd pkg
 
 # Disable problematic packages. See https://github.com/conda-forge/gap-feedstock/pull/16
-for GAP_PKG_NAME in kbmag cohomolo guava example ace xgap anupq polymakeinterface;
+for GAP_PKG_NAME in kbmag cohomolo guava example ace xgap anupq polymakeinterface fplsa;
 do
     PKG_DIR=`find . -maxdepth 1 -iname "$GAP_PKG_NAME-*" -type d`
     rm -rf $PKG_DIR
