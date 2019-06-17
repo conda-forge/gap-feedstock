@@ -39,6 +39,7 @@ requirements:
     - zeromq     # for ZeroMQInterface
     - linbox     # linboxing
     - libsemigroups   # for Semigroups
+    - planarity  # for digraphs
 
 outputs:
   - name: gap-core
@@ -79,6 +80,7 @@ outputs:
         - zeromq     # for ZeroMQInterface
         - linbox     # for linboxing
         - libsemigroups   # for Semigroups
+        - planarity  # for digraphs
         - {{ pin_subpackage('gap-core', exact=True) }}
       run:
         - gmp
@@ -93,6 +95,7 @@ outputs:
         - zeromq     # for ZeroMQInterface
         - linbox     # for linboxing
         - {{ pin_compatible('libsemigroups') }}   # for Semigroups
+        - {{ pin_compatible('planarity') }}       # for digraphs
         - {{ pin_subpackage('gap-core', exact=True) }}
     test:
       commands:

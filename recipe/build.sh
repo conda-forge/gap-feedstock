@@ -61,6 +61,10 @@ rm -rf src/libsemigroups
 rm -rf bin/lib
 popd
 
+# Remove planarity and use the one from conda
+DIGRAPHS_PKG_DIR=`find . -maxdepth 1 -iname "digraphs-*" -type d`
+rm -rf $DIGRAPHS_PKG_DIR/extern/edge-addition-planarity-suite-Version_3.0.0.5
+
 # Print error logs
 mkdir -p log
 ls -al log
