@@ -81,6 +81,6 @@ for folder in *; do
   echo "${load_output:1}"
   make clean || echo true
   load_output2=$(../../bin/gap.sh -q -T <<< "LoadPackage(\"$GAP_PKG_NAME\");")
-  [ "${load_output2:1}" == "true" ] || echo "Loading fails after make clean"
+  [ "${load_output2:1}" == "true" && "${load_output:1}" != "true" ] || echo "Loading fails after make clean"
   popd
 done
