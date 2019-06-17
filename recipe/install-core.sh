@@ -13,7 +13,7 @@ GAP_SRC_PATH=`ls -d "$INSTALL_DIR"/bin/*/src`
 rm "$GAP_SRC_PATH"
 ln -s "$INSTALL_DIR"/src/ "$GAP_SRC_PATH"
 
-
+INSTALL_DIR="$PREFIX/gap"
 mkdir -p "$INSTALL_DIR/pkg"
 cd pkg
 for GAP_PKG_NAME in smallgrp transgrp primgrp gapdoc;
