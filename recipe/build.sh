@@ -57,7 +57,6 @@ SEMIGROUPS_PKG_DIR=`find . -maxdepth 1 -iname "semigroups-*" -type d`
 pushd $SEMIGROUPS_PKG_DIR
 ./configure --with-graproot=$SRC_DIR --with-external-libsemigroups
 make
-make clean
 rm -rf src/libsemigroups
 rm -rf bin/lib
 if [[ "$target_platform" == "osx-64" ]]; then
