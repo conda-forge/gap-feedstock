@@ -14,16 +14,22 @@ docker_image:
 - condaforge/linux-anvil-comp7
 gmp:
 - '6'
+libcurl:
+- '7.64'
 mpfr:
 - '4'
 ncurses:
 - '6.1'
+pari:
+- '2.11'
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
   curl:
     max_pin: x
   gmp:
+    max_pin: x
+  libcurl:
     max_pin: x
   mpfr:
     max_pin: x
