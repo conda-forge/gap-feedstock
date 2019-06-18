@@ -93,3 +93,15 @@ for folder in *; do
   [[ "${load_output}" == "true" || "${load_output:1}" == "true" ]] || echo "Loading fails"
   popd
 done
+
+# Remove all object files and temporary files.
+find . \( \
+         -name "*.o" \
+      -o -name "*.lo" \
+      -o -name "*.la" \
+      -o -name "*.lai" \
+      -o -name ".libs" \
+      -o -name "config.log" \
+      -o -name "config.status" \
+      -o -name "libtool" \
+      \) -exec rm -rf {} \;
