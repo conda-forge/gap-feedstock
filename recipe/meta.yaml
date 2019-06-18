@@ -1,5 +1,5 @@
-{% set version = "4.8.10" %}
-{% set name = "gap" %}
+{% set version = "4.10.1" %}
+{% set name = "gap-core" %}
 
 package:
   name: {{ name }}
@@ -7,41 +7,102 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
-  url: https://www.gap-system.org/pub/gap/gap48/tar.gz/gap4r8p10_2018_01_15-13_02.tar.gz
-  sha256: fc0dac32d196a825be5b4cab6a970aad58f1d16ca2870bd0381c94c85e7a9e5b
-  patches:
-    # Patches from https://github.com/sagemath/sage
-    # Set GAP_MEM
-    - patches/gap_shi.patch
-    # fix infinite loop in writeandcheck() when writing an error message fails.
-    - patches/writeandcheck.patch
-    # https://github.com/gap-system/gap/pull/448
-    - patches/448.patch
-    # https://github.com/gap-system/gap/pull/1188
-    - patches/path.patch
-    # we don't install some of the default packages
-    - patches/nodefaultpackages.patch
+  url: https://www.gap-system.org/pub/gap/gap-{{ ".".join(version.split(".")[:2]) }}/tar.gz/gap-{{ version }}.tar.gz
+  sha256: b2d8800e338a6a9afdf92b06368c2e1a16b8adebffcd4c10319c1b3a4e827e45
 
 build:
-  number: 1002
+  number: 0 
   skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler('cxx') }}
     - libtool
+    - m4
+    - autoconf   # for simpcomp and NormalizInterface
+    - automake   # for NormalizInterface
+    - git        # for NormalizInterface
+    - make
   host:
+    # Since we are using bin/buildpackages.sh to build all packages at once,
+    # these requirements are needed.
     - gmp
     - readline
-    - ncurses
-  run:
-    - gmp
-    - readline
-    - ncurses
+    - ncurses    # for Browse
+    - curl       # for curlInterface
+    - boost-cpp  # for NormalizInterface
+    - mpfr       # for float
+    - mpfi       # for float
+    - mpc        # for float
+    #- fplll     # for float
+    - pari       # for alnuth
+    - zeromq     # for ZeroMQInterface
+    - linbox     # linboxing
+    - libsemigroups   # for Semigroups
+    - planarity  # for digraphs
+    - normaliz   # for NormalizInterface
 
-test:
-  commands:
-    - gap -h
+outputs:
+  - name: gap-core
+    script: install-core.sh
+    requirements:
+      build:    
+        - {{ compiler('cxx') }}
+        - libtool
+        - make
+      host:
+        - gmp
+        - readline
+      run:
+        - gmp
+        - readline
+    test:
+      commands:
+        - gap -h
+
+  - name: gap
+    script: install-full.sh
+    requirements:
+      build:    
+        - {{ compiler('cxx') }}
+        - libtool
+        - make
+      host:
+        - gmp
+        - readline
+        - ncurses    # for Browse
+        - libcurl    # for curlInterface
+        - boost-cpp  # for NormalizInterface
+        - mpfr       # for float
+        - mpfi       # for float
+        - mpc        # for float
+        #- fplll     # for float
+        - pari       # for alnuth
+        - zeromq     # for ZeroMQInterface
+        - linbox     # for linboxing
+        - libsemigroups   # for Semigroups
+        - planarity  # for digraphs
+        - normaliz   # for NormalizInterface
+        - {{ pin_subpackage('gap-core', exact=True) }}
+      run:
+        - gmp
+        - readline
+        - ncurses    # for Browse
+        - libcurl    # for curlInterface
+        - mpfr       # for float
+        - mpfi       # for float
+        - mpc        # for float
+        #- fplll     # for float
+        - pari       # for alnuth
+        - zeromq     # for ZeroMQInterface
+        - linbox     # for linboxing
+        - {{ pin_compatible('libsemigroups') }}   # for Semigroups
+        - {{ pin_compatible('planarity') }}       # for digraphs
+        - {{ pin_compatible('normaliz') }}        # for NormalizInterface
+        - {{ pin_subpackage('gap-core', exact=True) }}
+    test:
+      commands:
+        - echo "TODO - test a package here"
 
 about:
   home: https://www.gap-system.org/

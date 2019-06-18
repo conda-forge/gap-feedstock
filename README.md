@@ -1,5 +1,5 @@
-About gap
-=========
+About gap-core
+==============
 
 Home: https://www.gap-system.org/
 
@@ -14,9 +14,48 @@ Summary: GAP - Groups, Algorithms, Programming, a System for Computational Discr
 Current build status
 ====================
 
-[![Linux](https://img.shields.io/circleci/project/github/conda-forge/gap-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/gap-feedstock)
-[![OSX](https://img.shields.io/travis/conda-forge/gap-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/gap-feedstock)
-![Windows disabled](https://img.shields.io/badge/Windows-disabled-lightgrey.svg)
+
+<table>
+    
+  <tr>
+    <td>Azure</td>
+    <td>
+      <details>
+        <summary>
+          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=345&branchName=master">
+            <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gap-feedstock?branchName=master">
+          </a>
+        </summary>
+        <table>
+          <thead><tr><th>Variant</th><th>Status</th></tr></thead>
+          <tbody><tr>
+              <td>linux</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=345&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gap-feedstock?branchName=master&jobName=linux&configuration=linux_" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=345&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gap-feedstock?branchName=master&jobName=osx&configuration=osx_" alt="variant">
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </details>
+    </td>
+  </tr>
+  <tr>
+    <td>Windows</td>
+    <td>
+      <img src="https://img.shields.io/badge/Windows-disabled-lightgrey.svg" alt="Windows disabled">
+    </td>
+  </tr>
+![ppc64le disabled](https://img.shields.io/badge/ppc64le-disabled-lightgrey.svg)
+</table>
 
 Current release info
 ====================
@@ -24,20 +63,22 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gap-green.svg)](https://anaconda.org/conda-forge/gap) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gap.svg)](https://anaconda.org/conda-forge/gap) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gap.svg)](https://anaconda.org/conda-forge/gap) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gap.svg)](https://anaconda.org/conda-forge/gap) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-gap--core-green.svg)](https://anaconda.org/conda-forge/gap-core) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gap-core.svg)](https://anaconda.org/conda-forge/gap-core) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gap-core.svg)](https://anaconda.org/conda-forge/gap-core) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gap-core.svg)](https://anaconda.org/conda-forge/gap-core) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-gap--minimal-green.svg)](https://anaconda.org/conda-forge/gap-minimal) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gap-minimal.svg)](https://anaconda.org/conda-forge/gap-minimal) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gap-minimal.svg)](https://anaconda.org/conda-forge/gap-minimal) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gap-minimal.svg)](https://anaconda.org/conda-forge/gap-minimal) |
 
-Installing gap
-==============
+Installing gap-core
+===================
 
-Installing `gap` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `gap-core` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
 
 ```
 conda config --add channels conda-forge
 ```
 
-Once the `conda-forge` channel has been enabled, `gap` can be installed with:
+Once the `conda-forge` channel has been enabled, `gap, gap-core, gap-minimal` can be installed with:
 
 ```
-conda install gap
+conda install gap gap-core gap-minimal
 ```
 
 It is possible to list all of the versions of `gap` available on your platform with:
@@ -49,6 +90,8 @@ conda search gap --channel conda-forge
 
 About conda-forge
 =================
+
+[![Powered by NumFOCUS](https://img.shields.io/badge/powered%20by-NumFOCUS-orange.svg?style=flat&colorA=E1523D&colorB=007D8A)](http://numfocus.org)
 
 conda-forge is a community-led conda channel of installable packages.
 In order to provide high-quality builds, the process has been automated into the
@@ -83,17 +126,17 @@ Terminology
                   produce the finished article (built conda distributions)
 
 
-Updating gap-feedstock
-======================
+Updating gap-core-feedstock
+===========================
 
-If you would like to improve the gap recipe or build a new
+If you would like to improve the gap-core recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `conda-forge` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `conda-forge` channel.
-Note that all branches in the conda-forge/gap-feedstock are
+Note that all branches in the conda-forge/gap-core-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks and branches in the main repository should only be used to
 build distinct package versions.
@@ -104,3 +147,10 @@ In order to produce a uniquely identifiable distribution:
  * If the version of a package **is** being increased, please remember to return
    the [``build/number``](https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html#build-number-and-string)
    back to 0.
+
+Feedstock Maintainers
+=====================
+
+* [@isuruf](https://github.com/isuruf/)
+* [@saraedum](https://github.com/saraedum/)
+
