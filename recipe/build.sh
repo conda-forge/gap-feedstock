@@ -94,6 +94,7 @@ for folder in *; do
   popd
 done
 
+set +e
 # Remove all object files and temporary files.
 find . \( \
          -name "*.o" \
@@ -105,3 +106,5 @@ find . \( \
       -o -name "config.status" \
       -o -name "libtool" \
       \) -exec rm -rf {} \;
+
+echo "done"
