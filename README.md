@@ -64,7 +64,6 @@ Current release info
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gap-green.svg)](https://anaconda.org/conda-forge/gap) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gap.svg)](https://anaconda.org/conda-forge/gap) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gap.svg)](https://anaconda.org/conda-forge/gap) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gap.svg)](https://anaconda.org/conda-forge/gap) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gap--core-green.svg)](https://anaconda.org/conda-forge/gap-core) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gap-core.svg)](https://anaconda.org/conda-forge/gap-core) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gap-core.svg)](https://anaconda.org/conda-forge/gap-core) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gap-core.svg)](https://anaconda.org/conda-forge/gap-core) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-gap--minimal-green.svg)](https://anaconda.org/conda-forge/gap-minimal) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gap-minimal.svg)](https://anaconda.org/conda-forge/gap-minimal) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gap-minimal.svg)](https://anaconda.org/conda-forge/gap-minimal) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gap-minimal.svg)](https://anaconda.org/conda-forge/gap-minimal) |
 
 Installing gap-core
 ===================
@@ -75,10 +74,10 @@ Installing `gap-core` from the `conda-forge` channel can be achieved by adding `
 conda config --add channels conda-forge
 ```
 
-Once the `conda-forge` channel has been enabled, `gap, gap-core, gap-minimal` can be installed with:
+Once the `conda-forge` channel has been enabled, `gap, gap-core` can be installed with:
 
 ```
-conda install gap gap-core gap-minimal
+conda install gap gap-core
 ```
 
 It is possible to list all of the versions of `gap` available on your platform with:
