@@ -53,6 +53,7 @@ sed -i.bak "s@./build-normaliz.sh@echo@g" ../bin/BuildPackages.sh
 bash ../bin/BuildPackages.sh
 
 # Build semigroups with external libsemigroups
+# libsemigroups vendored and one from conda are ABI compatible
 SEMIGROUPS_PKG_DIR=`find . -maxdepth 1 -iname "semigroups-*" -type d`
 pushd $SEMIGROUPS_PKG_DIR
 ./configure --with-graproot=$SRC_DIR --with-external-libsemigroups
@@ -60,16 +61,17 @@ make
 rm -rf src/libsemigroups
 rm -rf bin/lib
 if [[ "$target_platform" == "osx-64" ]]; then
-    ${INSTALL_NAME_TOOL} -change $SEMIGROUPS_PKG_DIR/src/libsemigroups/../../bin/lib/libsemigroups.0.dylib @rpath/libplanarity.0.dylib bin/64/semigroups.so
+    ${INSTALL_NAME_TOOL} -change ${SRC_DIR}/pkg/${SEMIGROUPS_PKG_DIR:2}/src/libsemigroups/../../bin/lib/libsemigroups.0.dylib @rpath/libplanarity.0.dylib bin/64/semigroups.so
 fi
 popd
 
 # Remove planarity and use the one from conda
+# planarity vendored and one from conda are ABI compatible
 DIGRAPHS_PKG_DIR=`find . -maxdepth 1 -iname "digraphs-*" -type d`
 rm -rf $DIGRAPHS_PKG_DIR/extern/edge-addition-planarity-suite-Version_3.0.0.5
 rm -rf $DIGRAPHS_PKG_DIR/bin/lib
 if [[ "$target_platform" == "osx-64" ]]; then
-    ${INSTALL_NAME_TOOL} -change $DIGRAPHS_PKG_DIR/extern/edge-addition-planarity-suite-Version_3.0.0.5/../../bin/lib/libplanarity.0.dylib @rpath/libplanarity.0.dylib $DIGRAPHS_PKG_DIR/bin/64/digraphs.so
+    ${INSTALL_NAME_TOOL} -change ${SRC_DIR}/pkg/${DIGRAPHS_PKG_DIR:2}/extern/edge-addition-planarity-suite-Version_3.0.0.5/../../bin/lib/libplanarity.0.dylib @rpath/libplanarity.0.dylib $DIGRAPHS_PKG_DIR/bin/64/digraphs.so
 fi
 
 # Print error logs
