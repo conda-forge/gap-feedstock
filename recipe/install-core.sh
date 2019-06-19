@@ -2,6 +2,9 @@ INSTALL_DIR="$PREFIX/gap"
 
 mkdir -p "$INSTALL_DIR"
 
+make install-headers install-libgap
+cp gen/config.h $PREFIX/include/gap
+
 cp -R * "$INSTALL_DIR"
 rm -rf "$INSTALL_DIR/obj"
 rm -rf "$INSTALL_DIR/pkg"
