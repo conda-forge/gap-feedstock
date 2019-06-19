@@ -37,7 +37,7 @@ mkdir -p "$INSTALL_DIR/pkg"
 cd pkg
 for GAP_PKG_NAME in smallgrp transgrp primgrp gapdoc;
 do
-    PKG_DIR=`find . -maxdepth 1 -iname "$GAP_PKG_NAME-*" -type d`
+    PKG_DIR=`find . -maxdepth 1 -iname "$GAP_PKG_NAME-*" -o -iname "$GAP_PKG_NAME" -type d`
     echo "GAP_PKG_NAME: $GAP_PKG_NAME"
     echo "PKG_DIR: $PKG_DIR"
     ls -al .
