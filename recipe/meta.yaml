@@ -9,9 +9,11 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://www.gap-system.org/pub/gap/gap-{{ ".".join(version.split(".")[:2]) }}/tar.gz/gap-{{ version }}.tar.gz
   sha256: b2d8800e338a6a9afdf92b06368c2e1a16b8adebffcd4c10319c1b3a4e827e45
+  patches:
+    - patches/make_install.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
 
 requirements:
