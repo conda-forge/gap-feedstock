@@ -6,6 +6,7 @@ make install-headers install-libgap
 cp gen/config.h $PREFIX/include/gap
 
 set +e
+pushd pkg
 # Remove all object files and temporary files.
 find . \( \
          -name "*.o" \
@@ -17,7 +18,7 @@ find . \( \
       -o -name "config.status" \
       -o -name "libtool" \
       \) -exec rm -rf {} \;
-
+popd
 echo "done"
 set -e
 
