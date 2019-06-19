@@ -1,4 +1,4 @@
-INSTALL_DIR="$PREFIX/gap"
+INSTALL_DIR="$PREFIX/share/gap"
 
 rm -rf "$INSTALL_DIR/pkg"
 
