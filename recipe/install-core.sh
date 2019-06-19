@@ -5,6 +5,22 @@ mkdir -p "$INSTALL_DIR"
 make install-headers install-libgap
 cp gen/config.h $PREFIX/include/gap
 
+set +e
+# Remove all object files and temporary files.
+find . \( \
+         -name "*.o" \
+      -o -name "*.lo" \
+      -o -name "*.la" \
+      -o -name "*.lai" \
+      -o -name ".libs" \
+      -o -name "config.log" \
+      -o -name "config.status" \
+      -o -name "libtool" \
+      \) -exec rm -rf {} \;
+
+echo "done"
+set -e
+
 cp -R * "$INSTALL_DIR"
 rm -rf "$INSTALL_DIR/obj"
 rm -rf "$INSTALL_DIR/pkg"
