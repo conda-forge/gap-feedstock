@@ -13,7 +13,7 @@ source:
     - patches/make_install.patch
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
 
 requirements:
@@ -43,6 +43,7 @@ requirements:
     - libsemigroups   # for Semigroups
     - planarity  # for digraphs
     - normaliz   # for NormalizInterface
+    - zlib
 
 outputs:
   - name: gap-core
@@ -55,9 +56,11 @@ outputs:
       host:
         - gmp
         - readline
+        - zlib
       run:
         - gmp
         - readline
+        - zlib
     test:
       commands:
         - gap -h

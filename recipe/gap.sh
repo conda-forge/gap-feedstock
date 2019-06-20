@@ -6,4 +6,4 @@ CONDA_GAP_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 &
 
 GAP_ROOT="$(dirname $CONDA_GAP_SCRIPT_DIR)/share/gap"
 
-exec "$(dirname $CONDA_GAP_SCRIPT_DIR)/bin/gap-bin" -l "$GAP_ROOT" -m 64m "$@"
+exec "$GAP_ROOT/gap" -l "$GAP_ROOT" -m 64m "$@"
