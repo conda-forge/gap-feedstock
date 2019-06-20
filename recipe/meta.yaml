@@ -43,6 +43,7 @@ requirements:
     - libsemigroups   # for Semigroups
     - planarity  # for digraphs
     - normaliz   # for NormalizInterface
+    - zlib
 
 outputs:
   - name: gap-core
@@ -86,6 +87,7 @@ outputs:
         - planarity  # for digraphs
         - normaliz   # for NormalizInterface
         - {{ pin_subpackage('gap-core', exact=True) }}
+        - zlib
       run:
         - gmp
         - readline
@@ -102,6 +104,7 @@ outputs:
         - {{ pin_compatible('planarity') }}       # for digraphs
         - {{ pin_compatible('normaliz') }}        # for NormalizInterface
         - {{ pin_subpackage('gap-core', exact=True) }}
+        - zlib
     test:
       commands:
         - echo "TODO - test a package here"
