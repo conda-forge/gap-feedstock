@@ -56,9 +56,11 @@ outputs:
       host:
         - gmp
         - readline
+        - zlib
       run:
         - gmp
         - readline
+        - zlib
     test:
       commands:
         - gap -h
@@ -87,7 +89,6 @@ outputs:
         - planarity  # for digraphs
         - normaliz   # for NormalizInterface
         - {{ pin_subpackage('gap-core', exact=True) }}
-        - zlib
       run:
         - gmp
         - readline
@@ -104,7 +105,6 @@ outputs:
         - {{ pin_compatible('planarity') }}       # for digraphs
         - {{ pin_compatible('normaliz') }}        # for NormalizInterface
         - {{ pin_subpackage('gap-core', exact=True) }}
-        - zlib
     test:
       commands:
         - echo "TODO - test a package here"
