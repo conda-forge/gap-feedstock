@@ -39,7 +39,11 @@ pin_run_as_build:
     max_pin: x
   zeromq:
     max_pin: x.x
+  zlib:
+    max_pin: x.x
 readline:
 - '7.0'
 zeromq:
 - 4.3.1
+zlib:
+- '1.2'
