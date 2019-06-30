@@ -13,7 +13,7 @@ source:
     - patches/make_install.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
 
 requirements:
@@ -65,6 +65,17 @@ outputs:
       commands:
         - gap -h
 
+  - name: gap-defaults
+    script: install-defaults.sh
+    requirements:
+      host:
+        - {{ pin_subpackage('gap-core', exact=True) }}
+      run:
+        - {{ pin_subpackage('gap-core', exact=True) }}
+    test:
+      commands:
+        - echo "TODO - test a package here"
+
   - name: gap
     script: install-full.sh
     requirements:
@@ -89,6 +100,7 @@ outputs:
         - planarity  # for digraphs
         - normaliz   # for NormalizInterface
         - {{ pin_subpackage('gap-core', exact=True) }}
+        - {{ pin_subpackage('gap-defaults', exact=True) }}
       run:
         - gmp
         - readline
@@ -105,6 +117,7 @@ outputs:
         - {{ pin_compatible('planarity') }}       # for digraphs
         - {{ pin_compatible('normaliz') }}        # for NormalizInterface
         - {{ pin_subpackage('gap-core', exact=True) }}
+        - {{ pin_subpackage('gap-defaults', exact=True) }}
     test:
       commands:
         - echo "TODO - test a package here"
