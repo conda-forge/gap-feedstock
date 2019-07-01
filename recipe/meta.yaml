@@ -1,5 +1,5 @@
 {% set version = "4.10.2" %}
-{% set name = "gap-core" %}
+{% set name = "gap-split" %}
 
 package:
   name: {{ name }}
