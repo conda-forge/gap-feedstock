@@ -29,7 +29,7 @@ requirements:
     # Since we are using bin/buildpackages.sh to build all packages at once,
     # these requirements are needed.
     - gmp
-    - readline
+    - readline {{ readline }}
     - ncurses    # for Browse
     - curl       # for curlInterface
     - boost-cpp  # for NormalizInterface
@@ -55,11 +55,11 @@ outputs:
         - make
       host:
         - gmp
-        - readline
+        - readline {{ readline }}
         - zlib
       run:
         - gmp
-        - readline
+        - readline {{ readline }}
         - zlib
     test:
       commands:
@@ -85,7 +85,7 @@ outputs:
         - make
       host:
         - gmp
-        - readline
+        - readline {{ readline }}
         - ncurses    # for Browse
         - libcurl    # for curlInterface
         - boost-cpp  # for NormalizInterface
@@ -103,7 +103,7 @@ outputs:
         - {{ pin_subpackage('gap-defaults', exact=True) }}
       run:
         - gmp
-        - readline
+        - readline {{ readline }}
         - ncurses    # for Browse
         - libcurl    # for curlInterface
         - mpfr       # for float
