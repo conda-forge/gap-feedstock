@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # GAP startup script, installed in $PREFIX/bin/gap
 
