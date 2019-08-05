@@ -122,6 +122,17 @@ outputs:
       commands:
         - echo "TODO - test a package here"
 
+  - name: gap-jupyter
+    script: install-jupyter.sh
+    noarch: python
+    requirements:
+      host:
+        - notebook
+        - {{ pin_subpackage('gap', max_pin="x.x.x") }}
+      run:
+        - notebook
+        - {{ pin_subpackage('gap', max_pin="x.x.x") }}
+
 about:
   home: https://www.gap-system.org/
   license: GPLv2
