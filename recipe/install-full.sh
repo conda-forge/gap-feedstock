@@ -23,3 +23,4 @@ set -e
 mv pkg $INSTALL_DIR/pkg
 cp $INSTALL_DIR/pkg/JupyterKernel-*/bin/jupyter-kernel-gap .
 sed -i.bak "s@  GAP=gap@  GAP=$PREFIX/bin/gap@g" jupyter-kernel-gap
+cp jupyter-kernel-gap $PREFIX/bin/jupyter-kernel-gap
