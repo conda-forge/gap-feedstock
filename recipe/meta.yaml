@@ -124,7 +124,8 @@ outputs:
 
   - name: gap-jupyter
     script: install-jupyter.sh
-    noarch: python
+    build:
+      noarch: python
     requirements:
       host:
         - notebook
@@ -132,6 +133,9 @@ outputs:
       run:
         - notebook
         - {{ pin_subpackage('gap', max_pin="x.x.x") }}
+    test:
+      commands:
+        - echo "TODO - test gap jupyter here"
 
 about:
   home: https://www.gap-system.org/
