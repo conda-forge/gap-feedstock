@@ -28,6 +28,6 @@ rm bin/jupyter-kernel-gap.bak
 rm setup.py
 cp $RECIPE_DIR/setup.py setup.py
 cp $RECIPE_DIR/gap-mode.json etc/
-pip install .
+pip install . --no-deps
 rm -rf $SP_DIR/gap_jupyter-*
 popd
