@@ -101,6 +101,9 @@ outputs:
         - normaliz   # for NormalizInterface
         - {{ pin_subpackage('gap-core', exact=True) }}
         - {{ pin_subpackage('gap-defaults', exact=True) }}
+        # For JupyterKernel
+        - python *
+        - pip
       run:
         - gmp
         - readline {{ readline }}
@@ -121,21 +124,6 @@ outputs:
     test:
       commands:
         - echo "TODO - test a package here"
-
-  - name: gap-jupyter
-    script: install-jupyter.sh
-    build:
-      noarch: python
-    requirements:
-      host:
-        - notebook
-        - {{ pin_subpackage('gap', max_pin="x.x.x") }}
-      run:
-        - notebook
-        - {{ pin_subpackage('gap', max_pin="x.x.x") }}
-    test:
-      commands:
-        - echo "TODO - test gap jupyter here"
 
 about:
   home: https://www.gap-system.org/
