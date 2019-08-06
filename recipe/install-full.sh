@@ -21,3 +21,13 @@ popd
 set -e
 
 mv pkg $INSTALL_DIR/pkg
+
+pushd $INSTALL_DIR/pkg/JupyterKernel-*/
+sed -i.bak "s@  GAP=gap@  GAP=$PREFIX/bin/gap@g" bin/jupyter-kernel-gap
+rm bin/jupyter-kernel-gap.bak
+rm setup.py
+cp $RECIPE_DIR/setup.py setup.py
+cp $RECIPE_DIR/gap-mode.json etc/
+pip install .
+rm -rf $SP_DIR/gap_jupyter-*
+popd
