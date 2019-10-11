@@ -6,6 +6,7 @@ export CPPFLAGS="-I$PREFIX/include $CPPFLAGS"
 export LDFLAGS="-L$PREFIX/lib $LDFLAGS"
 export LD_LIBRARY_PATH="$PREFIX/lib:$LD_LIBRARY_PATH"
 export CFLAGS="-g -O3 -fPIC $CFLAGS"
+export CXXFLAGS="-g -O3 -fPIC $CXXFLAGS"
 
 # Following is adapted from https://github.com/sagemath/sage
 
