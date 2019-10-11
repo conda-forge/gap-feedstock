@@ -82,17 +82,13 @@ outputs:
         - libtool
         - make
       host:
-        - gmp
-        - readline {{ readline }}
         - ncurses    # for Browse
         - libcurl    # for curlInterface
-        - boost-cpp  # for NormalizInterface
         - mpfr       # for float
         - mpfi       # for float
         - mpc        # for float
         - pari       # for alnuth
         - zeromq     # for ZeroMQInterface
-        - linbox     # for linboxing
         - libsemigroups   # for Semigroups
         - planarity  # for digraphs
         - normaliz   # for NormalizInterface
@@ -102,16 +98,7 @@ outputs:
         - python *
         - pip
       run:
-        - gmp
-        - readline {{ readline }}
         - ncurses    # for Browse
-        - libcurl    # for curlInterface
-        - mpfr       # for float
-        - mpfi       # for float
-        - mpc        # for float
-        - pari       # for alnuth
-        - zeromq     # for ZeroMQInterface
-        - linbox     # for linboxing
         - {{ pin_compatible('libsemigroups') }}   # for Semigroups
         - {{ pin_compatible('planarity') }}       # for digraphs
         - {{ pin_compatible('normaliz') }}        # for NormalizInterface
