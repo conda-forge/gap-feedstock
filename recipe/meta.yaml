@@ -19,11 +19,11 @@ build:
 requirements:
   build:
     - {{ compiler('cxx') }}
-    - libtool
-    - m4
-    - autoconf   # for simpcomp and NormalizInterface
-    - automake   # for NormalizInterface
-    - git        # for NormalizInterface
+    - libtool  # FIXME: this should not be necessary for GAP itself, unless you build from git (but you don't, do you?); but perhaps some package needs it?
+    - m4       # FIXME: same as with libtool
+    - autoconf   # for simpcomp and NormalizInterface    # FIXME: simpcomp 2.1.9 in GAP 4.10.2 should not need this (and NormalizInterface 1.1.0 in GAP 4.11 won't either)
+    - automake   # for NormalizInterface # FIXME: shouldn't be need with NormalizInterface 1.1.0 or later in GAP 4.11
+    - git        # for NormalizInterface # FIXME: shouldn't be need with NormalizInterface 1.1.0 or later in GAP 4.11
     - make
   host:
     # Since we are using bin/buildpackages.sh to build all packages at once,
@@ -39,10 +39,10 @@ requirements:
     #- fplll     # for float
     - pari       # for alnuth
     - zeromq     # for ZeroMQInterface
-    - linbox     # linboxing
+    - linbox     # linboxing  # FIXME: linboxing is no longer shipped with GAP since 4.10, so you can drop this
     - libsemigroups   # for Semigroups
     - planarity  # for digraphs
-    - normaliz   # for NormalizInterface
+    - normaliz   # for NormalizInterface   # FIXME: huh -- if you link NormalizInterface against your own normaliz, then you shouldn't need boost, automake, autoconf for it... something does not add up here
     - zlib
 
 outputs:
@@ -50,7 +50,7 @@ outputs:
     script: install-core.sh
     requirements:
       build:    
-        - {{ compiler('cxx') }}
+        - {{ compiler('cxx') }}  # silly question (as I have no idea how conda meta.yml works): how do these requirements relate to the ones given above? Which ones need to be repeated here, and which not?
         - libtool
         - make
       host:
@@ -67,6 +67,7 @@ outputs:
 
   - name: gap-defaults
     script: install-defaults.sh
+    # ... and why does this "output" not need any requirements, when the one before and the one after apparently do need them?
     requirements:
       host:
         - {{ pin_subpackage('gap-core', exact=True) }}
