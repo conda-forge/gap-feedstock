@@ -13,18 +13,19 @@ source:
     - patches/make_install.patch
 
 build:
-  number: 4
+  number: 5
   skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler('cxx') }}
-    - libtool  # FIXME: this should not be necessary for GAP itself, unless you build from git (but you don't, do you?); but perhaps some package needs it?
-    - m4       # FIXME: same as with libtool
-    - autoconf   # for simpcomp and NormalizInterface    # FIXME: simpcomp 2.1.9 in GAP 4.10.2 should not need this (and NormalizInterface 1.1.0 in GAP 4.11 won't either)
-    - automake   # for NormalizInterface # FIXME: shouldn't be need with NormalizInterface 1.1.0 or later in GAP 4.11
-    - git        # for NormalizInterface # FIXME: shouldn't be need with NormalizInterface 1.1.0 or later in GAP 4.11
     - make
+    # All of this can probably be dropped with GAP 4.11
+    - libtool
+    - m4
+    - autoconf
+    - automake
+    - git
   host:
     # Since we are using bin/buildpackages.sh to build all packages at once,
     # these requirements are needed.
@@ -32,17 +33,14 @@ requirements:
     - readline {{ readline }}
     - ncurses    # for Browse
     - curl       # for curlInterface
-    - boost-cpp  # for NormalizInterface
     - mpfr       # for float
     - mpfi       # for float
     - mpc        # for float
-    #- fplll     # for float
     - pari       # for alnuth
     - zeromq     # for ZeroMQInterface
-    - linbox     # linboxing  # FIXME: linboxing is no longer shipped with GAP since 4.10, so you can drop this
     - libsemigroups   # for Semigroups
     - planarity  # for digraphs
-    - normaliz   # for NormalizInterface   # FIXME: huh -- if you link NormalizInterface against your own normaliz, then you shouldn't need boost, automake, autoconf for it... something does not add up here
+    - normaliz   # for NormalizInterface
     - zlib
 
 outputs:
@@ -50,7 +48,7 @@ outputs:
     script: install-core.sh
     requirements:
       build:    
-        - {{ compiler('cxx') }}  # silly question (as I have no idea how conda meta.yml works): how do these requirements relate to the ones given above? Which ones need to be repeated here, and which not?
+        - {{ compiler('cxx') }}
         - libtool
         - make
       host:
@@ -67,7 +65,6 @@ outputs:
 
   - name: gap-defaults
     script: install-defaults.sh
-    # ... and why does this "output" not need any requirements, when the one before and the one after apparently do need them?
     requirements:
       host:
         - {{ pin_subpackage('gap-core', exact=True) }}
@@ -93,7 +90,6 @@ outputs:
         - mpfr       # for float
         - mpfi       # for float
         - mpc        # for float
-        #- fplll     # for float
         - pari       # for alnuth
         - zeromq     # for ZeroMQInterface
         - linbox     # for linboxing
@@ -113,7 +109,6 @@ outputs:
         - mpfr       # for float
         - mpfi       # for float
         - mpc        # for float
-        #- fplll     # for float
         - pari       # for alnuth
         - zeromq     # for ZeroMQInterface
         - linbox     # for linboxing
