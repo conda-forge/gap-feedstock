@@ -71,8 +71,10 @@ outputs:
       run:
         - {{ pin_subpackage('gap-core', exact=True) }}
     test:
+      source_files:
+        - tst
       commands:
-        - echo "TODO - test a package here"
+        - gap tst/testinstall.g
 
   - name: gap
     script: install-full.sh
@@ -105,8 +107,10 @@ outputs:
         - {{ pin_subpackage('gap-core', exact=True) }}
         - {{ pin_subpackage('gap-defaults', exact=True) }}
     test:
+      source_files:
+        - tst
       commands:
-        - echo "TODO - test a package here"
+        - gap tst/testinstall.g
 
 about:
   home: https://www.gap-system.org/
