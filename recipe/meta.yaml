@@ -55,10 +55,6 @@ outputs:
         - gmp
         - readline {{ readline }}
         - zlib
-      run:
-        - gmp
-        - readline {{ readline }}
-        - zlib
     test:
       commands:
         - gap -h
@@ -85,6 +81,8 @@ outputs:
         - make
       host:
         - gmp
+        - zlib
+        - readline {{ readline }}
         - ncurses    # for Browse
         - libcurl    # for curlInterface
         - mpfr       # for float
