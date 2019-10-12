@@ -84,6 +84,7 @@ outputs:
         - libtool
         - make
       host:
+        - gmp
         - ncurses    # for Browse
         - libcurl    # for curlInterface
         - mpfr       # for float
