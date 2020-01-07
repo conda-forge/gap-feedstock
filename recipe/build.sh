@@ -56,6 +56,7 @@ pushd $SEMIGROUPS_PKG_DIR
     sed -i.bak 's/-mavx//g' Makefile.in
     sed -i.bak 's/-march=native//g' Makefile.in
   popd
+  sed -i.bak 's@libsemigroups/VERSION@libsemigroups/.VERSION@g' configure
   sed -i.bak 's/-march=native//g' Makefile.am
   sed -i.bak 's/-march=native//g' Makefile.in
 popd
