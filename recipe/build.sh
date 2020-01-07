@@ -48,11 +48,15 @@ do
 done
 
 SEMIGROUPS_PKG_DIR=`find . -maxdepth 1 -iname "semigroups-*" -type d`
-pushd $SEMIGROUPS_PKG_DIR/libsemigroups
-  mv VERSION .VERSION
-  sed -i.bak 's/-mavx//g' Makefile.am
+pushd $SEMIGROUPS_PKG_DIR
+  pushd libsemigroups
+    mv VERSION .VERSION
+    sed -i.bak 's/-mavx//g' Makefile.am
+    sed -i.bak 's/-march=native//g' Makefile.am
+    sed -i.bak 's/-mavx//g' Makefile.in
+    sed -i.bak 's/-march=native//g' Makefile.in
+  popd
   sed -i.bak 's/-march=native//g' Makefile.am
-  sed -i.bak 's/-mavx//g' Makefile.in
   sed -i.bak 's/-march=native//g' Makefile.in
 popd
 
