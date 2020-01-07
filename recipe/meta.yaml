@@ -13,7 +13,7 @@ source:
     - patches/make_install.patch
 
 build:
-  number: 4
+  number: 5
   skip: true  # [win]
 
 requirements:
@@ -40,7 +40,7 @@ requirements:
     - pari       # for alnuth
     - zeromq     # for ZeroMQInterface
     - linbox     # linboxing
-    - libsemigroups   # for Semigroups
+    - libsemigroups  0.6.*   # for Semigroups
     - planarity  # for digraphs
     - normaliz   # for NormalizInterface
     - zlib
@@ -96,7 +96,7 @@ outputs:
         - pari       # for alnuth
         - zeromq     # for ZeroMQInterface
         - linbox     # for linboxing
-        - libsemigroups   # for Semigroups
+        - libsemigroups  0.6.*   # for Semigroups
         - planarity  # for digraphs
         - normaliz   # for NormalizInterface
         - {{ pin_subpackage('gap-core', exact=True) }}
