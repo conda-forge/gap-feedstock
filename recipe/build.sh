@@ -49,12 +49,20 @@ do
     rm -rf $PKG_DIR
 done
 
+SEMIGROUPS_PKG_DIR=`find . -maxdepth 1 -iname "semigroups-*" -type d`
+pushd $SEMIGROUPS_PKG_DIR/libsemigroups
+  mv VERSION .VERSION
+  sed -i.bak 's/-mavx//g' Makefile.am
+  sed -i.bak 's/-march=native//g' Makefile.am
+  sed -i.bak 's/-mavx//g' Makefile.in
+  sed -i.bak 's/-march=native//g' Makefile.in
+popd
+
 sed -i.bak "s@./build-normaliz.sh@echo@g" ../bin/BuildPackages.sh
 bash ../bin/BuildPackages.sh
 
 # Build semigroups with external libsemigroups
 # libsemigroups vendored and one from conda are ABI compatible
-SEMIGROUPS_PKG_DIR=`find . -maxdepth 1 -iname "semigroups-*" -type d`
 pushd $SEMIGROUPS_PKG_DIR
 ./configure --with-graproot=$SRC_DIR --with-external-libsemigroups
 make
