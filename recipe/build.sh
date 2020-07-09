@@ -2,8 +2,6 @@
 
 set -x
 
-export CPPFLAGS="-I$PREFIX/include $CPPFLAGS"
-export LDFLAGS="-L$PREFIX/lib $LDFLAGS"
 export LD_LIBRARY_PATH="$PREFIX/lib:$LD_LIBRARY_PATH"
 export CFLAGS="-g -O3 -fPIC $CFLAGS"
 
@@ -49,12 +47,26 @@ do
     rm -rf $PKG_DIR
 done
 
+SEMIGROUPS_PKG_DIR=`find . -maxdepth 1 -iname "semigroups-*" -type d`
+pushd $SEMIGROUPS_PKG_DIR
+  pushd libsemigroups
+    mv VERSION .VERSION
+    sed -i.bak 's/-mavx//g' Makefile.am
+    sed -i.bak 's/-march=native//g' Makefile.am
+    sed -i.bak 's/-mavx//g' Makefile.in
+    sed -i.bak 's/-march=native//g' Makefile.in
+  popd
+  mv VERSION .VERSION
+  sed -i.bak 's@libsemigroups/VERSION@libsemigroups/.VERSION@g' configure
+  sed -i.bak 's/-march=native//g' Makefile.am
+  sed -i.bak 's/-march=native//g' Makefile.in
+popd
+
 sed -i.bak "s@./build-normaliz.sh@echo@g" ../bin/BuildPackages.sh
 bash ../bin/BuildPackages.sh
 
 # Build semigroups with external libsemigroups
 # libsemigroups vendored and one from conda are ABI compatible
-SEMIGROUPS_PKG_DIR=`find . -maxdepth 1 -iname "semigroups-*" -type d`
 pushd $SEMIGROUPS_PKG_DIR
 ./configure --with-graproot=$SRC_DIR --with-external-libsemigroups
 make
@@ -85,12 +97,16 @@ for file in log/*; do
 done
 rm -rf log
 
-for folder in *; do
-  pushd $folder
-  echo "GAP_PKG_NAME: $GAP_PKG_NAME"
-  GAP_PKG_NAME=$(echo $folder | cut -d- -f1)
-  load_output=$(../../bin/gap.sh -q -T <<< "LoadPackage(\"$GAP_PKG_NAME\");")
-  [[ "${load_output}" == "true" || "${load_output:1}" == "true" ]] || echo "Loading fails"
-  popd
-done
+# https://github.com/gap-system/gap/issues/1567
+export TERM=dumb
 
+if [[ "$target_platform" == *-64 ]]; then
+  for folder in *; do
+    pushd $folder
+    echo "GAP_PKG_NAME: $GAP_PKG_NAME"
+    GAP_PKG_NAME=$(echo $folder | cut -d- -f1)
+    load_output=$(../../bin/gap.sh -q -T <<< "LoadPackage(\"$GAP_PKG_NAME\");")
+    [[ "${load_output}" == "true" || "${load_output:1}" == "true" ]] || echo "Loading fails"
+    popd
+  done
+fi
