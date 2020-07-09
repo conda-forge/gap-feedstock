@@ -5,7 +5,7 @@ Home: https://www.gap-system.org/
 
 Package license: GPLv2
 
-Feedstock license: BSD 3-Clause
+Feedstock license: BSD-3-Clause
 
 Summary: GAP - Groups, Algorithms, Programming, a System for Computational Discrete Algebra
 
@@ -26,7 +26,7 @@ Current build status
     <td>Drone</td>
     <td>
       <a href="https://cloud.drone.io/conda-forge/gap-feedstock">
-        <img alt="linux" src="https://img.shields.io/drone/build/conda-forge/master.svg?label=Linux">
+        <img alt="linux" src="https://img.shields.io/drone/build/conda-forge/gap-feedstock/master.svg?label=Linux">
       </a>
     </td>
   </tr>

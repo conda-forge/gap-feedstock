@@ -7,7 +7,7 @@ channel_sources:
 channel_targets:
 - conda-forge main
 curl:
-- '7.64'
+- '7'
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
@@ -15,7 +15,7 @@ cxx_compiler_version:
 gmp:
 - '6'
 libcurl:
-- '7.64'
+- '7'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 macos_min_version:
