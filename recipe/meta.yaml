@@ -40,7 +40,7 @@ requirements:
     - pari       # for alnuth
     - zeromq     # for ZeroMQInterface
     - linbox     # linboxing
-    - libsemigroups  0.6.*   # for Semigroups
+    - libsemigroups  1.0.5   # for Semigroups
     - planarity  # for digraphs
     - bliss      # for digraphs
     - normaliz   # for NormalizInterface
@@ -97,7 +97,7 @@ outputs:
         - pari       # for alnuth
         - zeromq     # for ZeroMQInterface
         - linbox     # for linboxing
-        - libsemigroups  0.6.*   # for Semigroups
+        - libsemigroups  1.0.5   # for Semigroups
         - planarity  # for digraphs
         - bliss      # for digraphs
         - normaliz   # for NormalizInterface
