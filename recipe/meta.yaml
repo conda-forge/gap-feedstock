@@ -42,6 +42,7 @@ requirements:
     - linbox     # linboxing
     - libsemigroups  0.6.*   # for Semigroups
     - planarity  # for digraphs
+    - bliss      # for digraphs
     - normaliz   # for NormalizInterface
     - zlib
 
@@ -98,6 +99,7 @@ outputs:
         - linbox     # for linboxing
         - libsemigroups  0.6.*   # for Semigroups
         - planarity  # for digraphs
+        - bliss      # for digraphs
         - normaliz   # for NormalizInterface
         - {{ pin_subpackage('gap-core', exact=True) }}
         - {{ pin_subpackage('gap-defaults', exact=True) }}
@@ -118,6 +120,7 @@ outputs:
         - linbox     # for linboxing
         - {{ pin_compatible('libsemigroups') }}   # for Semigroups
         - {{ pin_compatible('planarity') }}       # for digraphs
+        - {{ pin_compatible('bliss', max_pin="x.x") }}       # for digraphs
         - {{ pin_compatible('normaliz') }}        # for NormalizInterface
         - {{ pin_subpackage('gap-core', exact=True) }}
         - {{ pin_subpackage('gap-defaults', exact=True) }}
