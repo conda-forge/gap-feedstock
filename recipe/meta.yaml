@@ -118,7 +118,7 @@ outputs:
         - linbox     # for linboxing
         - {{ pin_compatible('libsemigroups') }}   # for Semigroups
         - {{ pin_compatible('planarity') }}       # for digraphs
-        - {{ pin_compatible('bliss', max_pin="x.x") }}       # for digraphs
+        - {{ pin_compatible('bliss', min_pin="x.x", max_pin="x.x") }}       # for digraphs
         - {{ pin_compatible('normaliz') }}        # for NormalizInterface
         - {{ pin_subpackage('gap-core', exact=True) }}
         - {{ pin_subpackage('gap-defaults', exact=True) }}
