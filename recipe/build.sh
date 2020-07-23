@@ -47,23 +47,8 @@ do
     rm -rf $PKG_DIR
 done
 
-SEMIGROUPS_PKG_DIR=`find . -maxdepth 1 -iname "semigroups-*" -type d`
-pushd $SEMIGROUPS_PKG_DIR
-  pushd libsemigroups
-    mv VERSION .VERSION
-    sed -i.bak 's/-mavx//g' Makefile.am
-    sed -i.bak 's/-march=native//g' Makefile.am
-    sed -i.bak 's/-mavx//g' Makefile.in
-    sed -i.bak 's/-march=native//g' Makefile.in
-  popd
-  mv VERSION .VERSION
-  sed -i.bak 's@libsemigroups/VERSION@libsemigroups/.VERSION@g' configure
-  sed -i.bak 's/-march=native//g' Makefile.am
-  sed -i.bak 's/-march=native//g' Makefile.in
-popd
-
 sed -i.bak "s@./build-normaliz.sh@echo@g" ../bin/BuildPackages.sh
-bash ../bin/BuildPackages.sh --add-package-config-semigroups="--with-external-libsemigroups"  --add-package-config-digraphs="--with-external-bliss --with-external-planarity"
+bash ../bin/BuildPackages.sh --add-package-config-semigroups="--with-external-libsemigroups --without-march-native"  --add-package-config-digraphs="--with-external-bliss --with-external-planarity --without-intrinsics"
 
 # Print error logs
 mkdir -p log
