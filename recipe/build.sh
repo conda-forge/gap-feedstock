@@ -82,9 +82,9 @@ popd
 DIGRAPHS_PKG_DIR=`find . -maxdepth 1 -iname "digraphs-*" -type d`
 rm -rf $DIGRAPHS_PKG_DIR/extern/edge-addition-planarity-suite-Version_3.0.0.5
 rm -rf $DIGRAPHS_PKG_DIR/bin/lib
-if [[ "$target_platform" == "osx-64" ]]; then
-    ${INSTALL_NAME_TOOL} -change ${SRC_DIR}/pkg/${DIGRAPHS_PKG_DIR:2}/extern/edge-addition-planarity-suite-Version_3.0.0.5/../../bin/lib/libplanarity.0.dylib @rpath/libplanarity.0.dylib $DIGRAPHS_PKG_DIR/bin/64/digraphs.so
-fi
+#if [[ "$target_platform" == "osx-64" ]]; then
+#    ${INSTALL_NAME_TOOL} -change ${SRC_DIR}/pkg/${DIGRAPHS_PKG_DIR:2}/extern/edge-addition-planarity-suite-Version_3.0.0.5/../../bin/lib/libplanarity.0.dylib @rpath/libplanarity.0.dylib $DIGRAPHS_PKG_DIR/bin/64/digraphs.so
+#fi
 
 # Print error logs
 mkdir -p log
