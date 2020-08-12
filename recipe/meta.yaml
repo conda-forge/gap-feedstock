@@ -1,4 +1,4 @@
-{% set version = "4.10.2" %}
+{% set version = "4.11.0" %}
 {% set name = "gap-split" %}
 
 package:
@@ -8,12 +8,10 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://www.gap-system.org/pub/gap/gap-{{ ".".join(version.split(".")[:2]) }}/tar.gz/gap-{{ version }}.tar.gz
-  sha256: 11175bed0234101643d510d4ab94c44db30bd303bfe63d86b9b86ae67cff9e49
-  patches:
-    - patches/make_install.patch
+  sha256: 6fda7af23394708aeb3b4bca8885f5fdcb7c3ae4419639dfb2d9f67d3f590abb
 
 build:
-  number: 5
+  number: 0
   skip: true  # [win]
 
 requirements:
@@ -40,8 +38,9 @@ requirements:
     - pari       # for alnuth
     - zeromq     # for ZeroMQInterface
     - linbox     # linboxing
-    - libsemigroups  0.6.*   # for Semigroups
+    - libsemigroups  1.0.*   # for Semigroups
     - planarity  # for digraphs
+    - bliss      # for digraphs
     - normaliz   # for NormalizInterface
     - zlib
 
@@ -49,7 +48,7 @@ outputs:
   - name: gap-core
     script: install-core.sh
     requirements:
-      build:    
+      build:
         - {{ compiler('cxx') }}
         - libtool
         - make
@@ -79,7 +78,7 @@ outputs:
   - name: gap
     script: install-full.sh
     requirements:
-      build:    
+      build:
         - {{ compiler('cxx') }}
         - libtool
         - make
@@ -96,8 +95,9 @@ outputs:
         - pari       # for alnuth
         - zeromq     # for ZeroMQInterface
         - linbox     # for linboxing
-        - libsemigroups  0.6.*   # for Semigroups
+        - libsemigroups  1.0.*   # for Semigroups
         - planarity  # for digraphs
+        - bliss 0.73.*     # for digraphs
         - normaliz   # for NormalizInterface
         - {{ pin_subpackage('gap-core', exact=True) }}
         - {{ pin_subpackage('gap-defaults', exact=True) }}
@@ -118,6 +118,7 @@ outputs:
         - linbox     # for linboxing
         - {{ pin_compatible('libsemigroups') }}   # for Semigroups
         - {{ pin_compatible('planarity') }}       # for digraphs
+        - bliss >=0.73.a0,<0.74.a0       # for digraphs
         - {{ pin_compatible('normaliz') }}        # for NormalizInterface
         - {{ pin_subpackage('gap-core', exact=True) }}
         - {{ pin_subpackage('gap-defaults', exact=True) }}
