@@ -47,6 +47,11 @@ do
     rm -rf $PKG_DIR
 done
 
+if [[ -d NormalizInterface-1.1.0 ]]; then
+    curl -L -O https://github.com/gap-packages/NormalizInterface/releases/download/v1.2.0/NormalizInterface-1.2.0.tar.gz
+    tar -xvf NormalizInterface-1.2.0.tar.gz
+fi
+
 sed -i.bak "s@./build-normaliz.sh@echo@g" ../bin/BuildPackages.sh
 bash ../bin/BuildPackages.sh --add-package-config-semigroups "--with-external-libsemigroups --without-march-native"  --add-package-config-digraphs "--with-external-bliss --with-external-planarity --without-intrinsics"
 
