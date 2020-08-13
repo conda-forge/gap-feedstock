@@ -77,6 +77,10 @@ outputs:
 
   - name: gap
     script: install-full.sh
+    build:
+      ignore_run_exports:
+        - python
+        - python_abi
     requirements:
       build:
         - {{ compiler('cxx') }}
