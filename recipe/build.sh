@@ -50,6 +50,7 @@ done
 if [[ -d NormalizInterface-1.1.0 ]]; then
     curl -L -O https://github.com/gap-packages/NormalizInterface/releases/download/v1.2.0/NormalizInterface-1.2.0.tar.gz
     tar -xvf NormalizInterface-1.2.0.tar.gz
+    rm NormalizInterface-1.2.0.tar.gz
 fi
 
 sed -i.bak "s@./build-normaliz.sh@echo@g" ../bin/BuildPackages.sh
