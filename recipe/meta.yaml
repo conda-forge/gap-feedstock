@@ -31,7 +31,6 @@ requirements:
     #- fplll     # for float
     - pari       # for alnuth
     - zeromq     # for ZeroMQInterface
-    - linbox     # linboxing
     - libsemigroups  1.0.*   # for Semigroups
     - planarity  # for digraphs
     - bliss      # for digraphs
