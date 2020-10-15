@@ -124,7 +124,7 @@ outputs:
 
 about:
   home: https://www.gap-system.org/
-  license: GPLv2
+  license: GPL-2.0-or-later
   license_file: LICENSE
   summary: GAP - Groups, Algorithms, Programming, a System for Computational Discrete Algebra
   dev_url: https://github.com/gap-system/gap
