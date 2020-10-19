@@ -11,7 +11,7 @@ source:
   sha256: 6fda7af23394708aeb3b4bca8885f5fdcb7c3ae4419639dfb2d9f67d3f590abb
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
 
 requirements:
@@ -124,7 +124,7 @@ outputs:
 
 about:
   home: https://www.gap-system.org/
-  license: GPLv2
+  license: GPL-2.0-or-later
   license_file: LICENSE
   summary: GAP - Groups, Algorithms, Programming, a System for Computational Discrete Algebra
   dev_url: https://github.com/gap-system/gap
