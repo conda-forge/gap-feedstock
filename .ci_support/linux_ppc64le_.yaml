@@ -1,3 +1,5 @@
+cdt_name:
+- cos7
 channel_sources:
 - conda-forge,defaults
 channel_targets:
@@ -9,7 +11,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '8'
 docker_image:
-- condaforge/linux-anvil-ppc64le
+- quay.io/condaforge/linux-anvil-ppc64le
 gmp:
 - '6'
 libcurl:
@@ -17,7 +19,7 @@ libcurl:
 mpfr:
 - '4'
 ncurses:
-- '6.1'
+- '6.2'
 pari:
 - '2.11'
 pin_run_as_build:
