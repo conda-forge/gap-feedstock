@@ -65,7 +65,7 @@ popd
 DIGRAPHS_PKG_DIR=`find . -maxdepth 1 -iname "digraphs-*" -type d`
 pushd $DIGRAPHS_PKG_DIR
   mv VERSION .VERSION
-  sed -i.bak 's@< VERSION@< .VERSION@g' configure.ac
+  #sed -i.bak 's@< VERSION@< .VERSION@g' configure.ac
 popd
 
 sed -i.bak "s@./build-normaliz.sh@echo@g" ../bin/BuildPackages.sh
