@@ -3,7 +3,7 @@ About gap-split
 
 Home: https://www.gap-system.org/
 
-Package license: GPLv2
+Package license: GPL-2.0-or-later
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/gap-feedstock/blob/master/LICENSE.txt)
 
