@@ -53,8 +53,17 @@ if [[ -d NormalizInterface-1.1.0 ]]; then
     rm NormalizInterface-1.2.0.tar.gz
 fi
 
+for pkg in json profiling simpcomp ferret; do
+  VERSION_PKG_DIR=`find . -maxdepth 1 -iname "$pkg-*" -or -iname "$pkg" -type d`
+  pushd $VERSION_PKG_DIR
+    if [[ "$target_platform" == osx-* ]]; then
+      mv VERSION .VERSION
+    fi
+  popd
+done
+
 sed -i.bak "s@./build-normaliz.sh@echo@g" ../bin/BuildPackages.sh
-bash ../bin/BuildPackages.sh --add-package-config-semigroups "--with-external-libsemigroups --without-march-native"  --add-package-config-digraphs "--with-external-bliss --with-external-planarity --without-intrinsics"
+bash ../bin/BuildPackages.sh --add-package-config-Semigroups "--with-external-libsemigroups --without-march-native"  --add-package-config-Digraphs "--with-external-bliss --with-external-planarity --without-intrinsics"
 
 # Print error logs
 mkdir -p log

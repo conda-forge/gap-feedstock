@@ -11,13 +11,14 @@ source:
   sha256: 6fda7af23394708aeb3b4bca8885f5fdcb7c3ae4419639dfb2d9f67d3f590abb
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler('cxx') }}
     - make
+    - pkg-config
   host:
     # Since we are using bin/buildpackages.sh to build all packages at once,
     # these requirements are needed.
