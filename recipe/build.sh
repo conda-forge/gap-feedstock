@@ -54,7 +54,7 @@ if [[ -d NormalizInterface-1.1.0 ]]; then
 fi
 
 sed -i.bak "s@./build-normaliz.sh@echo@g" ../bin/BuildPackages.sh
-bash ../bin/BuildPackages.sh --add-package-config-semigroups "--with-external-libsemigroups --without-march-native"  --add-package-config-digraphs "--with-external-bliss --with-external-planarity --without-intrinsics"
+bash ../bin/BuildPackages.sh --add-package-config-Semigroups "--with-external-libsemigroups --without-march-native"  --add-package-config-Digraphs "--with-external-bliss --with-external-planarity --without-intrinsics"
 
 # Print error logs
 mkdir -p log
