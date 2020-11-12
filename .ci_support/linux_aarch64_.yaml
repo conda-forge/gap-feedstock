@@ -15,7 +15,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '7'
 docker_image:
-- condaforge/linux-anvil-aarch64
+- quay.io/condaforge/linux-anvil-aarch64
 gmp:
 - '6'
 libcurl:
@@ -56,6 +56,6 @@ readline:
 target_platform:
 - linux-aarch64
 zeromq:
-- 4.3.2
+- 4.3.3
 zlib:
 - '1.2'
