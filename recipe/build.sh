@@ -65,7 +65,9 @@ popd
 for pkg in digraphs json profiling NormalizInterface simpcomp; do
   VERSION_PKG_DIR=`find . -maxdepth 1 -iname "$pkg-*" -or -iname "$pkg" -type d`
   pushd $VERSION_PKG_DIR
-    mv VERSION .VERSION
+    if [[ "$target_platform" == osx-* ]]; then
+      mv VERSION .VERSION
+    fi
   popd
 done
 
