@@ -57,6 +57,6 @@ readline:
 target_platform:
 - linux-aarch64
 zeromq:
-- 4.3.3
+- 4.3.4
 zlib:
 - '1.2'
