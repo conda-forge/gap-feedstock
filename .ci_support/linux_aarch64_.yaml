@@ -53,7 +53,7 @@ python:
 - 3.8.* *_cpython
 - 3.9.* *_cpython
 readline:
-- '8.0'
+- '8'
 target_platform:
 - linux-aarch64
 zeromq:
