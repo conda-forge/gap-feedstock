@@ -1,4 +1,27 @@
 #!/bin/bash
+# Get an updated config.sub and config.guess
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./hpcgap/extern/gc
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./pkg/json-2.0.1/cnf
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./pkg/semigroups-3.2.3/libsemigroups/config
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./extern/gmp
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./pkg/io-4.7.0/cnf
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./pkg/semigroups-3.2.3/cnf
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./pkg/DeepThought-1.0.2/cnf
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./pkg/CddInterface-2020.01.01/cnf
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./pkg/float-0.9.1/build-aux
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./pkg/digraphs-1.1.1/extern/edge-addition-planarity-suite-Version_3.0.0.5
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./pkg/digraphs-1.1.1/cnf
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./pkg/curlInterface-2.1.1/cnf
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./pkg/ferret-1.0.2/cnf
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./hpcgap/extern/libatomic_ops
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./pkg/ZeroMQInterface-0.12/cnf
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./pkg/xgap-4.30/cnf
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./pkg/guava-3.15/src/leon
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./pkg/NormalizInterface-1.1.0/cnf
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./pkg/nq-2.5.4/cnf
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./pkg/profiling-2.2.1/cnf
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./pkg/grape-4.8.3/nauty22
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./cnf
 
 set -x
 
