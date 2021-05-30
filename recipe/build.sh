@@ -81,6 +81,13 @@ if [[ -d digraphs-1.1.1 ]]; then
     rm -rf digraphs-1.1.1
 fi
 
+if [[ -d semigroups-3.2.3 ]]; then
+    curl -L -O https://github.com/semigroups/Semigroups/releases/download/v3.4.2/semigroups-3.4.2.tar.gz
+    tar -xvf https://github.com/semigroups/Semigroups/releases/download/v3.4.2/semigroups-3.4.2.tar.gz
+    rm semigroups-3.4.2.tar.gz
+    rm -rf semigroups-3.2.3
+fi
+
 for pkg in DeepThought ferret json nq profiling simpcomp; do
   VERSION_PKG_DIR=`find . -maxdepth 1 -iname "$pkg-*" -or -iname "$pkg" -type d`
   pushd $VERSION_PKG_DIR
@@ -93,7 +100,9 @@ for pkg in DeepThought ferret json nq profiling simpcomp; do
 done
 
 sed -i.bak "s@./build-normaliz.sh@echo@g" ../bin/BuildPackages.sh
-bash ../bin/BuildPackages.sh --add-package-config-Semigroups "--with-external-libsemigroups --without-march-native"  --add-package-config-Digraphs "--with-external-bliss --with-external-planarity --without-intrinsics"
+bash ../bin/BuildPackages.sh \
+   --add-package-config-Semigroups "--with-external-libsemigroups --without-march-native" \
+   --add-package-config-Digraphs "--with-external-bliss --with-external-planarity --without-intrinsics"
 
 # Print error logs
 mkdir -p log
