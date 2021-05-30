@@ -102,8 +102,9 @@ for pkg in DeepThought ferret json nq profiling simpcomp; do
   VERSION_PKG_DIR=`find . -maxdepth 1 -iname "$pkg-*" -or -iname "$pkg" -type d`
   pushd $VERSION_PKG_DIR
     if [[ "$target_platform" == osx-* ]]; then
-      mv VERSION .VERSION
+      mv VERSION .VERSION || true
       sed -i.bak "s/< VERSION/< .VERSION/g" configure.ac || true
+      sed -i.bak "s@$(top_srcdir)/VERSION@$(top_srcdir)/.VERSION@g" || true
       autoreconf -vfi
     fi
   popd
