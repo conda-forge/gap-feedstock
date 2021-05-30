@@ -14,8 +14,7 @@ for f in $(find $SRC_DIR -name libtool); do
 done
 for f in $(find $SRC_DIR -name libtool.m4); do
     cp $BUILD_PREFIX/share/aclocal/libtool.m4 $f
-    pushd
-        cd $(dirname $(dirname $f))
+    pushd $(dirname $(dirname $f))
         autoreconf -vfi || true
     popd
 done
