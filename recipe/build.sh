@@ -71,6 +71,14 @@ if [[ -d NormalizInterface-1.1.0 ]]; then
     curl -L -O https://github.com/gap-packages/NormalizInterface/releases/download/v1.2.0/NormalizInterface-1.2.0.tar.gz
     tar -xvf NormalizInterface-1.2.0.tar.gz
     rm NormalizInterface-1.2.0.tar.gz
+    rm -rf NormalizInterface-1.1.0
+fi
+
+if [[ -d digraphs-1.1.1 ]]; then
+    curl -L -O https://github.com/digraphs/Digraphs/releases/download/v1.4.1/digraphs-1.4.1.tar.gz
+    tar -xvf digraphs-1.4.1.tar.gz
+    rm digraphs-1.4.1.tar.gz
+    rm -rf digraphs-1.1.1
 fi
 
 for pkg in DeepThought ferret json nq profiling simpcomp; do
