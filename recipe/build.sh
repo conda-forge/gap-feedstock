@@ -23,6 +23,7 @@ autoreconf -vfi
 
 export LD_LIBRARY_PATH="$PREFIX/lib:$LD_LIBRARY_PATH"
 export CFLAGS="-g -O3 -fPIC $CFLAGS"
+rm -f $BUILD_PREFIX/bin/curl-config
 
 # Following is adapted from https://github.com/sagemath/sage
 

@@ -32,6 +32,7 @@ requirements:
     - readline {{ readline }}
     - ncurses    # for Browse
     - curl       # for curlInterface
+    - cddlib     # for CddInterface
     - mpfr       # for float
     - mpfi       # for float
     - mpc        # for float
@@ -93,6 +94,7 @@ outputs:
         - gmp
         - readline {{ readline }}
         - ncurses    # for Browse
+        - cddlib     # for cddInterface
         - libcurl    # for curlInterface
         - mpfr       # for float
         - mpfi       # for float
