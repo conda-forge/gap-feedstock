@@ -9,7 +9,7 @@
 -Print(GAPInfo.PackageInfoCurrent.PackageName);
 -GAPInput
 -)
-+      local PKG_NAME=$(./PackageInfo.g | grep "PackageName := " | cut -b 17- | rev | cut -b 3- | rev)
++      local PKG_NAME=$(cat ./PackageInfo.g | grep "PackageName := " | cut -b 17- | rev | cut -b 3- | rev)
        local CONFIG_ARGS_FLAG_NAME="PACKAGE_CONFIG_ARGS_${PKG_NAME}"
        echo_run ./configure --with-gaproot="$GAPROOT" $CONFIGFLAGS ${!CONFIG_ARGS_FLAG_NAME}
        echo_run "$MAKE" clean
