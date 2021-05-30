@@ -20,6 +20,7 @@ requirements:
     - {{ compiler('cxx') }}
     - make
     - pkg-config
+    - curl
   host:
     # Since we are using bin/buildpackages.sh to build all packages at once,
     # these requirements are needed.
