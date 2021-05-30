@@ -14,7 +14,13 @@ for f in $(find $SRC_DIR -name libtool); do
 done
 for f in $(find $SRC_DIR -name libtool.m4); do
     cp $BUILD_PREFIX/share/aclocal/libtool.m4 $f
+    pushd
+        cd $(dirname $f)
+        autoreconf -vfi || true
+    popd
 done
+
+autoreconf -vfi
 
 export LD_LIBRARY_PATH="$PREFIX/lib:$LD_LIBRARY_PATH"
 export CFLAGS="-g -O3 -fPIC $CFLAGS"
@@ -67,12 +73,13 @@ if [[ -d NormalizInterface-1.1.0 ]]; then
     rm NormalizInterface-1.2.0.tar.gz
 fi
 
-for pkg in DeepThought ferret json nq profiling; do
+for pkg in DeepThought ferret json nq profiling simpcomp; do
   VERSION_PKG_DIR=`find . -maxdepth 1 -iname "$pkg-*" -or -iname "$pkg" -type d`
   pushd $VERSION_PKG_DIR
     if [[ "$target_platform" == osx-* ]]; then
       mv VERSION .VERSION
       sed -i.bak "s/< VERSION/< .VERSION/g" configure.ac || true
+      autoreconf -vfi
     fi
   popd
 done
