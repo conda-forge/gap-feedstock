@@ -12,6 +12,9 @@ done
 for f in $(find $SRC_DIR -name libtool); do
     cp $BUILD_PREFIX/bin/libtool $f
 done
+for f in $(find $SRC_DIR -name libtool.m4); do
+    cp $BUILD_PREFIX/share/aclocal/libtool.m4 $f
+done
 
 export LD_LIBRARY_PATH="$PREFIX/lib:$LD_LIBRARY_PATH"
 export CFLAGS="-g -O3 -fPIC $CFLAGS"
