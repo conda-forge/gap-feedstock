@@ -67,11 +67,12 @@ if [[ -d NormalizInterface-1.1.0 ]]; then
     rm NormalizInterface-1.2.0.tar.gz
 fi
 
-for pkg in json profiling simpcomp ferret; do
+for pkg in DeepThought ferret json nq profiling; do
   VERSION_PKG_DIR=`find . -maxdepth 1 -iname "$pkg-*" -or -iname "$pkg" -type d`
   pushd $VERSION_PKG_DIR
     if [[ "$target_platform" == osx-* ]]; then
       mv VERSION .VERSION
+      sed -i.bak "s/< VERSION/< .VERSION/g" configure.ac || true
     fi
   popd
 done
