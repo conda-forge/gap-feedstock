@@ -2,6 +2,10 @@
 
 set -x
 
+pushd pkg/CaratInterface
+    tar pzxf carat.tgz
+popd
+
 # Get an updated config.sub, config.guess and libtool
 for f in $(find $SRC_DIR -name config.sub); do
     cp $BUILD_PREFIX/share/gnuconfig/config.sub $f
