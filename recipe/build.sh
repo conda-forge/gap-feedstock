@@ -93,6 +93,11 @@ if [[ -d semigroups-3.2.3 ]]; then
     rm -rf semigroups-3.2.3
 fi
 
+ACE_PKG_DIR=`find . -maxdepth 1 -iname "ace-*" -or -iname "ace" -type d`
+pushd $ACE_PKG_DIR
+  sed -i.bak "s/CC=/CC?=/g" Makefile.in
+popd
+
 for pkg in DeepThought ferret json nq profiling simpcomp; do
   VERSION_PKG_DIR=`find . -maxdepth 1 -iname "$pkg-*" -or -iname "$pkg" -type d`
   pushd $VERSION_PKG_DIR
