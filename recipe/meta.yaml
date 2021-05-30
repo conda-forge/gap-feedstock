@@ -11,7 +11,7 @@ source:
   sha256: 6fda7af23394708aeb3b4bca8885f5fdcb7c3ae4419639dfb2d9f67d3f590abb
 
 build:
-  number: 6
+  number: 7
   skip: true  # [win]
 
 requirements:
@@ -35,11 +35,11 @@ requirements:
     #- fplll     # for float
     - pari       # for alnuth
     - zeromq     # for ZeroMQInterface
-    - libsemigroups  1.0.*   # for Semigroups
+    - libsemigroups  1.*   # for Semigroups
     - planarity  # for digraphs
     - bliss      # for digraphs
     - normaliz   # for NormalizInterface
-    - libflint 2.6.0  # for NormalizInterface -> normaliz -> e-antic -> libflint <=2.6.0
+    - libflint 2.*  # for NormalizInterface -> normaliz -> e-antic -> libflint <=2.6.0
     - zlib
 
 outputs:
@@ -95,11 +95,11 @@ outputs:
         #- fplll     # for float
         - pari       # for alnuth
         - zeromq     # for ZeroMQInterface
-        - libsemigroups  1.0.*   # for Semigroups
+        - libsemigroups  1.*   # for Semigroups
         - planarity  # for digraphs
         - bliss 0.73.*     # for digraphs
         - normaliz   # for NormalizInterface
-        - libflint 2.6.0  # for NormalizInterface -> normaliz -> e-antic -> libflint <=2.6.0
+        - libflint 2.*  # for NormalizInterface -> normaliz -> e-antic -> libflint <=2.6.0
         - {{ pin_subpackage('gap-core', exact=True) }}
         - {{ pin_subpackage('gap-defaults', exact=True) }}
         # For JupyterKernel
