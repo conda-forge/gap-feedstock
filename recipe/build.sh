@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -x
+
 # Get an updated config.sub and config.guess
 cp $BUILD_PREFIX/share/gnuconfig/config.* ./hpcgap/extern/gc
 cp $BUILD_PREFIX/share/gnuconfig/config.* ./pkg/json-2.0.1/cnf
