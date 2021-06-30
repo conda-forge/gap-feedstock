@@ -53,6 +53,8 @@ cd extern
 rm -r !(Makefile.in)
 cd ..
 
+export MAKEFLAGS="-j${CPU_COUNT}"
+
 chmod +x configure
 
 ./configure \
