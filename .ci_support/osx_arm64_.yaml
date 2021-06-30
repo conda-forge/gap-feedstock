@@ -21,7 +21,7 @@ mpfr:
 ncurses:
 - '6.2'
 pari:
-- '2.11'
+- '2.13'
 pin_run_as_build:
   curl:
     max_pin: x
