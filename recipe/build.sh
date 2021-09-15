@@ -79,26 +79,12 @@ if [[ -d NormalizInterface-1.1.0 ]]; then
     rm -rf NormalizInterface-1.1.0
 fi
 
-if [[ -d digraphs-1.1.1 ]]; then
-    curl -L -O https://github.com/digraphs/Digraphs/releases/download/v1.4.1/digraphs-1.4.1.tar.gz
-    tar -xvf digraphs-1.4.1.tar.gz
-    rm digraphs-1.4.1.tar.gz
-    rm -rf digraphs-1.1.1
-fi
-
-if [[ -d semigroups-3.2.3 ]]; then
-    curl -L -O https://github.com/semigroups/Semigroups/releases/download/v3.4.2/semigroups-3.4.2.tar.gz
-    tar -xvf semigroups-3.4.2.tar.gz
-    rm semigroups-3.4.2.tar.gz
-    rm -rf semigroups-3.2.3
-fi
-
 ACE_PKG_DIR=`find . -maxdepth 1 -iname "ace-*" -or -iname "ace" -type d`
 pushd $ACE_PKG_DIR
   sed -i.bak "s/CC=/CC?=/g" Makefile.in
 popd
 
-for pkg in DeepThought ferret json nq profiling simpcomp; do
+for pkg in DeepThought nq simpcomp; do
   VERSION_PKG_DIR=`find . -maxdepth 1 -iname "$pkg-*" -or -iname "$pkg" -type d`
   pushd $VERSION_PKG_DIR
     if [[ "$target_platform" == osx-* ]]; then
