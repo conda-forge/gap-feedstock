@@ -1,10 +1,10 @@
---- bin/BuildPackages.sh.bak    2021-05-30 10:16:44.000000000 -0700
-+++ bin/BuildPackages.sh        2021-05-30 10:17:20.000000000 -0700
-@@ -168,11 +168,7 @@
+--- bin/BuildPackages.sh.bak    2021-09-15 12:34:45.729535956 -0700
++++ bin/BuildPackages.sh        2021-09-15 12:38:27.348142632 -0700
+@@ -179,11 +179,7 @@
    then
      if grep Autoconf ./configure > /dev/null
      then
--      local PKG_NAME=$($GAPROOT/gap -q -T -A <<GAPInput
+-      local PKG_NAME=$($GAP -q -T -A -r <<GAPInput
 -Read("PackageInfo.g");
 -Print(GAPInfo.PackageInfoCurrent.PackageName);
 -GAPInput
