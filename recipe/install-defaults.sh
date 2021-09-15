@@ -21,7 +21,7 @@ for pkg in atlasrep \
     autpgrp-* \
     alnuth-* \
     crisp-* \
-    ctbllib \
+    ctbllib-* \
     FactInt-* \
     fga \
     irredsol-* \
