@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/gap-system/gap/releases/download/v{{ version }}/gap-{{ version }}.tar.gz
-  sha256: 6fda7af23394708aeb3b4bca8885f5fdcb7c3ae4419639dfb2d9f67d3f590abb
+  sha256: 6635c5da7d82755f8339486b9cac33766f58712f297e8234fba40818902ea304
   patches:
     - patches/cross-build-package.sh
 
