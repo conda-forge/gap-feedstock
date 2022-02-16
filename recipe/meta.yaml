@@ -12,7 +12,7 @@ source:
     - patches/cross-build-package.sh
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
 
 requirements:
@@ -43,7 +43,7 @@ requirements:
     - planarity  # for digraphs
     - bliss      # for digraphs
     - normaliz   # for NormalizInterface
-    - libflint 2.*  # for NormalizInterface -> normaliz -> e-antic -> libflint <=2.6.0
+    - libflint   # for NormalizInterface -> normaliz -> e-antic -> libflint <=2.6.0
     - zlib
 
 outputs:
@@ -106,7 +106,7 @@ outputs:
         - planarity  # for digraphs
         - bliss 0.73.*     # for digraphs
         - normaliz   # for NormalizInterface
-        - libflint 2.*  # for NormalizInterface -> normaliz -> e-antic -> libflint <=2.6.0
+        - libflint   # for NormalizInterface -> normaliz -> e-antic -> libflint <=2.6.0
         - {{ pin_subpackage('gap-core', exact=True) }}
         - {{ pin_subpackage('gap-defaults', exact=True) }}
         # For JupyterKernel
