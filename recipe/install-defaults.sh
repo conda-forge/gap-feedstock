@@ -26,6 +26,7 @@ for pkg in atlasrep \
     fga \
     irredsol-* \
     laguna-* \
+    nq-* \
     polenta-* \
     polycyclic-* \
     resclasses-* \
