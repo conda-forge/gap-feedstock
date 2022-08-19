@@ -9,7 +9,7 @@ curl:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '11'
+- '14'
 gmp:
 - '6'
 libcurl:
