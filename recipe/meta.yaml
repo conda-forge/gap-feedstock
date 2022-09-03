@@ -89,6 +89,7 @@ outputs:
         - libtool
         - make
         - python *                               # [build_platform != target_platform]
+        - setuptools <60                         # [build_platform != target_platform]
         - cross-python_{{ target_platform }}     # [build_platform != target_platform]
       host:
         - gmp
@@ -111,6 +112,7 @@ outputs:
         - {{ pin_subpackage('gap-defaults', exact=True) }}
         # For JupyterKernel
         - python *
+        - setuptools <60
         - pip
       run:
         - gmp
