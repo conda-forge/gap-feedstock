@@ -114,6 +114,7 @@ outputs:
         - {{ pin_subpackage('gap-defaults', exact=True) }}
         # For JupyterKernel
         - setuptools <60
+        - python 3.10
         - pip
       run:
         - gmp
