@@ -23,9 +23,6 @@ for f in $(find $SRC_DIR -name libtool.m4); do
     popd
 done
 
-# Do not use the outdated libtool macro definitions bundled with GAP
-echo "" > cnf/m4/libtool.m4
-
 autoreconf -vfi
 
 export LD_LIBRARY_PATH="$PREFIX/lib:$LD_LIBRARY_PATH"

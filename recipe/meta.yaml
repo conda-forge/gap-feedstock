@@ -9,7 +9,8 @@ source:
   url: https://github.com/gap-system/gap/releases/download/v{{ version }}/gap-{{ version }}.tar.gz
   sha256: 6635c5da7d82755f8339486b9cac33766f58712f297e8234fba40818902ea304
   patches:
-    - patches/cross-build-package.sh
+    - 0000-cross-build-package.patch
+    - 0001-Use-a-standard-autotools-setup.patch
 
 build:
   number: 5
