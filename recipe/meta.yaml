@@ -10,6 +10,7 @@ source:
   sha256: 6635c5da7d82755f8339486b9cac33766f58712f297e8234fba40818902ea304
   patches:
     - 0000-cross-build-package.patch
+    # Upstream issue: https://github.com/gap-system/gap/issues/5383
     - 0001-Use-a-standard-autotools-setup.patch
 
 build:
