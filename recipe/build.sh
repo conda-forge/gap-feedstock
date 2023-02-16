@@ -53,10 +53,12 @@ cd extern
 rm -r !(Makefile.in)
 cd ..
 
+CONFIGURE_FLAGS=
+
 if [[ "$target_platform" != "$build_platform" ]]; then
   if [[ "$target_platform" == "osx-arm64" ]]; then
     # Set target host correctly when building for M1s (otherwise, it defaults to aarch64-apple-darwin.)
-    export target_host="arm64-darwin"
+    CONFIGURE_FLAGS="--host=arm64-darwin"
   fi
 fi
 
@@ -65,6 +67,7 @@ chmod +x configure
 ./configure \
     --prefix="$PREFIX" PREFIX="$PREFIX" \
     --with-gmp="$PREFIX" \
+    $CONFIGURE_FLAGS \
     CC="$CC" CXX="$CXX" CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
 
 make
