@@ -53,11 +53,21 @@ cd extern
 rm -r !(Makefile.in)
 cd ..
 
+CONFIGURE_FLAGS=
+
+if [[ "$target_platform" != "$build_platform" ]]; then
+  if [[ "$target_platform" == "osx-arm64" ]]; then
+    # Set target host correctly when building for M1s (otherwise, it defaults to aarch64-apple-darwin.)
+    CONFIGURE_FLAGS="--host=arm64-darwin"
+  fi
+fi
+
 chmod +x configure
 
 ./configure \
     --prefix="$PREFIX" PREFIX="$PREFIX" \
     --with-gmp="$PREFIX" \
+    $CONFIGURE_FLAGS \
     CC="$CC" CXX="$CXX" CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
 
 make
@@ -74,7 +84,7 @@ done
 
 if [[ -d NormalizInterface-1.1.0 ]]; then
     curl -L -O https://github.com/gap-packages/NormalizInterface/releases/download/v1.2.0/NormalizInterface-1.2.0.tar.gz
-    tar -xvf NormalizInterface-1.2.0.tar.gz
+    tar -zxvf NormalizInterface-1.2.0.tar.gz
     rm NormalizInterface-1.2.0.tar.gz
     rm -rf NormalizInterface-1.1.0
 fi

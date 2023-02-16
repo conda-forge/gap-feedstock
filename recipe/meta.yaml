@@ -9,10 +9,12 @@ source:
   url: https://github.com/gap-system/gap/releases/download/v{{ version }}/gap-{{ version }}.tar.gz
   sha256: 6635c5da7d82755f8339486b9cac33766f58712f297e8234fba40818902ea304
   patches:
-    - patches/cross-build-package.sh
+    - 0000-cross-build-package.patch
+    # Upstream issue: https://github.com/gap-system/gap/issues/5383
+    - 0001-Use-a-standard-autotools-setup.patch
 
 build:
-  number: 4
+  number: 5
   skip: true  # [win]
 
 requirements:
@@ -88,9 +90,9 @@ outputs:
         - {{ compiler('cxx') }}
         - libtool
         - make
-        - python *                               # [build_platform != target_platform]
-        - setuptools <60                         # [build_platform != target_platform]
-        - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+        - python *                            # [build_platform != target_platform]
+        - setuptools <60                      # [build_platform != target_platform]
+        - cross-python_{{ target_platform }}  # [build_platform != target_platform]
       host:
         - gmp
         - readline {{ readline }}
@@ -111,8 +113,8 @@ outputs:
         - {{ pin_subpackage('gap-core', exact=True) }}
         - {{ pin_subpackage('gap-defaults', exact=True) }}
         # For JupyterKernel
-        - python *
         - setuptools <60
+        - python *
         - pip
       run:
         - gmp
