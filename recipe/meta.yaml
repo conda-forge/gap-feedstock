@@ -90,9 +90,9 @@ outputs:
         - {{ compiler('cxx') }}
         - libtool
         - make
-        - python 3.10                              # [build_platform != target_platform]
-        - setuptools <60                           # [build_platform != target_platform]
-        - cross-python_{{ target_platform }} 3.10  # [build_platform != target_platform]
+        - python *                            # [build_platform != target_platform]
+        - setuptools <60                      # [build_platform != target_platform]
+        - cross-python_{{ target_platform }}  # [build_platform != target_platform]
       host:
         - gmp
         - readline {{ readline }}
@@ -114,7 +114,7 @@ outputs:
         - {{ pin_subpackage('gap-defaults', exact=True) }}
         # For JupyterKernel
         - setuptools <60
-        - python 3.10
+        - python *
         - pip
       run:
         - gmp
