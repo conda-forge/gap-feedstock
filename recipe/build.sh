@@ -53,6 +53,13 @@ cd extern
 rm -r !(Makefile.in)
 cd ..
 
+if [[ "$target_platform" != "$build_platform" ]]; then
+  if [[ "$target_platform" == "osx-arm64" ]]; then
+    # Set target host correctly when building for M1s (otherwise, it defaults to aarch64-apple-darwin.)
+    export target_host="arm64-darwin"
+  fi
+fi
+
 chmod +x configure
 
 ./configure \
