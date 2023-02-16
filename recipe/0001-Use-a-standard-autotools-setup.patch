@@ -1,7 +1,7 @@
-From 804b74c9212c522d2a05b958de2ae0212c1fc5eb Mon Sep 17 00:00:00 2001
+From c6c48a39d07169842b61ec8d06b9f31deea194e6 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Julian=20R=C3=BCth?= <julian.rueth@fsfe.org>
-Date: Thu, 16 Feb 2023 12:56:41 +0100
-Subject: [PATCH] Use a standard autotools setup
+Date: Thu, 16 Feb 2023 13:23:14 +0100
+Subject: [PATCH] Use a standard autoconf setup
 
 ---
  aclocal.m4   | 16 ----------------
@@ -11,7 +11,7 @@ Subject: [PATCH] Use a standard autotools setup
 
 diff --git a/aclocal.m4 b/aclocal.m4
 deleted file mode 100644
-index 28434516c..000000000
+index 28434516..00000000
 --- a/aclocal.m4
 +++ /dev/null
 @@ -1,16 +0,0 @@
@@ -32,7 +32,7 @@ index 28434516c..000000000
 -m4_include([cnf/m4/ltversion.m4])
 -m4_include([cnf/m4/lt~obsolete.m4])
 diff --git a/configure.ac b/configure.ac
-index 325c45fb3..bda465d52 100644
+index 1aab3453..f39a0af9 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -3,6 +3,8 @@ dnl Setup autoconf
@@ -41,9 +41,9 @@ index 325c45fb3..bda465d52 100644
  
 +AC_CONFIG_MACRO_DIRS([cnf/m4])
 +
- m4_define([gap_version], [4.11.0])
- m4_define([gap_releaseday], [29-Feb-2020])
- m4_define([gap_releaseyear], [2020])
+ m4_define([gap_version], [4.11.1])
+ m4_define([gap_releaseday], [2021-03-02])
+ m4_define([gap_releaseyear], [2021])
 -- 
 2.39.1
 
