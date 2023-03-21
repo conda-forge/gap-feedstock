@@ -14,7 +14,7 @@ source:
     - 0001-Use-a-standard-autotools-setup.patch
 
 build:
-  number: 5
+  number: 6
   skip: true  # [win]
 
 requirements:
