@@ -1,10 +1,10 @@
---- bin/BuildPackages.sh.bak    2021-09-15 12:34:45.729535956 -0700
-+++ bin/BuildPackages.sh        2021-09-15 12:38:27.348142632 -0700
-@@ -179,11 +179,7 @@
+--- a/bin/BuildPackages.sh
++++ b/bin/BuildPackages.sh
+@@ -194,11 +194,7 @@ run_configure_and_make() {
    then
      if grep Autoconf ./configure > /dev/null
      then
--      local PKG_NAME=$($GAP -q -T -A -r <<GAPInput
+-      local PKG_NAME=$($GAP -q -T -A -M <<GAPInput
 -Read("PackageInfo.g");
 -Print(GAPInfo.PackageInfoCurrent.PackageName);
 -GAPInput
