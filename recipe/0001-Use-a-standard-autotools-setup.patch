@@ -32,7 +32,7 @@ index 28434516..00000000
 -m4_include([cnf/m4/ltversion.m4])
 -m4_include([cnf/m4/lt~obsolete.m4])
 diff --git a/configure.ac b/configure.ac
-index 1aab3453..f39a0af9 100644
+index 969ec0e..1a5b770 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -3,6 +3,8 @@ dnl Setup autoconf
@@ -41,9 +41,9 @@ index 1aab3453..f39a0af9 100644
  
 +AC_CONFIG_MACRO_DIRS([cnf/m4])
 +
- m4_define([gap_version], [4.11.1])
- m4_define([gap_releaseday], [2021-03-02])
- m4_define([gap_releaseyear], [2021])
+ m4_define([gap_version], [4.12.2])
+ m4_define([gap_releaseday], [2022-12-18])
+ m4_define([gap_releaseyear], [2022])
 -- 
 2.39.1
 
