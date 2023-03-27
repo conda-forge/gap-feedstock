@@ -3,7 +3,6 @@ INSTALL_DIR="$PREFIX/share/gap"
 mkdir -p "$INSTALL_DIR"
 
 make install-headers install-libgap
-cp gen/config.h $PREFIX/include/gap
 
 set +e
 pushd pkg
