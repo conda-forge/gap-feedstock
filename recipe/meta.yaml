@@ -10,8 +10,6 @@ source:
   sha256: 672308745eb78a222494ee8dd6786edd5bc331456fcc6456ac064bdb28d587a8
   patches:
     - patches/0001-Allow-cross-building-packages.patch
-    # Upstream issue: https://github.com/gap-system/gap/issues/5383
-    - patches/0002-Use-a-standard-autoconf-setup.patch
 
 build:
   number: 0
