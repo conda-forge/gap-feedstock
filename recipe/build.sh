@@ -63,11 +63,6 @@ do
     rm -rf $PKG_DIR
 done
 
-ACE_PKG_DIR=`find . -maxdepth 1 -iname "ace-*" -or -iname "ace" -type d`
-pushd $ACE_PKG_DIR
-  sed -i.bak "s/CC=/CC?=/g" Makefile.in
-popd
-
 for pkg in nq; do
   pushd $pkg
     if [[ "$target_platform" == osx-* ]]; then
