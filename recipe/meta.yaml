@@ -126,6 +126,7 @@ outputs:
         #- fplll     # for float
         - pari       # for alnuth
         - zeromq     # for ZeroMQInterface
+        - mathjax    # for agt
         - {{ pin_compatible('libsemigroups') }}   # for Semigroups
         - {{ pin_compatible('planarity') }}       # for digraphs
         - bliss >=0.73.a0,<0.74.a0       # for digraphs

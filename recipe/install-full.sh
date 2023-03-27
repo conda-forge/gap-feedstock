@@ -31,3 +31,8 @@ cp $RECIPE_DIR/gap-mode.json etc/
 python -m pip install . --no-deps
 rm -rf $SP_DIR/gap_jupyter-*
 popd
+
+pushd $INSTALL_DIR/pkg/agt
+rm doc/mathjax
+ln -sf ${PREFIX}/lib/mathjax doc/mathjax
+popd
