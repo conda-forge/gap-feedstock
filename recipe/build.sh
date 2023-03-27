@@ -6,25 +6,6 @@ pushd pkg/caratinterface
     tar pzxf carat.tgz
 popd
 
-# Get an updated config.sub, config.guess and libtool
-for f in $(find $SRC_DIR -name config.sub); do
-    cp $BUILD_PREFIX/share/gnuconfig/config.sub $f
-done
-for f in $(find $SRC_DIR -name config.guess); do
-    cp $BUILD_PREFIX/share/gnuconfig/config.guess $f
-done
-for f in $(find $SRC_DIR -name libtool); do
-    cp $BUILD_PREFIX/bin/libtool $f
-done
-for f in $(find $SRC_DIR -name libtool.m4); do
-    cp $BUILD_PREFIX/share/aclocal/libtool.m4 $f
-    pushd $(dirname $(dirname $f))
-        autoreconf -vfi || true
-    popd
-done
-
-autoreconf -vfi
-
 export LD_LIBRARY_PATH="$PREFIX/lib:$LD_LIBRARY_PATH"
 export CFLAGS="-g -O3 -fPIC $CFLAGS"
 rm -f $BUILD_PREFIX/bin/curl-config
