@@ -2,7 +2,7 @@
 
 set -x
 
-pushd pkg/CaratInterface
+pushd pkg/caratinterface
     tar pzxf carat.tgz
 popd
 
@@ -82,21 +82,13 @@ do
     rm -rf $PKG_DIR
 done
 
-if [[ -d NormalizInterface-1.1.0 ]]; then
-    curl -L -O https://github.com/gap-packages/NormalizInterface/releases/download/v1.2.0/NormalizInterface-1.2.0.tar.gz
-    tar -zxvf NormalizInterface-1.2.0.tar.gz
-    rm NormalizInterface-1.2.0.tar.gz
-    rm -rf NormalizInterface-1.1.0
-fi
-
 ACE_PKG_DIR=`find . -maxdepth 1 -iname "ace-*" -or -iname "ace" -type d`
 pushd $ACE_PKG_DIR
   sed -i.bak "s/CC=/CC?=/g" Makefile.in
 popd
 
-for pkg in DeepThought nq simpcomp; do
-  VERSION_PKG_DIR=`find . -maxdepth 1 -iname "$pkg-*" -or -iname "$pkg" -type d`
-  pushd $VERSION_PKG_DIR
+for pkg in nq; do
+  pushd $pkg
     if [[ "$target_platform" == osx-* ]]; then
       mv VERSION .VERSION || true
       sed -i.bak "s/< VERSION/< .VERSION/g" configure.ac || true
