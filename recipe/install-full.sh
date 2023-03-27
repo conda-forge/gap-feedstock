@@ -22,7 +22,7 @@ set -e
 
 mv pkg $INSTALL_DIR/pkg
 
-pushd $INSTALL_DIR/pkg/JupyterKernel-*/
+pushd $INSTALL_DIR/pkg/jupyterkernel/
 sed -i.bak "s@  GAP=gap@  GAP=$PREFIX/bin/gap@g" bin/jupyter-kernel-gap
 rm bin/jupyter-kernel-gap.bak
 rm setup.py
