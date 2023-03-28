@@ -56,11 +56,9 @@ make
 cd pkg
 
 # Disable problematic packages. See https://github.com/conda-forge/gap-feedstock/pull/16
-# anupq, cohomolo because of duplicate symbols
-for GAP_PKG_NAME in anupq cohomolo xgap polymakeinterface;
+for GAP_PKG_NAME in xgap;
 do
-    PKG_DIR=`find . -maxdepth 1 -iname "$GAP_PKG_NAME-*" -type d`
-    rm -rf $PKG_DIR
+    rm -rf $GAP_PKG_NAME
 done
 
 for pkg in nq; do
