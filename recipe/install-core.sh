@@ -2,7 +2,7 @@ INSTALL_DIR="$PREFIX/share/gap"
 
 mkdir -p "$INSTALL_DIR"
 
-make install-headers install-libgap
+make install
 
 set +e
 pushd pkg
@@ -21,12 +21,11 @@ popd
 echo "done"
 set -e
 
-cp -R * "$INSTALL_DIR"
-rm -rf "$INSTALL_DIR/obj"
-rm -rf "$INSTALL_DIR/pkg"
-rm "$INSTALL_DIR"/conda_build.sh
-cp "$RECIPE_DIR/gap.sh" "$PREFIX/bin/gap"
-chmod +x "$PREFIX/bin/gap"
+mkdir -p "$INSTALL_DIR"/pkg
+cp -R pkg/* "$INSTALL_DIR"/pkg
+
+mkdir -p "$INSTALL_DIR"/src
+cp -R src/* "$INSTALL_DIR"/src
 
 GAP_SRC_PATH=`ls -d "$INSTALL_DIR"/bin/*/src`
 rm "$GAP_SRC_PATH"
