@@ -10,6 +10,7 @@ source:
   sha256: 672308745eb78a222494ee8dd6786edd5bc331456fcc6456ac064bdb28d587a8
   patches:
     - patches/0001-Allow-cross-building-packages.patch
+    - patches/0001-Do-not-run-prerequisites.sh.patch
 
 build:
   number: 0
