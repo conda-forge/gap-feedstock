@@ -78,7 +78,7 @@ outputs:
         - {{ pin_subpackage('gap-core', exact=True) }}
     test:
       commands:
-        - echo "TODO - test a package here"
+        - echo 'if LoadPackage("smallgrp") = fail then QUIT_GAP(1); else QUIT_GAP(0); fi;' | gap
 
   - name: gap
     script: install-full.sh
@@ -136,7 +136,7 @@ outputs:
         - {{ pin_subpackage('gap-defaults', exact=True) }}
     test:
       commands:
-        - echo "TODO - test a package here"
+        - echo 'if LoadPackage("alnuth") = fail then QUIT_GAP(1); else QUIT_GAP(0); fi;' | gap
 
 about:
   home: https://www.gap-system.org/
