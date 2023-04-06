@@ -27,9 +27,6 @@ cp -R pkg/* "$INSTALL_DIR"/pkg
 mkdir -p "$INSTALL_DIR"/src
 cp -R src/* "$INSTALL_DIR"/src
 
-rm "$INSTALL_DIR"/build/gap
-ln -s "$INSTALL_DIR"/src/ "$INSTALL_DIR"/build/gap
-
 mkdir -p "$INSTALL_DIR/pkg"
 cd pkg
 for GAP_PKG_NAME in smallgrp transgrp primgrp gapdoc;
