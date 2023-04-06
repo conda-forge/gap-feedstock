@@ -72,7 +72,6 @@ for pkg in nq; do
   popd
 done
 
-sed -i.bak "s@./build-normaliz.sh@echo@g" ../bin/BuildPackages.sh
 bash ../bin/BuildPackages.sh \
    --add-package-config-Semigroups "--with-external-libsemigroups --without-march-native" \
    --add-package-config-semigroups "--with-external-libsemigroups --without-march-native" \
