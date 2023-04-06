@@ -12,21 +12,6 @@ rm -f $BUILD_PREFIX/bin/curl-config
 
 # Following is adapted from https://github.com/sagemath/sage
 
-# Delete PDF documentation and misc TeX files
-find doc \( \
-         -name "*.bbl" \
-      -o -name "*.blg" \
-      -o -name "*.aux" \
-      -o -name "*.dvi" \
-      -o -name "*.idx" \
-      -o -name "*.ilg" \
-      -o -name "*.l*" \
-      -o -name "*.m*" \
-      -o -name "*.pdf" \
-      -o -name "*.ind" \
-      -o -name "*.toc" \
-      \) -exec rm {} \;
-
 shopt -s extglob
 
 # Stuff that isn't GAP sources:
