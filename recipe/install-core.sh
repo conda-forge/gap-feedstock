@@ -35,4 +35,5 @@ do
     mv $GAP_PKG_NAME $INSTALL_DIR/pkg/$GAP_PKG_NAME
 done
 
-rm $INSTALL_DIR/pkg/agt/doc/mathjax
+# Delete doc for agt (we do not ship docs and these contain broken symlinks.)
+rm -rf $INSTALL_DIR/pkg/agt/doc

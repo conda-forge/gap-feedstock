@@ -35,3 +35,6 @@ for pkg in atlasrep \
 done
 
 popd
+
+# Delete doc for agt (we do not ship docs and these contain broken symlinks.)
+rm -rf $INSTALL_DIR/pkg/agt/doc
