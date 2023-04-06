@@ -34,3 +34,5 @@ do
     echo "GAP_PKG_NAME: $GAP_PKG_NAME"
     mv $GAP_PKG_NAME $INSTALL_DIR/pkg/$GAP_PKG_NAME
 done
+
+rm $INSTALL_DIR/pkg/agt/doc/mathjax
