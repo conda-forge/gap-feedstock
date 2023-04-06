@@ -27,10 +27,6 @@ cp -R pkg/* "$INSTALL_DIR"/pkg
 mkdir -p "$INSTALL_DIR"/src
 cp -R src/* "$INSTALL_DIR"/src
 
-GAP_SRC_PATH=`ls -d "$INSTALL_DIR"/bin/*/src`
-rm "$GAP_SRC_PATH"
-ln -s "$INSTALL_DIR"/src/ "$GAP_SRC_PATH"
-
 rm "$INSTALL_DIR"/build/gap
 ln -s "$INSTALL_DIR"/src/ "$INSTALL_DIR"/build/gap
 
