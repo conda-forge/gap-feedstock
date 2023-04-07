@@ -23,9 +23,6 @@ popd
 echo "done"
 set -e
 
-mkdir -p "$INSTALL_DIR"/pkg
-cp -R pkg/* "$INSTALL_DIR"/pkg
-
 mkdir -p "$INSTALL_DIR/pkg"
 cd pkg
 for GAP_PKG_NAME in smallgrp transgrp primgrp gapdoc;
