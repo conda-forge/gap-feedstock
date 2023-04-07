@@ -1,3 +1,5 @@
+#!/bin/bash
+
 INSTALL_DIR="$PREFIX/share/gap"
 
 mkdir -p "$INSTALL_DIR"
