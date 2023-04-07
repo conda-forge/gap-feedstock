@@ -46,17 +46,6 @@ do
     rm -rf $GAP_PKG_NAME
 done
 
-for pkg in nq; do
-  pushd $pkg
-    if [[ "$target_platform" == osx-* ]]; then
-      mv VERSION .VERSION || true
-      sed -i.bak "s/VERSION/.VERSION/g" configure.ac || true
-      sed -i.bak 's@$(top_srcdir)/VERSION@$(top_srcdir)/.VERSION@g' Makefile.in || true
-      autoreconf -vfi
-    fi
-  popd
-done
-
 bash ../bin/BuildPackages.sh \
    --add-package-config-Semigroups "--with-external-libsemigroups --without-march-native" \
    --add-package-config-semigroups "--with-external-libsemigroups --without-march-native" \
