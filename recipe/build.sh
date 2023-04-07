@@ -48,9 +48,7 @@ done
 
 bash ../bin/BuildPackages.sh \
    --add-package-config-Semigroups "--with-external-libsemigroups --without-march-native" \
-   --add-package-config-semigroups "--with-external-libsemigroups --without-march-native" \
    --add-package-config-Digraphs "--with-external-bliss --with-external-planarity --without-intrinsics" \
-   --add-package-config-digraphs "--with-external-bliss --with-external-planarity --without-intrinsics"
 
 # Print error logs
 mkdir -p log
