@@ -41,10 +41,7 @@ make
 cd pkg
 
 # Disable problematic packages. See https://github.com/conda-forge/gap-feedstock/pull/16
-for GAP_PKG_NAME in xgap;
-do
-    rm -rf $GAP_PKG_NAME
-done
+rm -rf xgap
 
 bash ../bin/BuildPackages.sh \
    --add-package-config-Semigroups "--with-external-libsemigroups --without-march-native" \
