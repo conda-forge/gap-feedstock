@@ -18,21 +18,23 @@ echo "done"
 set -e
 
 for pkg in atlasrep \
-    autpgrp-* \
-    alnuth-* \
-    crisp-* \
-    ctbllib-* \
-    FactInt-* \
+    autpgrp \
+    alnuth \
+    crisp \
+    ctbllib \
+    factint \
     fga \
-    irredsol-* \
-    laguna-* \
-    polenta-* \
-    polycyclic-* \
-    resclasses-* \
-    sophus-* \
-    tomlib-* ; do
+    irredsol \
+    laguna \
+    polenta \
+    polycyclic \
+    resclasses \
+    sophus \
+    tomlib ; do
     mv $pkg $INSTALL_DIR/pkg/$pkg
 done
 
 popd
 
+# Delete doc for agt (we do not ship docs and these contain broken symlinks.)
+rm -rf $INSTALL_DIR/pkg/agt/doc

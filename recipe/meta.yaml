@@ -1,4 +1,4 @@
-{% set version = "4.11.1" %}
+{% set version = "4.12.2" %}
 {% set name = "gap-split" %}
 
 package:
@@ -7,14 +7,14 @@ package:
 
 source:
   url: https://github.com/gap-system/gap/releases/download/v{{ version }}/gap-{{ version }}.tar.gz
-  sha256: 6635c5da7d82755f8339486b9cac33766f58712f297e8234fba40818902ea304
+  sha256: 672308745eb78a222494ee8dd6786edd5bc331456fcc6456ac064bdb28d587a8
   patches:
-    - 0000-cross-build-package.patch
-    # Upstream issue: https://github.com/gap-system/gap/issues/5383
-    - 0001-Use-a-standard-autotools-setup.patch
+    - patches/0001-Allow-cross-building-packages.patch
+    - patches/0001-Do-not-run-prerequisites.sh.patch
+    - patches/0001-Do-not-install-documentation.patch
 
 build:
-  number: 5
+  number: 0
   skip: true  # [win]
 
 requirements:
@@ -24,7 +24,6 @@ requirements:
     - make
     - pkg-config
     - curl
-    - autoconf
     - automake
     - libtool
   host:
@@ -77,7 +76,7 @@ outputs:
         - {{ pin_subpackage('gap-core', exact=True) }}
     test:
       commands:
-        - echo "TODO - test a package here"
+        - echo 'if LoadPackage("smallgrp") = fail then QUIT_GAP(1); else QUIT_GAP(0); fi;' | gap
 
   - name: gap
     script: install-full.sh
@@ -135,7 +134,7 @@ outputs:
         - {{ pin_subpackage('gap-defaults', exact=True) }}
     test:
       commands:
-        - echo "TODO - test a package here"
+        - echo 'if LoadPackage("alnuth") = fail then QUIT_GAP(1); else QUIT_GAP(0); fi;' | gap
 
 about:
   home: https://www.gap-system.org/
@@ -143,7 +142,7 @@ about:
   license_file: LICENSE
   summary: GAP - Groups, Algorithms, Programming, a System for Computational Discrete Algebra
   dev_url: https://github.com/gap-system/gap
-  doc_url: https://www.gap-system.org/Manuals/doc/ref/chap0.html
+  doc_url: https://docs.gap-system.org/doc/ref/chap0_mj.html
 
 extra:
   recipe-maintainers:

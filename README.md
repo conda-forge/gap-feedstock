@@ -1,11 +1,11 @@
-About gap-split
-===============
+About gap-split-feedstock
+=========================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/gap-feedstock/blob/main/LICENSE.txt)
 
 Home: https://www.gap-system.org/
 
 Package license: GPL-2.0-or-later
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/gap-feedstock/blob/main/LICENSE.txt)
 
 Summary: GAP - Groups, Algorithms, Programming, a System for Computational Discrete Algebra
 
