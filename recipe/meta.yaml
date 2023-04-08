@@ -24,8 +24,6 @@ requirements:
     - make
     - pkg-config
     - curl
-    # Need this for nq autoreconf. Remove in next version
-    - autoconf
     - automake
     - libtool
   host:
