@@ -36,5 +36,5 @@ done
 
 popd
 
-# Delete doc for agt (we do not ship docs and these contain broken symlinks.)
-rm -rf $INSTALL_DIR/pkg/agt/doc
+# remove broken symlink in GAP 4.12.2 (TODO: remove in next GAP release)
+rm -f $INSTALL_DIR/pkg/agt/doc/mathjax
