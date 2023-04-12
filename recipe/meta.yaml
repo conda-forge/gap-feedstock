@@ -11,10 +11,9 @@ source:
   patches:
     - patches/0001-Allow-cross-building-packages.patch
     - patches/0001-Do-not-run-prerequisites.sh.patch
-    - patches/0001-Do-not-install-documentation.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
 
 requirements:
