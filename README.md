@@ -11,7 +11,7 @@ Summary: GAP - Groups, Algorithms, Programming, a System for Computational Discr
 
 Development: https://github.com/gap-system/gap
 
-Documentation: https://www.gap-system.org/Manuals/doc/ref/chap0.html
+Documentation: https://docs.gap-system.org/doc/ref/chap0_mj.html
 
 Current build status
 ====================
