@@ -1,4 +1,4 @@
-{% set version = "4.10.2" %}
+{% set version = "4.12.2" %}
 {% set name = "gap-split" %}
 
 package:
@@ -6,25 +6,25 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: https://www.gap-system.org/pub/gap/gap-{{ ".".join(version.split(".")[:2]) }}/tar.gz/gap-{{ version }}.tar.gz
-  sha256: 11175bed0234101643d510d4ab94c44db30bd303bfe63d86b9b86ae67cff9e49
+  url: https://github.com/gap-system/gap/releases/download/v{{ version }}/gap-{{ version }}.tar.gz
+  sha256: 672308745eb78a222494ee8dd6786edd5bc331456fcc6456ac064bdb28d587a8
   patches:
-    - patches/make_install.patch
+    - patches/0001-Allow-cross-building-packages.patch
+    - patches/0001-Do-not-run-prerequisites.sh.patch
 
 build:
-  number: 5
+  number: 3
   skip: true  # [win]
 
 requirements:
   build:
+    - gnuconfig  # [unix]
     - {{ compiler('cxx') }}
-    - libtool
-    - m4
-    - autoconf   # for simpcomp and NormalizInterface
-    - automake   # for NormalizInterface
-    - git        # for NormalizInterface
     - make
+    - pkg-config
+    - curl
+    - automake
+    - libtool
   host:
     # Since we are using bin/buildpackages.sh to build all packages at once,
     # these requirements are needed.
@@ -32,24 +32,25 @@ requirements:
     - readline {{ readline }}
     - ncurses    # for Browse
     - curl       # for curlInterface
-    - boost-cpp  # for NormalizInterface
+    - cddlib     # for CddInterface
     - mpfr       # for float
     - mpfi       # for float
     - mpc        # for float
     #- fplll     # for float
     - pari       # for alnuth
     - zeromq     # for ZeroMQInterface
-    - linbox     # linboxing
-    - libsemigroups  0.6.*   # for Semigroups
+    - libsemigroups  1.*   # for Semigroups
     - planarity  # for digraphs
+    - bliss      # for digraphs
     - normaliz   # for NormalizInterface
+    - libflint   # for NormalizInterface -> normaliz -> e-antic -> libflint <=2.6.0
     - zlib
 
 outputs:
   - name: gap-core
     script: install-core.sh
     requirements:
-      build:    
+      build:
         - {{ compiler('cxx') }}
         - libtool
         - make
@@ -74,34 +75,43 @@ outputs:
         - {{ pin_subpackage('gap-core', exact=True) }}
     test:
       commands:
-        - echo "TODO - test a package here"
+        - echo 'if LoadPackage("smallgrp") = fail then QUIT_GAP(1); else QUIT_GAP(0); fi;' | gap
 
   - name: gap
     script: install-full.sh
+    build:
+      ignore_run_exports:
+        - python
+        - python_abi
     requirements:
-      build:    
+      build:
         - {{ compiler('cxx') }}
         - libtool
         - make
+        - python *                            # [build_platform != target_platform]
+        - setuptools <60                      # [build_platform != target_platform]
+        - cross-python_{{ target_platform }}  # [build_platform != target_platform]
       host:
         - gmp
         - readline {{ readline }}
         - ncurses    # for Browse
+        - cddlib     # for cddInterface
         - libcurl    # for curlInterface
-        - boost-cpp  # for NormalizInterface
         - mpfr       # for float
         - mpfi       # for float
         - mpc        # for float
         #- fplll     # for float
         - pari       # for alnuth
         - zeromq     # for ZeroMQInterface
-        - linbox     # for linboxing
-        - libsemigroups  0.6.*   # for Semigroups
+        - libsemigroups  1.*   # for Semigroups
         - planarity  # for digraphs
+        - bliss 0.73.*     # for digraphs
         - normaliz   # for NormalizInterface
+        - libflint   # for NormalizInterface -> normaliz -> e-antic -> libflint <=2.6.0
         - {{ pin_subpackage('gap-core', exact=True) }}
         - {{ pin_subpackage('gap-defaults', exact=True) }}
         # For JupyterKernel
+        - setuptools <60
         - python *
         - pip
       run:
@@ -115,23 +125,23 @@ outputs:
         #- fplll     # for float
         - pari       # for alnuth
         - zeromq     # for ZeroMQInterface
-        - linbox     # for linboxing
         - {{ pin_compatible('libsemigroups') }}   # for Semigroups
         - {{ pin_compatible('planarity') }}       # for digraphs
+        - bliss >=0.73.a0,<0.74.a0       # for digraphs
         - {{ pin_compatible('normaliz') }}        # for NormalizInterface
         - {{ pin_subpackage('gap-core', exact=True) }}
         - {{ pin_subpackage('gap-defaults', exact=True) }}
     test:
       commands:
-        - echo "TODO - test a package here"
+        - echo 'if LoadPackage("alnuth") = fail then QUIT_GAP(1); else QUIT_GAP(0); fi;' | gap
 
 about:
   home: https://www.gap-system.org/
-  license: GPLv2
+  license: GPL-2.0-or-later
   license_file: LICENSE
   summary: GAP - Groups, Algorithms, Programming, a System for Computational Discrete Algebra
   dev_url: https://github.com/gap-system/gap
-  doc_url: https://www.gap-system.org/Manuals/doc/ref/chap0.html
+  doc_url: https://docs.gap-system.org/doc/ref/chap0_mj.html
 
 extra:
   recipe-maintainers:

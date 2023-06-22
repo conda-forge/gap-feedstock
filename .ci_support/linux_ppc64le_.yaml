@@ -1,49 +1,42 @@
-boost_cpp:
-- 1.70.0
+cdt_name:
+- cos7
 channel_sources:
-- conda-forge,defaults
+- conda-forge
 channel_targets:
 - conda-forge main
 curl:
-- '7'
+- '8'
 cxx_compiler:
 - gxx
 cxx_compiler_version:
-- '8'
+- '11'
 docker_image:
-- condaforge/linux-anvil-ppc64le
+- quay.io/condaforge/linux-anvil-cos7-x86_64
 gmp:
 - '6'
 libcurl:
 - '7'
+libflint:
+- '2.9'
 mpfr:
 - '4'
 ncurses:
-- '6.1'
+- '6'
 pari:
-- '2.11'
+- 2.15.* *_pthread
 pin_run_as_build:
-  boost-cpp:
-    max_pin: x.x.x
-  curl:
-    max_pin: x
-  gmp:
-    max_pin: x
-  libcurl:
-    max_pin: x
-  mpfr:
-    max_pin: x
-  ncurses:
+  python:
+    min_pin: x.x
     max_pin: x.x
-  readline:
-    max_pin: x
-  zeromq:
-    max_pin: x.x
-  zlib:
-    max_pin: x.x
+python:
+- 3.10.* *_cpython
+- 3.8.* *_cpython
+- 3.9.* *_cpython
 readline:
-- '8.0'
+- '8'
+target_platform:
+- linux-ppc64le
 zeromq:
-- 4.3.2
+- 4.3.4
 zlib:
 - '1.2'

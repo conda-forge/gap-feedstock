@@ -22,12 +22,15 @@ set -e
 
 mv pkg $INSTALL_DIR/pkg
 
-pushd $INSTALL_DIR/pkg/JupyterKernel-*/
+pushd $INSTALL_DIR/pkg/jupyterkernel/
 sed -i.bak "s@  GAP=gap@  GAP=$PREFIX/bin/gap@g" bin/jupyter-kernel-gap
 rm bin/jupyter-kernel-gap.bak
 rm setup.py
 cp $RECIPE_DIR/setup.py setup.py
 cp $RECIPE_DIR/gap-mode.json etc/
-pip install . --no-deps
+python -m pip install . --no-deps
 rm -rf $SP_DIR/gap_jupyter-*
 popd
+
+# remove broken symlink in GAP 4.12.2 (TODO: remove in next GAP release)
+rm -f $INSTALL_DIR/pkg/agt/doc/mathjax

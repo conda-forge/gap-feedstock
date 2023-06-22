@@ -18,21 +18,23 @@ echo "done"
 set -e
 
 for pkg in atlasrep \
-    autpgrp-* \
-    alnuth-* \
-    crisp-* \
+    autpgrp \
+    alnuth \
+    crisp \
     ctbllib \
-    FactInt-* \
+    factint \
     fga \
-    irredsol-* \
-    laguna-* \
-    polenta-* \
-    polycyclic-* \
-    resclasses-* \
-    sophus-* \
-    tomlib-* ; do
+    irredsol \
+    laguna \
+    polenta \
+    polycyclic \
+    resclasses \
+    sophus \
+    tomlib ; do
     mv $pkg $INSTALL_DIR/pkg/$pkg
 done
 
 popd
 
+# remove broken symlink in GAP 4.12.2 (TODO: remove in next GAP release)
+rm -f $INSTALL_DIR/pkg/agt/doc/mathjax

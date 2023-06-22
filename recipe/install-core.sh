@@ -1,9 +1,10 @@
+#!/bin/bash
+
 INSTALL_DIR="$PREFIX/share/gap"
 
 mkdir -p "$INSTALL_DIR"
 
-make install-headers install-libgap
-cp gen/config.h $PREFIX/include/gap
+make install
 
 set +e
 pushd pkg
@@ -22,24 +23,13 @@ popd
 echo "done"
 set -e
 
-cp -R * "$INSTALL_DIR"
-rm -rf "$INSTALL_DIR/obj"
-rm -rf "$INSTALL_DIR/pkg"
-rm "$INSTALL_DIR"/conda_build.sh
-cp "$RECIPE_DIR/gap.sh" "$PREFIX/bin/gap"
-chmod +x "$PREFIX/bin/gap"
-
-GAP_SRC_PATH=`ls -d "$INSTALL_DIR"/bin/*/src`
-rm "$GAP_SRC_PATH"
-ln -s "$INSTALL_DIR"/src/ "$GAP_SRC_PATH"
-
 mkdir -p "$INSTALL_DIR/pkg"
 cd pkg
 for GAP_PKG_NAME in smallgrp transgrp primgrp gapdoc;
 do
-    PKG_DIR=`find . -maxdepth 1 -iname "$GAP_PKG_NAME-*" -o -iname "$GAP_PKG_NAME" -type d`
     echo "GAP_PKG_NAME: $GAP_PKG_NAME"
-    echo "PKG_DIR: $PKG_DIR"
-    ls -al .
-    mv $PKG_DIR $INSTALL_DIR/pkg/$PKG_DIR
+    mv $GAP_PKG_NAME $INSTALL_DIR/pkg/$GAP_PKG_NAME
 done
+
+# remove broken symlink in GAP 4.12.2 (TODO: remove in next GAP release)
+rm -f $INSTALL_DIR/pkg/agt/doc/mathjax
