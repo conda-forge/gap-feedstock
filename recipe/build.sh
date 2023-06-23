@@ -15,6 +15,8 @@ cd extern
 rm -r !(Makefile.in)
 cd ..
 
+export MAKEFLAGS="-j${CPU_COUNT}"
+
 CONFIGURE_FLAGS=
 
 if [[ "$target_platform" != "$build_platform" ]]; then
