@@ -26,7 +26,6 @@ if [[ "$target_platform" != "$build_platform" ]]; then
   fi
 fi
 
-chmod +x configure
 ./configure \
     --prefix="$PREFIX" PREFIX="$PREFIX" \
     --with-gmp="$PREFIX" \
