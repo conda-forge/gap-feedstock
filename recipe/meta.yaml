@@ -20,6 +20,7 @@ requirements:
   build:
     - gnuconfig  # [unix]
     - {{ compiler('cxx') }}
+    - {{ stdlib("c") }}
     - make
     - pkg-config
     - curl
@@ -52,6 +53,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('cxx') }}
+        - {{ stdlib("c") }}
         - libtool
         - make
       host:
@@ -86,6 +88,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('cxx') }}
+        - {{ stdlib("c") }}
         - libtool
         - make
         - python *                            # [build_platform != target_platform]
