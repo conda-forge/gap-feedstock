@@ -30,6 +30,3 @@ do
     echo "GAP_PKG_NAME: $GAP_PKG_NAME"
     mv $GAP_PKG_NAME $INSTALL_DIR/pkg/$GAP_PKG_NAME
 done
-
-# remove broken symlink in GAP 4.12.2 (TODO: remove in next GAP release)
-rm -f $INSTALL_DIR/pkg/agt/doc/mathjax
