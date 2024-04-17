@@ -60,9 +60,9 @@ export TERM=dumb
 if [[ "$target_platform" == *-64 ]]; then
   for folder in *; do
     pushd $folder
-    echo "GAP_PKG_NAME: $GAP_PKG_NAME"
     GAP_PKG_NAME=$(echo $folder | cut -d- -f1)
-    load_output=$(../../bin/gap.sh -q -T <<< "LoadPackage(\"$GAP_PKG_NAME\");")
+    echo "GAP_PKG_NAME: $GAP_PKG_NAME"
+    load_output=$(../../bin/gap -q -T <<< "LoadPackage(\"$GAP_PKG_NAME\");")
     [[ "${load_output}" == "true" || "${load_output:1}" == "true" ]] || echo "Loading fails"
     popd
   done
