@@ -36,7 +36,7 @@ popd
 # https://github.com/gap-system/gap/issues/1567
 export TERM=dumb
 
-cd pkg
+cd $INSTALL_DIR/pkg
 
 if [[ "$target_platform" == *-64 ]]; then
   for folder in *; do
