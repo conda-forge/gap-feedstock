@@ -1,0 +1,29 @@
+From 497d2c62fc127eabdff421a1baf01733d943e237 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Julian=20R=C3=BCth?= <julian.rueth@fsfe.org>
+Date: Thu, 18 Apr 2024 00:57:41 +0300
+Subject: [PATCH 1/2] Allow cross building packages
+
+---
+ bin/BuildPackages.sh | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
+
+diff --git a/bin/BuildPackages.sh b/bin/BuildPackages.sh
+index 8a9f641e..4434a923 100755
+--- a/bin/BuildPackages.sh
++++ b/bin/BuildPackages.sh
+@@ -194,11 +194,7 @@ run_configure_and_make() {
+   then
+     if grep Autoconf ./configure > /dev/null
+     then
+-      local PKG_NAME=$($GAP -q -T -A -r -M --bare <<GAPInput
+-Read("PackageInfo.g");
+-Print(GAPInfo.PackageInfoCurrent.PackageName);
+-GAPInput
+-)
++      local PKG_NAME=$(cat ./PackageInfo.g | grep "PackageName := " | cut -b 17- | rev | cut -b 3- | rev)
+       local CONFIG_ARGS_FLAG_NAME="PACKAGE_CONFIG_ARGS_${PKG_NAME}"
+       echo_run ./configure --with-gaproot="$GAPROOT" $CONFIGFLAGS ${!CONFIG_ARGS_FLAG_NAME}
+       # hack: run `make clean` in case the package was built before with different settings
+-- 
+2.44.0
+
