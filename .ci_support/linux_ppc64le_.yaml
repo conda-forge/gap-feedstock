@@ -44,5 +44,8 @@ target_platform:
 - linux-ppc64le
 zeromq:
 - 4.3.5
+zip_keys:
+- - c_stdlib_version
+  - cdt_name
 zlib:
 - '1.2'

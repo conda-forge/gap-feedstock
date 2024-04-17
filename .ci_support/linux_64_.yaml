@@ -44,7 +44,6 @@ target_platform:
 - linux-64
 zeromq:
 - 4.3.5
-- 4.3.5
 zip_keys:
 - - c_stdlib_version
   - cdt_name
