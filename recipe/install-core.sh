@@ -25,7 +25,7 @@ set -e
 
 mkdir -p "$INSTALL_DIR/pkg"
 cd pkg
-for GAP_PKG_NAME in smallgrp transgrp primgrp gapdoc;
+for GAP_PKG_NAME in smallgrp transgrp primgrp gapdoc utils;
 do
     echo "GAP_PKG_NAME: $GAP_PKG_NAME"
     mv $GAP_PKG_NAME $INSTALL_DIR/pkg/$GAP_PKG_NAME
