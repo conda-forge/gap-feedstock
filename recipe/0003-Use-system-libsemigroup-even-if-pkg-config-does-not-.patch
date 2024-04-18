@@ -1,0 +1,26 @@
+From 6d78d7f1c2988cbf956ffa1b9a7775aefd1450ff Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Julian=20R=C3=BCth?= <julian.rueth@fsfe.org>
+Date: Thu, 18 Apr 2024 17:05:13 +0300
+Subject: [PATCH] Use system libsemigroup even if pkg-config does not know
+ about it
+
+---
+ pkg/semigroups/m4/ax_check_libsemigroup.m4 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pkg/semigroups/m4/ax_check_libsemigroup.m4 b/pkg/semigroups/m4/ax_check_libsemigroup.m4
+index a326e3bc..cbf05fbf 100644
+--- a/pkg/semigroups/m4/ax_check_libsemigroup.m4
++++ b/pkg/semigroups/m4/ax_check_libsemigroup.m4
+@@ -14,7 +14,7 @@ AC_DEFUN([AX_CHECK_LIBSEMIGROUPS], [
+ 	PKG_CHECK_MODULES([LIBSEMIGROUPS], 
+                           [libsemigroups >= $REQUI_LIBSEMIGROUPS_VERSION],
+ 			  [need_included_libsemigroups=no],
+-			  [need_included_libsemigroups=yes])],
++			  [need_included_libsemigroups=no])],
+ 	[AC_MSG_NOTICE(m4_normalize([
+                         ignoring flag --with-external-libsemigroups, the Semigroups configure file
+                         was created on a system without m4 macros for pkg-config available...]))])
+-- 
+2.44.0
+
