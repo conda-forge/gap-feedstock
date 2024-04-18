@@ -15,8 +15,7 @@ if [[ "$target_platform" == *-64 ]]; then
     echo "*******************************************************"
     echo "* Verifying that GAP package $GAP_PKG_NAME loads."
     echo "*******************************************************"
-    load_output=$(gap -q -T <<< "LoadPackage(\"$GAP_PKG_NAME\");")
-    [[ "${load_output}" == "true" || "${load_output:1}" == "true" ]]
+    gap --nointeract -b -c 'SetInfoLevel(InfoPackageLoading, 4); if LoadPackage("'$GAP_PKG_NAME'") = fail then GapExitCode(1); fi;'
     echo "*******************************************************"
     echo "* OK. GAP package $GAP_PKG_NAME loads."
     echo "*******************************************************"
