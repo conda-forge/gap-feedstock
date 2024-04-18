@@ -34,12 +34,12 @@ requirements:
     - readline {{ readline }}
     - ncurses              # for package Browse
     - curl                 # for package curlInterface
-    # GAP uses the old header layout of cddlib that changed in 0.94k
-    - cddlib <0.94k        # for package cddInterface
+    # GAP uses the old header layout of cddlib that changed in 0.94k; we do not
+    # build a cdd interface until this is fixed upstream.
+    # - cddlib             # for package cddInterface
     - mpfr                 # for package float
     - mpfi                 # for package float
     - mpc                  # for package float
-    #- fplll               # for package float
     - pari                 # for package alnuth
     - zeromq               # for package ZeroMQInterface
     - libsemigroups  1.*   # for package Semigroups
@@ -104,13 +104,13 @@ outputs:
         - gmp
         - readline {{ readline }}
         - ncurses             # for package Browse
-        # GAP uses the old header layout of cddlib that changed in 0.94k
-        - cddlib <0.94k       # for package cddInterface
+        # GAP uses the old header layout of cddlib that changed in 0.94k; we do
+        # not build a cdd interface until this is fixed upstream.
+        # - cddlib            # for package cddInterface
         - libcurl             # for package curlInterface
         - mpfr                # for package float
         - mpfi                # for package float
         - mpc                 # for package float
-        #- fplll              # for package float
         - pari                # for package alnuth
         - zeromq              # for package ZeroMQInterface
         - libsemigroups  1.*  # for package Semigroups

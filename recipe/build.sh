@@ -36,6 +36,11 @@ make
 
 cd pkg
 
+# cddinterface relies on a very outdated version of cddlib
+rm -rf cddinterface
+# nconvex required cddinterface
+rm -rf nconvex
+
 bash ../bin/BuildPackages.sh \
    --add-package-config-Semigroups "--with-external-libsemigroups --without-march-native" \
    --add-package-config-Digraphs "--with-external-bliss --with-external-planarity --without-intrinsics" \
