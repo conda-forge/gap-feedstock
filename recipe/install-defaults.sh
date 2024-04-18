@@ -28,6 +28,7 @@ for pkg in atlasrep \
     laguna \
     polenta \
     polycyclic \
+    radiroot \
     resclasses \
     sophus \
     tomlib ; do
