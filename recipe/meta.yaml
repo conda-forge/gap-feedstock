@@ -67,6 +67,7 @@ outputs:
     test:
       commands:
         - gap -h
+      script: run_test.sh
 
   - name: gap-defaults
     script: install-defaults.sh
@@ -75,6 +76,8 @@ outputs:
         - {{ pin_subpackage('gap-core', exact=True) }}
       run:
         - {{ pin_subpackage('gap-core', exact=True) }}
+    test:
+      script: run_test.sh
 
   - name: gap
     script: install-full.sh
@@ -131,6 +134,8 @@ outputs:
         - {{ pin_compatible('normaliz') }}        # for NormalizInterface
         - {{ pin_subpackage('gap-core', exact=True) }}
         - {{ pin_subpackage('gap-defaults', exact=True) }}
+    test:
+      script: run_test.sh
 
 about:
   home: https://www.gap-system.org/
