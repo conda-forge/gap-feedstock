@@ -38,8 +38,10 @@ cd pkg
 
 # cddinterface relies on a very outdated version of cddlib
 rm -rf cddinterface
-# nconvex required cddinterface
+# nconvex requires cddinterface
 rm -rf nconvex
+# toricvarieties requires nconvex
+rm -rf toricvarieties
 
 bash ../bin/BuildPackages.sh \
    --add-package-config-Semigroups "--with-external-libsemigroups --without-march-native" \
