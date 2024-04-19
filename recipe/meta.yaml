@@ -127,7 +127,7 @@ outputs:
       run:
         - gmp
         - readline {{ readline }}
-        - 4ti2                                   # for package 4ti2interface
+        - 4ti2                                   # for package 4ti2Interface  # [x86_64]
         - ncurses                                # for package Browse
         - libcurl                                # for package curlInterface
         - mpfr                                   # for package float
