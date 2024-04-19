@@ -1,0 +1,27 @@
+From 175f803373c76b49b0133b8ee8868cd9b558d6e3 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Julian=20R=C3=BCth?= <julian.rueth@fsfe.org>
+Date: Thu, 18 Apr 2024 00:58:51 +0300
+Subject: [PATCH 2/2] Do not run prerequisites.sh
+
+---
+ bin/BuildPackages.sh | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/bin/BuildPackages.sh b/bin/BuildPackages.sh
+index 4434a923..58a2896a 100755
+--- a/bin/BuildPackages.sh
++++ b/bin/BuildPackages.sh
+@@ -226,10 +226,6 @@ build_one_package() {
+   (  # start subshell
+   set -e
+   cd "$CURDIR/$PKG"
+-  if [[ -x prerequisites.sh ]]
+-  then
+-    ./prerequisites.sh "$GAPROOT"
+-  fi
+   run_configure_and_make
+   ) &&
+   (  # start subshell
+-- 
+2.44.0
+

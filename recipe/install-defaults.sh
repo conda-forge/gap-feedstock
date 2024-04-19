@@ -28,6 +28,7 @@ for pkg in atlasrep \
     laguna \
     polenta \
     polycyclic \
+    radiroot \
     resclasses \
     sophus \
     tomlib ; do
@@ -35,6 +36,3 @@ for pkg in atlasrep \
 done
 
 popd
-
-# remove broken symlink in GAP 4.12.2 (TODO: remove in next GAP release)
-rm -f $INSTALL_DIR/pkg/agt/doc/mathjax

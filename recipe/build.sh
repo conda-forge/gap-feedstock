@@ -36,8 +36,25 @@ make
 
 cd pkg
 
-# Disable problematic packages. See https://github.com/conda-forge/gap-feedstock/pull/16
+# cddinterface relies on a very outdated version of cddlib, see #79
+rm -rf cddinterface
+# nconvex requires cddinterface which is not installed, see #80
+rm -rf nconvex
+# toricvarieties requires nconvex which is not installed, see #81
+rm -rf toricvarieties
+# 4ti2interface requires 4ti2 (only available on x86_64 on conda-forge.)
+conda list 4ti2 | grep 4ti2 || rm -rf 4ti2interface
+# xgap fails to build because it does not detect the X11 headers, see #82
 rm -rf xgap
+# itc depends on xgap which is not installed, see #83
+rm -rf itc
+# normalizinterface fails to detect the normaliz headers, see #84
+rm -rf normalizinterface
+
+if [[ `uname` == 'Darwin' ]]; then
+  # caratinterface fails to build with a compile errer, see #85
+  rm -rf caratinterface
+fi
 
 bash ../bin/BuildPackages.sh \
    --add-package-config-Semigroups "--with-external-libsemigroups --without-march-native" \
@@ -53,17 +70,3 @@ for file in log/*; do
   cat $file
 done
 rm -rf log
-
-# https://github.com/gap-system/gap/issues/1567
-export TERM=dumb
-
-if [[ "$target_platform" == *-64 ]]; then
-  for folder in *; do
-    pushd $folder
-    echo "GAP_PKG_NAME: $GAP_PKG_NAME"
-    GAP_PKG_NAME=$(echo $folder | cut -d- -f1)
-    load_output=$(../../bin/gap.sh -q -T <<< "LoadPackage(\"$GAP_PKG_NAME\");")
-    [[ "${load_output}" == "true" || "${load_output:1}" == "true" ]] || echo "Loading fails"
-    popd
-  done
-fi

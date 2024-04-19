@@ -1,9 +1,10 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
+c_stdlib:
+- macosx_deployment_target
+c_stdlib_version:
+- '10.9'
 channel_sources:
-- conda-forge
-- conda-forge/label/python_rc,conda-forge
-- conda-forge
 - conda-forge
 channel_targets:
 - conda-forge main
@@ -12,13 +13,13 @@ curl:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '15'
+- '16'
 gmp:
 - '6'
 libcurl:
 - '8'
 libflint:
-- '2.9'
+- '3.0'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 mpfr:
@@ -33,6 +34,7 @@ pin_run_as_build:
     max_pin: x.x
 python:
 - 3.10.* *_cpython
+- 3.11.* *_cpython
 - 3.12.* *_cpython
 - 3.8.* *_cpython
 - 3.9.* *_cpython
@@ -41,9 +43,6 @@ readline:
 target_platform:
 - osx-64
 zeromq:
-- 4.3.4
-zip_keys:
-- - python
-  - channel_sources
+- 4.3.5
 zlib:
 - '1.2'
