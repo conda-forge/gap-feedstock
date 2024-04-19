@@ -51,6 +51,11 @@ rm -rf itc
 # normalizinterface fails to detect the normaliz headers, see #84
 rm -rf normalizinterface
 
+if [[ `uname` == 'Darwin' ]]; then
+  # caratinterface fails to build with a compile errer, see #85
+  rm -rf caratinterface
+fi
+
 bash ../bin/BuildPackages.sh \
    --add-package-config-Semigroups "--with-external-libsemigroups --without-march-native" \
    --add-package-config-Digraphs "--with-external-bliss --with-external-planarity --without-intrinsics" \
