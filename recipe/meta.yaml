@@ -34,7 +34,7 @@ requirements:
     - ncurses                    # for package Browse
     - curl                       # for package curlInterface
     # GAP uses the old header layout of cddlib that changed in 0.94k; we do not
-    # build a cdd interface until this is fixed upstream.
+    # build a cdd interface until this is fixed upstream; see #79.
     # - cddlib                   # for package cddInterface
     - mpfr                       # for package float
     - mpfi                       # for package float
@@ -104,7 +104,7 @@ outputs:
         - readline {{ readline }}
         - ncurses             # for package Browse
         # GAP uses the old header layout of cddlib that changed in 0.94k; we do
-        # not build cddInterface until this is fixed upstream.
+        # not build cddInterface until this is fixed upstream, see #79.
         # - cddlib
         - libcurl                    # for package curlInterface
         - mpfr                       # for package float
@@ -115,9 +115,11 @@ outputs:
         - libsemigroups  >=2.7.3,<3  # for package Semigroups
         - planarity                  # for package digraphs
         - bliss 0.73.*               # for package digraphs
-        - normaliz                   # for package NormalizInterface
-        - libflint                   # for package NormalizInterface -> normaliz -> e-antic -> libflint <=2.6.0
-        - xorg-libx11                # for package xgap
+        # libnormaliz fails to detect the normaliz headers, see #84.
+        # - normaliz                   # for package NormalizInterface
+        # - libflint                   # for package NormalizInterface -> normaliz -> e-antic -> libflint <=2.6.0
+        # The xgap package fails to detect the libX11 headers, see #83.
+        # - xorg-libx11                # for package xgap
         - {{ pin_subpackage('gap-core', exact=True) }}
         - {{ pin_subpackage('gap-defaults', exact=True) }}
         # For JupyterKernel

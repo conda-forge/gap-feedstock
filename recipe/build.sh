@@ -36,14 +36,20 @@ make
 
 cd pkg
 
-# cddinterface relies on a very outdated version of cddlib
+# cddinterface relies on a very outdated version of cddlib, see #79
 rm -rf cddinterface
-# nconvex requires cddinterface
+# nconvex requires cddinterface which is not installed, see #80
 rm -rf nconvex
-# toricvarieties requires nconvex
+# toricvarieties requires nconvex which is not installed, see #81
 rm -rf toricvarieties
 # 4ti2interface requires 4ti2 (only available on x86_64 on conda-forge.)
 conda list 4ti2 | grep 4ti2 || rm -rf 4ti2interface
+# xgap fails to build because it does not detect the X11 headers, see #82
+rm -rf xgap
+# itc depends on xgap which is not installed, see #83
+rm -rf itc
+# normalizinterface fails to detect the normaliz headers, see #84
+rm -rf normalizinterface
 
 bash ../bin/BuildPackages.sh \
    --add-package-config-Semigroups "--with-external-libsemigroups --without-march-native" \
