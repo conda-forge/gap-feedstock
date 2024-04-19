@@ -42,6 +42,8 @@ rm -rf cddinterface
 rm -rf nconvex
 # toricvarieties requires nconvex
 rm -rf toricvarieties
+# 4ti2interface requires 4ti2 (only available on x86_64 on conda-forge.)
+conda list 4ti2 | grep 4ti2 || rm -rf 4ti2interface
 
 bash ../bin/BuildPackages.sh \
    --add-package-config-Semigroups "--with-external-libsemigroups --without-march-native" \
