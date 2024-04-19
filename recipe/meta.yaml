@@ -11,7 +11,6 @@ source:
   patches:
     - 0001-Allow-cross-building-packages.patch
     - 0002-Do-not-run-prerequisites.sh.patch
-    - 0003-Use-system-libsemigroup-even-if-pkg-config-does-not-.patch
 
 build:
   number: 0
@@ -32,21 +31,21 @@ requirements:
     # these requirements are needed.
     - gmp
     - readline {{ readline }}
-    - ncurses              # for package Browse
-    - curl                 # for package curlInterface
+    - ncurses                    # for package Browse
+    - curl                       # for package curlInterface
     # GAP uses the old header layout of cddlib that changed in 0.94k; we do not
     # build a cdd interface until this is fixed upstream.
-    # - cddlib             # for package cddInterface
-    - mpfr                 # for package float
-    - mpfi                 # for package float
-    - mpc                  # for package float
-    - pari                 # for package alnuth
-    - zeromq               # for package ZeroMQInterface
-    - libsemigroups  1.*   # for package Semigroups
-    - planarity            # for package digraphs
-    - bliss                # for package digraphs
-    - normaliz             # for package NormalizInterface
-    - libflint             # for package NormalizInterface -> normaliz -> e-antic -> libflint <=2.6.0
+    # - cddlib                   # for package cddInterface
+    - mpfr                       # for package float
+    - mpfi                       # for package float
+    - mpc                        # for package float
+    - pari                       # for package alnuth
+    - zeromq                     # for package ZeroMQInterface
+    - libsemigroups  >=2.7.3,<3  # for package Semigroups
+    - planarity                  # for package digraphs
+    - bliss                      # for package digraphs
+    - normaliz                   # for package NormalizInterface
+    - libflint                   # for package NormalizInterface -> normaliz -> e-antic -> libflint <=2.6.0
     - zlib
 
 outputs:
@@ -105,19 +104,20 @@ outputs:
         - readline {{ readline }}
         - ncurses             # for package Browse
         # GAP uses the old header layout of cddlib that changed in 0.94k; we do
-        # not build a cdd interface until this is fixed upstream.
-        # - cddlib            # for package cddInterface
-        - libcurl             # for package curlInterface
-        - mpfr                # for package float
-        - mpfi                # for package float
-        - mpc                 # for package float
-        - pari                # for package alnuth
-        - zeromq              # for package ZeroMQInterface
-        - libsemigroups  1.*  # for package Semigroups
-        - planarity           # for package digraphs
-        - bliss 0.73.*        # for package digraphs
-        - normaliz            # for package NormalizInterface
-        - libflint            # for package NormalizInterface -> normaliz -> e-antic -> libflint <=2.6.0
+        # not build cddInterface until this is fixed upstream.
+        # - cddlib
+        - libcurl                    # for package curlInterface
+        - mpfr                       # for package float
+        - mpfi                       # for package float
+        - mpc                        # for package float
+        - pari                       # for package alnuth
+        - zeromq                     # for package ZeroMQInterface
+        - libsemigroups  >=2.7.3,<3  # for package Semigroups
+        - planarity                  # for package digraphs
+        - bliss 0.73.*               # for package digraphs
+        - normaliz                   # for package NormalizInterface
+        - libflint                   # for package NormalizInterface -> normaliz -> e-antic -> libflint <=2.6.0
+        - xorg-libx11                # for package xgap
         - {{ pin_subpackage('gap-core', exact=True) }}
         - {{ pin_subpackage('gap-defaults', exact=True) }}
         # For JupyterKernel
