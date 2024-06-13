@@ -5,7 +5,7 @@ INSTALL_DIR="$PREFIX/share/gap"
 mkdir -p "$INSTALL_DIR/pkg"
 
 # Remove all object files and temporary files.
-find . \( \
+find pkg \( \
          -name "*.o" \
       -o -name "*.lo" \
       -o -name "*.la" \
