@@ -1,4 +1,4 @@
-{% set version = "4.13.0" %}
+{% set version = "4.13.1" %}
 {% set name = "gap-split" %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/gap-system/gap/releases/download/v{{ version }}/gap-{{ version }}.tar.gz
-  sha256: cc76ecbe33d6719450a593e613fb87e9e4247faa876f632dd0f97c398f92265d
+  sha256: 9794dbdba6fb998e0a2d0aa8ce21fc8848ad3d3f9cc9993b0b8e20be7e1dbeba
   patches:
     - 0001-Allow-cross-building-packages.patch
     - 0002-Do-not-run-prerequisites.sh.patch
