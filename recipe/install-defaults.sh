@@ -1,21 +1,7 @@
-INSTALL_DIR="$PREFIX/share/gap"
+#!/bin/bash
+set -exo pipefail
 
-set +e
-pushd pkg
-# Remove all object files and temporary files.
-find . \( \
-         -name "*.o" \
-      -o -name "*.lo" \
-      -o -name "*.la" \
-      -o -name "*.lai" \
-      -o -name ".libs" \
-      -o -name "config.log" \
-      -o -name "config.status" \
-      -o -name "libtool" \
-      \) -exec rm -rf {} \;
-
-echo "done"
-set -e
+source $RECIPE_DIR/install-shared.sh
 
 for pkg in atlasrep \
     autpgrp \
@@ -32,7 +18,5 @@ for pkg in atlasrep \
     resclasses \
     sophus \
     tomlib ; do
-    mv $pkg $INSTALL_DIR/pkg/$pkg
+  mv pkg/$pkg $INSTALL_DIR/pkg/$pkg
 done
-
-popd
