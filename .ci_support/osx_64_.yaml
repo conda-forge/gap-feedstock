@@ -29,7 +29,7 @@ mpfr:
 ncurses:
 - '6'
 pari:
-- '2.17'
+- 2.17.* *_pthread
 readline:
 - '8'
 target_platform:
