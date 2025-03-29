@@ -13,7 +13,7 @@ source:
     - 0002-Do-not-run-prerequisites.sh.patch
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
 
 requirements:
