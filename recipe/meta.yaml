@@ -13,7 +13,7 @@ source:
     - 0002-Do-not-run-prerequisites.sh.patch
 
 build:
-  number: 3
+  number: 4
   skip: true  # [win]
 
 requirements:
@@ -61,10 +61,6 @@ outputs:
         - gmp
         - readline {{ readline }}
         - zlib
-      run:
-        - gmp
-        - readline {{ readline }}
-        - zlib
     test:
       commands:
         - gap -h
@@ -87,9 +83,9 @@ outputs:
   - name: gap
     script: install-full.sh
     build:
-      ignore_run_exports:
+      ignore_run_exports_from:
         - python *
-        - python_abi *
+        - cross-python_{{ target_platform }}  # [build_platform != target_platform]
     requirements:
       build:
         - {{ compiler('cxx') }}
@@ -101,7 +97,7 @@ outputs:
         - cross-python_{{ target_platform }}  # [build_platform != target_platform]
       host:
         - gmp
-        - readline {{ readline }}
+        - readline
         - ncurses             # for package Browse
         # GAP uses the old header layout of cddlib that changed in 0.94k; we do
         # not build cddInterface until this is fixed upstream, see #79.
@@ -112,9 +108,9 @@ outputs:
         - mpc                        # for package float
         - pari                       # for package alnuth
         - zeromq                     # for package ZeroMQInterface
-        - libsemigroups  >=2.7.3,<3  # for package Semigroups
+        - libsemigroups              # for package Semigroups
         - planarity                  # for package digraphs
-        - bliss 0.73.*               # for package digraphs
+        - bliss                      # for package digraphs
         # libnormaliz fails to detect the normaliz headers, see #84.
         # - normaliz                   # for package NormalizInterface
         # - libflint                   # for package NormalizInterface -> normaliz -> e-antic -> libflint <=2.6.0
@@ -127,21 +123,7 @@ outputs:
         - python *
         - pip
       run:
-        - gmp
-        - readline {{ readline }}
-        - 4ti2                                   # for package 4ti2Interface  # [x86_64]
-        - ncurses                                # for package Browse
-        - libcurl                                # for package curlInterface
-        - mpfr                                   # for package float
-        - mpfi                                   # for package float
-        - mpc                                    # for package float
-        - pari                                   # for package alnuth
-        - zeromq                                 # for package ZeroMQInterface
-        - {{ pin_compatible('libsemigroups') }}  # for package Semigroups
-        - {{ pin_compatible('planarity') }}      # for package digraphs
-        - bliss >=0.73.a0,<0.74.a0               # for package digraphs
-        - {{ pin_compatible('normaliz') }}       # for package NormalizInterface
-        - singular                               # for package liepring
+        - {{ pin_compatible('4ti2') }}        # [x86_64]
         - {{ pin_subpackage('gap-core', exact=True) }}
         - {{ pin_subpackage('gap-defaults', exact=True) }}
     test:
