@@ -41,7 +41,7 @@ requirements:
     - mpc                        # for package float
     - pari                       # for package alnuth
     - zeromq                     # for package ZeroMQInterface
-    - libsemigroups  >=2.7.3,<3  # for package Semigroups
+    - libsemigroups              # for package Semigroups
     - planarity                  # for package digraphs
     - bliss                      # for package digraphs
     - normaliz                   # for package NormalizInterface
