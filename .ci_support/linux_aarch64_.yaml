@@ -13,7 +13,7 @@ curl:
 cxx_compiler:
 - gxx
 cxx_compiler_version:
-- '13'
+- '14'
 docker_image:
 - quay.io/condaforge/linux-anvil-x86_64:alma9
 gmp:
@@ -21,7 +21,7 @@ gmp:
 libcurl:
 - '8'
 libflint:
-- '3.2'
+- '3.3'
 mpfr:
 - '4'
 ncurses:
