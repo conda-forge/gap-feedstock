@@ -41,8 +41,8 @@ requirements:
     - mpc                        # for package float
     - pari                       # for package alnuth
     - zeromq                     # for package ZeroMQInterface
-    - libsemigroups >=2.7.3,<3   # for package Semigroups
-    - planarity                  # for package digraphs
+    - libsemigroups >=3.1.1,<4   # for package Semigroups
+    - planarity >=3,<4           # for package digraphs
     - bliss                      # for package digraphs
     - normaliz                   # for package NormalizInterface
     - libflint                   # for package NormalizInterface -> normaliz -> e-antic -> libflint <=2.6.0
@@ -108,8 +108,8 @@ outputs:
         - mpc                        # for package float
         - pari                       # for package alnuth
         - zeromq                     # for package ZeroMQInterface
-        - libsemigroups >=2.7.3,<3   # for package Semigroups
-        - planarity                  # for package digraphs
+        - libsemigroups >=3.1.1,<4   # for package Semigroups
+        - planarity >=3,<4           # for package digraphs
         - bliss                      # for package digraphs
         # libnormaliz fails to detect the normaliz headers, see #84.
         # - normaliz                   # for package NormalizInterface
