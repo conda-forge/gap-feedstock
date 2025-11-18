@@ -19,7 +19,7 @@ gmp:
 libcurl:
 - '8'
 libflint:
-- '3.2'
+- '3.3'
 mpfr:
 - '4'
 ncurses:
