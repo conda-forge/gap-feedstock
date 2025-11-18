@@ -41,9 +41,7 @@ requirements:
     - mpc                        # for package float
     - pari                       # for package alnuth
     - zeromq                     # for package ZeroMQInterface
-    # GAP 4.15.1 does not support libsemigroups 3 yet.
-    # We cannot build against an older version because that leads to compiler trouble with GCC.
-    # - libsemigroups >=3.1.1,<4   # for package Semigroups
+    - libsemigroups >=3.1.1,<4   # for package Semigroups
     - planarity >=3,<4           # for package digraphs
     - bliss                      # for package digraphs
     - normaliz                   # for package NormalizInterface
@@ -110,8 +108,7 @@ outputs:
         - mpc                        # for package float
         - pari                       # for package alnuth
         - zeromq                     # for package ZeroMQInterface
-        # Temporarily disabled. See above.
-        # - libsemigroups >=3.1.1,<4   # for package Semigroups
+        - libsemigroups >=3.1.1,<4   # for package Semigroups
         - planarity >=3,<4           # for package digraphs
         - bliss                      # for package digraphs
         # libnormaliz fails to detect the normaliz headers, see #84.
@@ -126,6 +123,7 @@ outputs:
         - python *
         - pip
       run:
+        - {{ pin_compatible('libsemigroups') }}
         - {{ pin_compatible('4ti2') }}        # [x86_64]
         - {{ pin_subpackage('gap-core', exact=True) }}
         - {{ pin_subpackage('gap-defaults', exact=True) }}
