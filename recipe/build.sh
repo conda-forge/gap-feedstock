@@ -57,8 +57,10 @@ if [[ `uname` == 'Darwin' ]]; then
 fi
 
 bash ../bin/BuildPackages.sh \
-   --add-package-config-Semigroups "--with-external-libsemigroups --without-march-native" \
-   --add-package-config-Digraphs "--with-external-bliss --with-external-planarity --without-intrinsics" \
+   --add-package-config-Digraphs "--with-external-bliss --with-external-planarity --without-intrinsics"
+
+# We temporarily disabled building with semigroups support until upstream adapts to the latest semigroups changes
+# --add-package-config-Semigroups "--with-external-libsemigroups --without-march-native" \
 
 # Print error logs
 mkdir -p log
