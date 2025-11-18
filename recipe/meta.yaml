@@ -41,7 +41,7 @@ requirements:
     - mpc                        # for package float
     - pari                       # for package alnuth
     - zeromq                     # for package ZeroMQInterface
-    - libsemigroups >=3.1.1,<4   # for package Semigroups
+    - libsemigroups >=2.7.4,<3   # for package Semigroups
     - planarity >=3,<4           # for package digraphs
     - bliss                      # for package digraphs
     - normaliz                   # for package NormalizInterface
@@ -108,7 +108,7 @@ outputs:
         - mpc                        # for package float
         - pari                       # for package alnuth
         - zeromq                     # for package ZeroMQInterface
-        - libsemigroups >=3.1.1,<4   # for package Semigroups
+        - libsemigroups >=2.7.4,<3   # for package Semigroups
         - planarity >=3,<4           # for package digraphs
         - bliss                      # for package digraphs
         # libnormaliz fails to detect the normaliz headers, see #84.
@@ -123,7 +123,6 @@ outputs:
         - python *
         - pip
       run:
-        - {{ pin_compatible('libsemigroups') }}
         - {{ pin_compatible('4ti2') }}        # [x86_64]
         - {{ pin_subpackage('gap-core', exact=True) }}
         - {{ pin_subpackage('gap-defaults', exact=True) }}
