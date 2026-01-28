@@ -1,0 +1,28 @@
+From a3542371f1259a22cf8aeb1e503e3cb0288db8a4 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Julian=20R=C3=BCth?= <julian.rueth@fsfe.org>
+Date: Wed, 28 Jan 2026 13:40:33 +0100
+Subject: [PATCH 3/3] Build with planarity 4
+
+---
+ pkg/digraphs/src/planar.c | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
+
+diff --git a/pkg/digraphs/src/planar.c b/pkg/digraphs/src/planar.c
+index 72e5b304..770eacd3 100644
+--- a/pkg/digraphs/src/planar.c
++++ b/pkg/digraphs/src/planar.c
+@@ -38,10 +38,7 @@
+ #include "c/graphLib/homeomorphSearch/graphK33Search.h"
+ #include "c/graphLib/homeomorphSearch/graphK4Search.h"
+ #else
+-#include "planarity/graph.h"
+-#include "planarity/c/graphLib/homeomorphSearch/graphK23Search.h"
+-#include "planarity/c/graphLib/homeomorphSearch/graphK33Search.h"
+-#include "planarity/c/graphLib/homeomorphSearch/graphK4Search.h"
++#include "planarity/graphLib.h"
+ #endif
+ #if defined(__clang__)
+ #pragma clang diagnostic pop
+-- 
+2.52.0
+

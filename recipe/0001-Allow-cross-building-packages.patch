@@ -1,7 +1,7 @@
-From 497d2c62fc127eabdff421a1baf01733d943e237 Mon Sep 17 00:00:00 2001
+From 536a0d2cc4e79743c680dcbe3220c5b80158a435 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Julian=20R=C3=BCth?= <julian.rueth@fsfe.org>
 Date: Thu, 18 Apr 2024 00:57:41 +0300
-Subject: [PATCH 1/2] Allow cross building packages
+Subject: [PATCH 1/3] Allow cross building packages
 
 ---
  bin/BuildPackages.sh | 6 +-----
@@ -25,5 +25,5 @@ index 8a9f641e..4434a923 100755
        echo_run ./configure --with-gaproot="$GAPROOT" $CONFIGFLAGS ${!CONFIG_ARGS_FLAG_NAME}
        # hack: run `make clean` in case the package was built before with different settings
 -- 
-2.44.0
+2.52.0
 
