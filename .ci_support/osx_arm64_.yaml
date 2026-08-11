@@ -21,7 +21,7 @@ gmp:
 libcurl:
 - '8'
 libflint:
-- '3.3'
+- '3.5'
 macos_machine:
 - arm64-apple-darwin20.0.0
 mpfr:

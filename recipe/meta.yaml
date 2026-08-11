@@ -14,7 +14,7 @@ source:
     - 0003-Build-with-planarity-4.patch
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
 
 requirements:
