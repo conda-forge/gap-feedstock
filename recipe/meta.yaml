@@ -31,7 +31,7 @@ requirements:
     # Since we are using bin/buildpackages.sh to build all packages at once,
     # these requirements are needed.
     - gmp
-    - readline {{ readline }}
+    - readline
     - ncurses                    # for package Browse
     - curl                       # for package curlInterface
     # GAP uses the old header layout of cddlib that changed in 0.94k; we do not
@@ -45,8 +45,10 @@ requirements:
     - libsemigroups >=2.7.4,<3   # for package Semigroups
     - planarity >=4,<5           # for package digraphs
     - bliss                      # for package digraphs
-    - normaliz                   # for package NormalizInterface
-    - libflint                   # for package NormalizInterface -> normaliz -> e-antic -> libflint <=2.6.0
+    # libnormaliz fails to detect the normaliz headers, see #84; build.sh
+    # removes NormalizInterface, so we do not need normaliz (or libflint).
+    # - normaliz                 # for package NormalizInterface
+    # - libflint                 # for package NormalizInterface -> normaliz -> e-antic -> libflint
     - zlib
 
 outputs:
@@ -60,7 +62,7 @@ outputs:
         - make
       host:
         - gmp
-        - readline {{ readline }}
+        - readline
         - zlib
     test:
       commands:
