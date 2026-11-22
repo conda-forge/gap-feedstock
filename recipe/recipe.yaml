@@ -122,7 +122,6 @@ outputs:
             - setuptools
             - cross-python_${{ target_platform }}
       host:
-        - 4ti2                       # for package 4ti2interface
         - gmp
         - readline
         - ncurses                    # for package Browse
@@ -150,6 +149,7 @@ outputs:
         - python *
         - pip
       run:
+        - 4ti2                       # for package 4ti2interface
         - ${{ pin_subpackage('gap-core', exact=True) }}
         - ${{ pin_subpackage('gap-defaults', exact=True) }}
       ignore_run_exports:
