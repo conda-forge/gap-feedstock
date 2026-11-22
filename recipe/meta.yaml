@@ -23,7 +23,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ stdlib("c") }}
     - make
-    - pkg-config
+    - pkgconf
     - curl
     - automake
     - libtool
