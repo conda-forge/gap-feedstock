@@ -4,6 +4,7 @@ import setuptools
 
 setuptools.setup(
     name="gap-jupyter",
+    packages=[],
     include_package_data=True,
     data_files=[
         # like `jupyter nbextension install --sys-prefix`

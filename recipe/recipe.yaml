@@ -29,13 +29,11 @@ outputs:
       script: build.sh
     requirements:
       build:
-        - if: unix
-          then: gnuconfig
+        - gnuconfig
         - ${{ compiler('cxx') }}
         - ${{ stdlib("c") }}
         - make
         - pkgconf
-        - curl
         - automake
         - libtool
       host:
@@ -44,7 +42,7 @@ outputs:
         - gmp
         - readline
         - ncurses                    # for package Browse
-        - curl                       # for package curlInterface
+        - libcurl                    # for package curlInterface
         # GAP uses the old header layout of cddlib that changed in 0.94k; we do not
         # build a cdd interface until this is fixed upstream; see #79.
         # - cddlib                   # for package cddInterface
@@ -122,12 +120,13 @@ outputs:
         - if: build_platform != target_platform
           then:
             - python *
-            - setuptools <60
+            - setuptools
             - cross-python_${{ target_platform }}
       host:
+        - 4ti2                       # for package 4ti2interface
         - gmp
         - readline
-        - ncurses             # for package Browse
+        - ncurses                    # for package Browse
         # GAP uses the old header layout of cddlib that changed in 0.94k; we do
         # not build cddInterface until this is fixed upstream, see #79.
         # - cddlib
@@ -141,20 +140,17 @@ outputs:
         - planarity >=4,<5           # for package digraphs
         - bliss                      # for package digraphs
         # libnormaliz fails to detect the normaliz headers, see #84.
-        # - normaliz                   # for package NormalizInterface
-        # - libflint                   # for package NormalizInterface -> normaliz -> e-antic -> libflint <=2.6.0
+        # - normaliz                 # for package NormalizInterface
+        # - libflint                 # for package NormalizInterface -> normaliz -> e-antic -> libflint <=2.6.0
         # The xgap package fails to detect the libX11 headers, see #83.
-        # - xorg-libx11                # for package xgap
+        # - xorg-libx11              # for package xgap
         - ${{ pin_subpackage('gap-core', exact=True) }}
         - ${{ pin_subpackage('gap-defaults', exact=True) }}
         # For JupyterKernel
-        - setuptools <60
+        - setuptools
         - python *
         - pip
       run:
-        # pin_compatible() requires 4ti2 in host, which it never was.
-        - if: x86_64
-          then: 4ti2
         - ${{ pin_subpackage('gap-core', exact=True) }}
         - ${{ pin_subpackage('gap-defaults', exact=True) }}
       ignore_run_exports:
