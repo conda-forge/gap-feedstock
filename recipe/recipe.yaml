@@ -50,7 +50,7 @@ outputs:
         - mpc                        # for package float
         - pari                       # for package alnuth
         - zeromq                     # for package ZeroMQInterface
-        - libsemigroups >=3.3.5,<4   # for package Semigroups
+        - libsemigroups >=3.5.5,<4   # for package Semigroups
         - planarity >=5,<6           # for package digraphs
         - bliss                      # for package digraphs
         # libnormaliz fails to detect the normaliz headers, see #84; build.sh
