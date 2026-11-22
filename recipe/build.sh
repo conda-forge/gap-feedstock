@@ -4,7 +4,6 @@ set -x
 
 export LD_LIBRARY_PATH="$PREFIX/lib:$LD_LIBRARY_PATH"
 export CFLAGS="-g -O3 -fPIC $CFLAGS"
-rm -f $BUILD_PREFIX/bin/curl-config
 
 # Following is adapted from https://github.com/sagemath/sage
 
@@ -38,8 +37,6 @@ rm -rf cddinterface
 rm -rf nconvex
 # toricvarieties requires nconvex which is not installed, see #81
 rm -rf toricvarieties
-# 4ti2interface requires 4ti2 (only available on x86_64 on conda-forge.)
-conda list 4ti2 | grep 4ti2 || rm -rf 4ti2interface
 # xgap fails to build because it does not detect the X11 headers, see #82
 rm -rf xgap
 # itc depends on xgap which is not installed, see #83
@@ -53,8 +50,8 @@ if [[ `uname` == 'Darwin' ]]; then
 fi
 
 bash ../bin/BuildPackages.sh \
-   --add-package-config-Semigroups "--with-external-libsemigroups --without-march-native" \
-   --add-package-config-Digraphs "--with-external-bliss --with-external-planarity --without-intrinsics" \
+   --add-package-config-Semigroups "--with-external-libsemigroups" \
+   --add-package-config-Digraphs "--with-external-bliss --with-external-planarity --without-intrinsics"
 
 # Print error logs
 mkdir -p log
