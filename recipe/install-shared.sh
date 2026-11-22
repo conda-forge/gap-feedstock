@@ -2,6 +2,30 @@
 
 INSTALL_DIR="$PREFIX/share/gap"
 
+# GAP packages shipped by gap-core.
+CORE_PKGS="smallgrp
+transgrp
+primgrp
+gapdoc
+utils"
+
+# GAP packages shipped by gap-defaults.
+DEFAULT_PKGS="atlasrep
+autpgrp
+alnuth
+crisp
+ctbllib
+factint
+fga
+irredsol
+laguna
+polenta
+polycyclic
+radiroot
+resclasses
+sophus
+tomlib"
+
 mkdir -p "$INSTALL_DIR/pkg"
 
 # Remove all object files and temporary files.

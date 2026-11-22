@@ -3,7 +3,12 @@ set -exo pipefail
 
 source $RECIPE_DIR/install-shared.sh
 
+# Every output starts from a fresh copy of the build's work directory, so the
+# packages of gap-core and gap-defaults are still there; skip them.
 for pkg in `ls pkg/`; do
+  if grep -qxF "$pkg" <<< "$CORE_PKGS"$'\n'"$DEFAULT_PKGS"; then
+    continue
+  fi
   mv pkg/$pkg $INSTALL_DIR/pkg/$pkg
 done
 

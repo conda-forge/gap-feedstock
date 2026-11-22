@@ -8,12 +8,8 @@ rm -f $BUILD_PREFIX/bin/curl-config
 
 # Following is adapted from https://github.com/sagemath/sage
 
-shopt -s extglob
-
 # Stuff that isn't GAP sources:
-cd extern
-rm -r !(Makefile.in)
-cd ..
+find extern -mindepth 1 -maxdepth 1 ! -name Makefile.in -exec rm -rf {} +
 
 export MAKEFLAGS="-j${CPU_COUNT}"
 

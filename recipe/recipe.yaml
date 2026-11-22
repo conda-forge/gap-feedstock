@@ -1,0 +1,179 @@
+schema_version: 1
+
+context:
+  version: "4.15.1"
+  name: gap-split
+
+recipe:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/gap-system/gap/releases/download/v${{ version }}/gap-${{ version }}.tar.gz
+  sha256: 6049d53e99b12e25c2d848db21ac4a06380a46fe4c4157243d556fe06930042c
+  patches:
+    - 0001-Allow-cross-building-packages.patch
+    - 0002-Do-not-run-prerequisites.sh.patch
+    - 0003-Build-with-planarity-4.patch
+
+build:
+  number: 5
+  skip: win
+
+outputs:
+  # Builds GAP and all its packages once; the outputs below pick their files
+  # from the resulting work directory.
+  - staging:
+      name: gap-build
+    build:
+      script: build.sh
+    requirements:
+      build:
+        - if: unix
+          then: gnuconfig
+        - ${{ compiler('cxx') }}
+        - ${{ stdlib("c") }}
+        - make
+        - pkgconf
+        - curl
+        - automake
+        - libtool
+      host:
+        # Since we are using bin/buildpackages.sh to build all packages at once,
+        # these requirements are needed.
+        - gmp
+        - readline
+        - ncurses                    # for package Browse
+        - curl                       # for package curlInterface
+        # GAP uses the old header layout of cddlib that changed in 0.94k; we do not
+        # build a cdd interface until this is fixed upstream; see #79.
+        # - cddlib                   # for package cddInterface
+        - mpfr                       # for package float
+        - mpfi                       # for package float
+        - mpc                        # for package float
+        - pari                       # for package alnuth
+        - zeromq                     # for package ZeroMQInterface
+        - libsemigroups >=2.7.4,<3   # for package Semigroups
+        - planarity >=4,<5           # for package digraphs
+        - bliss                      # for package digraphs
+        # libnormaliz fails to detect the normaliz headers, see #84; build.sh
+        # removes NormalizInterface, so we do not need normaliz (or libflint).
+        # - normaliz                 # for package NormalizInterface
+        # - libflint                 # for package NormalizInterface -> normaliz -> e-antic -> libflint
+        - zlib
+
+  - package:
+      name: gap-core
+    inherit:
+      from: gap-build
+      # Only the packages each output links against belong in its dependencies.
+      run_exports: false
+    build:
+      script: install-core.sh
+    requirements:
+      build:
+        - ${{ compiler('cxx') }}
+        - ${{ stdlib("c") }}
+        - libtool
+        - make
+      host:
+        - gmp
+        - readline
+        - zlib
+    tests:
+      - script:
+          - gap -h
+      - script: run_test.sh
+
+  - package:
+      name: gap-defaults
+    inherit:
+      from: gap-build
+      # Only the packages each output links against belong in its dependencies.
+      run_exports: false
+    build:
+      script: install-defaults.sh
+    requirements:
+      host:
+        - ${{ pin_subpackage('gap-core', exact=True) }}
+      run:
+        - ${{ pin_subpackage('gap-core', exact=True) }}
+    tests:
+      - script: run_test.sh
+
+  # The GAP CAS with all packages that we could manage to build.
+  # Eventually, we might want to split this into separate gap- packages so that
+  # it is possible to install just a subset of those. (Some, such as
+  # cddinterface conflict with other systems such as sage.)
+  - package:
+      name: gap
+    inherit:
+      from: gap-build
+      # Only the packages each output links against belong in its dependencies.
+      run_exports: false
+    build:
+      script: install-full.sh
+    requirements:
+      build:
+        - ${{ compiler('cxx') }}
+        - ${{ stdlib("c") }}
+        - libtool
+        - make
+        - if: build_platform != target_platform
+          then:
+            - python *
+            - setuptools <60
+            - cross-python_${{ target_platform }}
+      host:
+        - gmp
+        - readline
+        - ncurses             # for package Browse
+        # GAP uses the old header layout of cddlib that changed in 0.94k; we do
+        # not build cddInterface until this is fixed upstream, see #79.
+        # - cddlib
+        - libcurl                    # for package curlInterface
+        - mpfr                       # for package float
+        - mpfi                       # for package float
+        - mpc                        # for package float
+        - pari                       # for package alnuth
+        - zeromq                     # for package ZeroMQInterface
+        - libsemigroups >=2.7.4,<3   # for package Semigroups
+        - planarity >=4,<5           # for package digraphs
+        - bliss                      # for package digraphs
+        # libnormaliz fails to detect the normaliz headers, see #84.
+        # - normaliz                   # for package NormalizInterface
+        # - libflint                   # for package NormalizInterface -> normaliz -> e-antic -> libflint <=2.6.0
+        # The xgap package fails to detect the libX11 headers, see #83.
+        # - xorg-libx11                # for package xgap
+        - ${{ pin_subpackage('gap-core', exact=True) }}
+        - ${{ pin_subpackage('gap-defaults', exact=True) }}
+        # For JupyterKernel
+        - setuptools <60
+        - python *
+        - pip
+      run:
+        # pin_compatible() requires 4ti2 in host, which it never was.
+        - if: x86_64
+          then: 4ti2
+        - ${{ pin_subpackage('gap-core', exact=True) }}
+        - ${{ pin_subpackage('gap-defaults', exact=True) }}
+      ignore_run_exports:
+        from_package:
+          - python
+          - if: build_platform != target_platform
+            then: cross-python_${{ target_platform }}
+    tests:
+      - script: run_test.sh
+
+about:
+  homepage: https://www.gap-system.org/
+  license: GPL-2.0-or-later
+  license_file: LICENSE
+  summary: GAP - Groups, Algorithms, Programming, a System for Computational Discrete Algebra
+  repository: https://github.com/gap-system/gap
+  documentation: https://docs.gap-system.org/doc/ref/chap0_mj.html
+
+extra:
+  recipe-maintainers:
+    - isuruf
+    - saraedum
