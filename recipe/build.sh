@@ -50,7 +50,7 @@ if [[ `uname` == 'Darwin' ]]; then
 fi
 
 bash ../bin/BuildPackages.sh \
-   --add-package-config-Semigroups "--with-external-libsemigroups --without-march-native" \
+   --add-package-config-Semigroups "--with-external-libsemigroups" \
    --add-package-config-Digraphs "--with-external-bliss --with-external-planarity --without-intrinsics"
 
 # Print error logs
