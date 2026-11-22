@@ -14,7 +14,6 @@ source:
   patches:
     - 0001-Allow-cross-building-packages.patch
     - 0002-Do-not-run-prerequisites.sh.patch
-    - 0003-Build-with-planarity-4.patch
 
 build:
   number: 0
@@ -51,8 +50,8 @@ outputs:
         - mpc                        # for package float
         - pari                       # for package alnuth
         - zeromq                     # for package ZeroMQInterface
-        - libsemigroups >=2.7.4,<3   # for package Semigroups
-        - planarity >=4,<5           # for package digraphs
+        - libsemigroups >=3.3.5,<4   # for package Semigroups
+        - planarity >=5,<6           # for package digraphs
         - bliss                      # for package digraphs
         # libnormaliz fails to detect the normaliz headers, see #84; build.sh
         # removes NormalizInterface, so we do not need normaliz (or libflint).
@@ -136,8 +135,8 @@ outputs:
         - mpc                        # for package float
         - pari                       # for package alnuth
         - zeromq                     # for package ZeroMQInterface
-        - libsemigroups >=2.7.4,<3   # for package Semigroups
-        - planarity >=4,<5           # for package digraphs
+        - libsemigroups >=3.5.5,<4   # for package Semigroups
+        - planarity >=5,<6           # for package digraphs
         - bliss                      # for package digraphs
         # libnormaliz fails to detect the normaliz headers, see #84.
         # - normaliz                 # for package NormalizInterface
